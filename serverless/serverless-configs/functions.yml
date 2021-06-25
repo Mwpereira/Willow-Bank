@@ -1,0 +1,49 @@
+verifyToken:
+  handler: 'src/handlers/jwt-handler.verifyToken'
+  description: "Verifies JWT"
+
+register:
+  handler: 'src/handlers/auth-handler.register'
+  description: "Creates User"
+  events:
+    - http:
+        method: 'post'
+        path: 'auth/register'
+        cors: true
+
+login:
+  handler: 'src/handlers/auth-handler.login'
+  description: "Authenticates User"
+  events:
+    - http:
+        method: 'post'
+        path: 'auth/login'
+        cors: true
+
+refresh:
+  handler: 'src/handlers/jwt-handler.refresh'
+  description: "Refreshes JWT Token"
+  events:
+    - http:
+        method: 'get'
+        path: 'auth/refresh'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
+
+#getAccounts:
+#  handler: 'src/handlers/user-handler.getAccounts'
+#  description: "Gets User's Accounts"
+#  events:
+#    - http:
+#        method: 'get'
+#        path: 'user/accounts'
+#        cors: true
+#        authorizer:
+#          name: verifyToken
+#          type: request
+#          resultTtlInSeconds: 10
+#          indentitySource: method.request.header.Cookie
