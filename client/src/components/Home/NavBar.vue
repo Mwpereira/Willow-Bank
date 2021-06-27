@@ -5,19 +5,13 @@
         Home
       </b-navbar-item>
       <b-navbar-dropdown label="Benefits">
-        <b-navbar-item href="#Benefits">
-          Info
-        </b-navbar-item>
+        <b-navbar-item href="#Benefits"> Info </b-navbar-item>
         <b-navbar-item href="#SavingsCalculator">
           Savings Calculator
         </b-navbar-item>
       </b-navbar-dropdown>
-      <b-navbar-item href="#Goals">
-        Goals
-      </b-navbar-item>
-      <b-navbar-item href="#ContactUs">
-        Contact Us
-      </b-navbar-item>
+      <b-navbar-item href="#Goals"> Goals </b-navbar-item>
+      <b-navbar-item href="#ContactUs"> Contact Us </b-navbar-item>
     </template>
 
     <template #end>
@@ -26,9 +20,7 @@
           <a class="button is-primary">
             <strong>Sign up</strong>
           </a>
-          <a class="button is-light">
-            Log in
-          </a>
+          <a class="button is-light"> Log in </a>
         </div>
       </b-navbar-item>
     </template>
@@ -36,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import {Vue} from "vue-property-decorator";
+import { Vue } from "vue-property-decorator";
 import Component from "vue-class-component";
 
 @Component
@@ -44,7 +36,7 @@ export default class NavBar extends Vue {}
 </script>
 
 <style scoped>
-.navbar-item{
+.navbar-item {
   font-weight: bold;
 }
 </style>

@@ -10,20 +10,25 @@
       <div class="column">
         <img class="m-6" src="../../assets/img/server.png" />
         <p class="is-size-3 has-text-weight-bold mb-3">Latest Technology</p>
-        <p>Provide state of the art technology <br />for the <b>fastest performance</b></p>
+        <p>
+          Provide state of the art technology <br />for the
+          <b>fastest performance</b>
+        </p>
       </div>
       <div class="column">
         <img class="m-6" src="../../assets/img/cloud.png" />
         <p class="is-size-3 has-text-weight-bold mb-3">Advanced Security</p>
-        <p>Keep your financials <b>safe</b> with <br/>
-          <b>complex hashing</b> and <b>encryption</b></p>
+        <p>
+          Keep your financials <b>safe</b> with <br />
+          <b>complex hashing</b> and <b>encryption</b>
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {Vue} from "vue-property-decorator";
+import { Vue } from "vue-property-decorator";
 import Component from "vue-class-component";
 
 @Component
@@ -31,7 +36,7 @@ export default class Goals extends Vue {}
 </script>
 
 <style scoped>
-img{
+img {
   width: 200px;
 }
 </style>
