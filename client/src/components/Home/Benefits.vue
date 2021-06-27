@@ -3,17 +3,17 @@
     <p class="is-size-2 has-text-centered has-text-weight-bold">Our Benefits</p>
     <div class="columns">
       <div class="column">
-        <img class="m-6" src="../../assets/img/anonymous.png" />
+        <img class="ml-6 mr-6 mt-6 mb-5" src="../../assets/img/Home/anonymous.png" />
         <p class="is-size-3 has-text-weight-bold mb-3">Financial Privacy</p>
         <p>Freedom of <b>crypto</b> and <b>stock trading</b></p>
       </div>
       <div class="column">
-        <img class="m-6" src="../../assets/img/profits.png" />
+        <img class="ml-6 mr-6 mt-6 mb-5" src="../../assets/img/Home/profits.png" />
         <p class="is-size-3 has-text-weight-bold mb-3">High Interest</p>
         <p>Savings account <b>interest rate of 7%</b></p>
       </div>
       <div class="column">
-        <img class="m-6" src="../../assets/img/technical-support.png" />
+        <img class="ml-6 mr-6 mt-6 mb-5" src="../../assets/img/Home/technical-support.png" />
         <p class="is-size-3 has-text-weight-bold mb-3">Customer Support</p>
         <p><b>24/7</b> customer support</p>
       </div>

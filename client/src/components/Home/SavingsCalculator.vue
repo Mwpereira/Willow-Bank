@@ -44,7 +44,7 @@
         </p>
       </div>
       <div class="column">
-        <img src="../../assets/img/calculator.png" width="400" />
+        <img src="../../assets/img/Home/calculator.png" width="400" />
       </div>
     </div>
   </div>
