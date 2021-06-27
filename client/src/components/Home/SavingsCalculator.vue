@@ -18,8 +18,6 @@
                 :tooltip="false"
                 :min="100"
                 :max="100000"
-                :format="format"
-                :locale="locale"
               ></b-slider>
             </b-field>
           </div>
@@ -31,8 +29,6 @@
                 :tooltip="false"
                 :min="1"
                 :max="25"
-                :format="format"
-                :locale="locale"
               ></b-slider>
             </b-field>
           </div>

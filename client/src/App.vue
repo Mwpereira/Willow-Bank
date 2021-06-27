@@ -39,3 +39,11 @@ export default {
   components: { Footer },
 };
 </script>
+
+<style>
+@media only screen and (max-width: 768px) {
+  html {
+    overflow-x: hidden !important;
+  }
+}
+</style>

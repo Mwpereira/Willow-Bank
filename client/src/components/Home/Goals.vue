@@ -3,12 +3,18 @@
     <p class="is-size-2 has-text-centered has-text-weight-bold">Our Goals</p>
     <div class="columns is-multiline">
       <div class="column">
-        <img class="ml-6 mr-6 mt-6 mb-5" src="../../assets/img/Home/bitcoin.png" />
+        <img
+          class="ml-6 mr-6 mt-6 mb-5"
+          src="../../assets/img/Home/bitcoin.png"
+        />
         <p class="is-size-3 has-text-weight-bold mb-3">Financial Flexibility</p>
         <p>Stay in control of <b>your money</b></p>
       </div>
       <div class="column">
-        <img class="ml-6 mr-6 mt-6 mb-5" src="../../assets/img/Home/server.png" />
+        <img
+          class="ml-6 mr-6 mt-6 mb-5"
+          src="../../assets/img/Home/server.png"
+        />
         <p class="is-size-3 has-text-weight-bold mb-3">Latest Technology</p>
         <p>
           Provide state of the art technology <br />for the
@@ -16,7 +22,10 @@
         </p>
       </div>
       <div class="column">
-        <img class="ml-6 mr-6 mt-6 mb-5" src="../../assets/img/Home/cloud.png" />
+        <img
+          class="ml-6 mr-6 mt-6 mb-5"
+          src="../../assets/img/Home/cloud.png"
+        />
         <p class="is-size-3 has-text-weight-bold mb-3">Advanced Security</p>
         <p>
           Keep your financials <b>safe</b> with <br />

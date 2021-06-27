@@ -20,7 +20,7 @@
           <a class="button is-primary" href="/register  " rel="noopener">
             <strong>Sign up</strong>
           </a>
-          <a class="button is-light" href="/login" rel="noopener"> Login </a>
+          <a class="button is-light" href="/login" rel="noopener"> Log in </a>
         </div>
       </b-navbar-item>
     </template>
@@ -28,12 +28,11 @@
 </template>
 
 <script lang="ts">
-import {Vue} from "vue-property-decorator";
+import { Vue } from "vue-property-decorator";
 import Component from "vue-class-component";
 
 @Component
-export default class NavBar extends Vue {
-}
+export default class NavBar extends Vue {}
 </script>
 
 <style scoped>
