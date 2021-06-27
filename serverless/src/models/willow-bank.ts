@@ -5,11 +5,11 @@ export const WillowBankSchema = new DynamoDB.Schema({
         type: String,
         required: true,
     },
-    email: {
-        type: String,
+    accessNumber: {
+        type: Number,
         required: true,
     },
-    username: {
+    email: {
         type: String,
         required: true,
     },

@@ -15,7 +15,7 @@
       <b-navbar-item href="#Goals">
         Goals
       </b-navbar-item>
-      <b-navbar-item href="#Contact">
+      <b-navbar-item href="#ContactUs">
         Contact Us
       </b-navbar-item>
     </template>
@@ -35,10 +35,12 @@
   </b-navbar>
 </template>
 
-<script>
-export default {
-name: "NavBar"
-}
+<script lang="ts">
+import {Vue} from "vue-property-decorator";
+import Component from "vue-class-component";
+
+@Component
+export default class NavBar extends Vue {}
 </script>
 
 <style scoped>

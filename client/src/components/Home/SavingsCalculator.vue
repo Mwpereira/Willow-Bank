@@ -1,71 +1,70 @@
 <template>
-<div id="SavingsCalculator">
-  <p class="is-size-2 has-text-centered has-text-weight-bold mb-6">Savings Calculator</p>
-  <div class="columns section mt-0 mb-0 pt-0 pb-0">
-    <div class="column">
-      <p class="has-text-weight-bold is-size-4 mt-4 mb-5">
-        Calculate How much You Can Earn With <span style="color: #75bd9f;">Willow Bank</span>
-      </p>
-      <div class="columns my-6">
-        <div class="column">
-          <div class="has-text-left">
-            <b-field label="Enter Savings Account Balance ($)">
-              <b-input placeholder="Balance"
-                       type="number"
-                       min="100"
-                       max="100000"
-                       id="balance">
-              </b-input>
-            </b-field>
-          </div>
-        </div>
-        <div class="column">
+  <div id="SavingsCalculator">
+    <p class="is-size-2 has-text-centered has-text-weight-bold mb-6">Savings Calculator</p>
+    <div class="columns section mt-0 mb-0 pt-0 pb-0">
+      <div class="column">
+        <p class="has-text-weight-bold is-size-4 mt-4 mb-5">
+          Calculate How much You Can Earn With <span style="color: #75bd9f;">Willow Bank</span>
+        </p>
+        <div class="my-6">
           <div class="has-text-left mb-6">
-            <b-field label="Time Period (#)">
-              <b-input placeholder="Years"
-                       type="number"
-                       min="1"
-                       max="25"
-                       id="years">
-              </b-input>
+            <b-field label="Enter Savings Account Balance ($)">
+              <b-slider v-model="balance" indicator :tooltip="false" :min="100" :max="100000" :format="format"
+                        :locale="locale"></b-slider>
+            </b-field>
+          </div>
+          <div class="has-text-left mb-6">
+            <b-field label="Time Period (number of years)">
+              <b-slider v-model="years" indicator :tooltip="false" :min="1" :max="25" :format="format"
+                        :locale="locale"></b-slider>
             </b-field>
           </div>
         </div>
+        <p class="is-size-4 my-5">After <b>{{ years }} years</b> your <b>${{ oldBalance }}</b> will turn into
+          <b style="color: #75bd9f;">${{ newBalance }}</b> <br/>which is a <b
+              style="color: #75bd9f;">{{ percentIncrease }}%</b> increase!</p>
       </div>
-      <p class="is-size-4">After <b>5 years</b> your <b>$10,000</b> will turn into
-        <b style="color: #75bd9f;">$13,500</b> <br/>which is a <b style="color: #75bd9f;">35%</b> increase!</p>
-    </div>
-    <div class="column">
-      <img src="../../assets/img/calculator.png" width="375"/>
+      <div class="column">
+        <img src="../../assets/img/calculator.png" width="400"/>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import {Component, Vue, Watch} from 'vue-property-decorator'
 
 @Component
-class SavingsCalculator extends Vue {
-//   public updateInputs(): void{
-//     [inputAmount, outputAmount] = new AutoNumeric.multiple(
-//         ['#balance', '#years'],
-//         [
-//           {
-//             watchExternalChanges: true,
-//             decimalPlaces: 6,
-//           },
-//           'floatPos',
-//         ])
-//   }
-// }
-}
+export default class SavingsCalculator extends Vue {
+  public balance = 50000;
+  public years = 5;
+  public oldBalance = "1000";
+  public newBalance = "1000";
+  public percentIncrease = "0";
 
-export default SavingsCalculator
+  @Watch('years')
+  @Watch('balance')
+  public balanceChanged(): void {
+    this.oldBalance = this.balance.toLocaleString();
+    const amount = this.balance * (Math.pow((1 + (0.07 / 12)), (12 * this.years)));
+    const interest = amount - this.balance;
+    this.newBalance = (this.balance + parseFloat(interest.toFixed(2))).toFixed(2);
+    this.percentIncrease = (parseFloat(this.newBalance) / this.balance * 100 - 100).toFixed(2);
+    this.newBalance = parseFloat((this.balance + parseFloat(interest.toFixed(2))).toFixed(2)).toLocaleString();
+  }
+
+  mounted() {
+    this.balanceChanged();
+  }
+}
 </script>
 
 <style scoped>
-.b-slider{
+.b-slider {
   max-width: 400px;
+}
+
+.b-field label {
+  font-size: 24px;
 }
 </style>

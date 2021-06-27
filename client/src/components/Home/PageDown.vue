@@ -1,22 +1,26 @@
 <template>
   <div id="page-down" class="m-5">
-            <svg id="page-down" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="7 13 12 18 17 13"></polyline>
-              <polyline points="7 6 12 11 17 6"></polyline>
-            </svg>
+    <svg id="page-down" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="7 13 12 18 17 13"></polyline>
+      <polyline points="7 6 12 11 17 6"></polyline>
+    </svg>
   </div>
 </template>
 
-<script>
-export default {
-  name: "PageDown"
+<script lang="ts">
+import {Vue} from "vue-property-decorator";
+import Component from "vue-class-component";
+
+@Component
+export default class PageDown extends Vue {
 }
 </script>
 
 <style scoped>
-#page-down{
+#page-down {
   transform: translatey(0px);
-  animation: float 3s ease-in-out infinite;
+  animation: float 2.5s ease-in-out infinite;
 }
 
 @keyframes float {

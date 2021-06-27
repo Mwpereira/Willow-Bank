@@ -22,10 +22,12 @@
   </div>
 </template>
 
-<script>
-export default {
-name: "Goals",
-}
+<script lang="ts">
+import {Vue} from "vue-property-decorator";
+import Component from "vue-class-component";
+
+@Component
+export default class Goals extends Vue {}
 </script>
 
 <style scoped>

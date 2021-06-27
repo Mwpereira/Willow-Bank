@@ -1,24 +1,24 @@
 <template>
   <div id="Home">
-    <NavBar />
+    <NavBar/>
     <div id="section-hero" class="section">
-          <Hero />
+      <Hero/>
     </div>
     <div id="section-benefits" class="section">
       <div class="container">
-        <Benefits />
+        <Benefits/>
       </div>
     </div>
-    <PageDown />
+    <PageDown/>
     <div id="section-savingscalculator" class="section">
       <div class="container">
-        <SavingsCalculator />
+        <SavingsCalculator/>
       </div>
     </div>
-    <PageDown />
+    <PageDown/>
     <div id="section-goals" class="section">
       <div class="container">
-        <Goals />
+        <Goals/>
       </div>
     </div>
     <div class="control has-text-centered mt-5 mb-6">
@@ -28,21 +28,21 @@
     </div>
     <div id="section-contact" class="section">
       <div class="container">
-          <Contact />
+        <Contact/>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import NavBar from "@/components/Home/NavBar.vue";
-import Benefits from "@/components/Home/Benefits.vue";
-import Contact from "@/components/Home/Contact.vue";
-import Goals from "@/components/Home/Goals.vue";
-import Hero from "@/components/Home/Hero.vue";
-import PageDown from "@/components/Home/PageDown.vue";
-import SavingsCalculator from "@/components/Home/SavingsCalculator.vue";
+import {Component, Vue} from 'vue-property-decorator';
+import NavBar from '@/components/Home/NavBar.vue';
+import Benefits from '@/components/Home/Benefits.vue';
+import Contact from '@/components/Home/ContactUs.vue';
+import Goals from '@/components/Home/Goals.vue';
+import Hero from '@/components/Home/Hero.vue';
+import PageDown from '@/components/Home/PageDown.vue';
+import SavingsCalculator from '@/components/Home/SavingsCalculator.vue';
 
 @Component({
   components: {
@@ -55,18 +55,12 @@ import SavingsCalculator from "@/components/Home/SavingsCalculator.vue";
     NavBar,
   },
 })
-
 export default class Home extends Vue {
-  mounted(){
-    document.title = "Willow Bank";
+  mounted() {
+    document.title = 'Willow Bank';
   }
 }
 </script>
 
 <style scoped>
-#section-savingscalculator {
-  background-image: url(../assets/img/wave.svg);
-  background-repeat: repeat;
-  background-size: cover;
-}
 </style>
