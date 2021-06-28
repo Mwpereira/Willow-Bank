@@ -11,7 +11,7 @@
         >
         </b-input>
       </b-field>
-      <b-field label="Password">
+      <b-field label="Password" class="mb-5">
         <b-input type="password" icon-pack="fas" icon="key" password-reveal>
         </b-input>
       </b-field>
