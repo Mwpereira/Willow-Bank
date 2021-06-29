@@ -5,6 +5,7 @@
       ],
       "removeComments": true,
       "moduleResolution": "node",
+      "noImplicitAny": false,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
       "sourceMap": true,

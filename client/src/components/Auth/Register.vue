@@ -1,116 +1,83 @@
 <template>
-  <div id="Register">
-    <p class="title is-size-3 has-text-left pb-2">Sign up for <span id="bank">Willow Bank</span></p>
-    <form class="has-text-left" @submit.prevent="register">
-      <div v-if="step === 0">
-        <b-field label="Email" class="mb-5">
-          <b-input
-              type="email"
-              icon-pack="fas"
-              icon="envelope"
-              placeolder="Email"
-              v-model="user.email"
-              required
-          >
-          </b-input>
-        </b-field>
-        <b-field label="Password" class="mb-5">
-          <b-input type="password" icon-pack="fas" icon="key" v-model="user.password" password-reveal required>
-          </b-input>
-        </b-field>
-      </div>
-      <div v-if="step === 1">
-        <b-field label="First Name" class="mb-5">
-          <b-input v-model="user.firstName" required></b-input>
-        </b-field>
-        <b-field label="Last Name" class="mb-5">
-          <b-input v-model="user.lastName" required></b-input>
-        </b-field>
-        <b-field class="pt-2 mb-5">
-          <b-select placeholder="Country" icon-pack="fas" icon="globe-americas" v-model="user.country" required>
-            <option value="Canada">Canada</option>
-            <option value="United States">United States</option>
-          </b-select>
-        </b-field>
-      </div>
-      <div v-if="step === 2">
-        <b-field class="pt-2 mb-5">
-          <b-select placeholder="Security Question 1" icon-pack="fas" icon="star" v-model="user.twoFactorAuthentication.securityQuestionOne" required>
-            <option value="1">Favourite Artist?</option>
-            <option value="2">Favourite Movie?</option>
-            <option value="3">Favourite Show?</option>
-            <option value="4">Favourite Dish?</option>
-            <option value="5">Favourite Dessert?</option>
-          </b-select>
-        </b-field>
-        <b-field class="pt-2 mb-5">
-          <b-select placeholder="Security Question 2" icon-pack="fas" icon="user" v-model="user.twoFactorAuthentication.securityQuestionTwo" required>
-            <option value="1">Childhood Best Friend's Name?</option>
-            <option value="2">Mother's Maiden Name?</option>
-            <option value="3">Father's Middle Name?</option>
-            <option value="4">First Pet's Name?</option>
-            <option value="5">First Partner's Name?</option>
-          </b-select>
-        </b-field>
-      </div>
-      <div class="columns is-vcentered">
-        <div class="column mb">
-          <div v-if="step === 0">
-            <b-field class="mt-5"
-            >Already a member?<a
-                v-on:click="updatePage('login')"
-                rel="noopener"
-            >
-              Log in</a
-            ></b-field
-            >
-          </div>
-          <div v-else>
-            <b-button
-                class="button is-white is-fullwidth has-text-weight-bold mt-5" v-on:click="back" id="backButton">Back
-            </b-button
-            >
-          </div>
-        </div>
-        <div class="column">
-          <b-button
-              class="button is-warning is-fullwidth has-text-weight-bold mt-5" :label="step === 2 ? 'Sign up' : 'Next'"
-              v-on:click="next" id="submit" type="submit"
-          ></b-button
-          >
-        </div>
-      </div>
-    </form>
+  <div id="Register" class="has-text-left">
+    <p class="title is-size-3 has-text-left pb-2">
+      Sign up for <span id="bank">Willow Bank</span>
+    </p>
+    <div v-if="step === 0">
+      <Step0
+        :email="this.user.email"
+        :password="this.user.password"
+        @next="next($event)"
+        @update-page="updatePage($event)"
+      />
+    </div>
+    <div v-if="step === 1">
+      <Step1
+        :country="this.user.country"
+        :firstName="this.user.firstName"
+        :lastName="this.user.lastName"
+        @back="back($event)"
+        @next="next($event)"
+      />
+    </div>
+    <div v-if="step === 2">
+      <Step2
+        :security-question-one="
+          this.user.twoFactorAuthentication.securityQuestionOne
+        "
+        :security-question-two="
+          this.user.twoFactorAuthentication.securityQuestionTwo
+        "
+        :security-answer-one="
+          this.user.twoFactorAuthentication.securityAnswerOne
+        "
+        :security-answer-two="
+          this.user.twoFactorAuthentication.securityAnswerTwo
+        "
+        @back="back($event)"
+        @register="register($event)"
+      />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Emit, Vue} from "vue-property-decorator";
+import { Component, Emit, Vue } from "vue-property-decorator";
+import AuthService from "@/services/auth-service";
+import Step0 from "@/components/Auth/Register/Step0.vue";
+import Step1 from "@/components/Auth/Register/Step1.vue";
+import Step2 from "@/components/Auth/Register/Step2.vue";
+import { RegisterRequest } from "@/interfaces/register-request";
+import BuefyService from "@/services/buefy-service";
+import ResponseUtils from "@/utils/response-utils";
 
-@Component
+@Component({
+  components: { Step2, Step1, Step0 },
+})
 export default class Register extends Vue {
-  public page = "Register";
-  public step = 0;
-  public user = {
-    email: null,
-    password: null,
-    firstName: null,
-    lastName: null,
-    country: null,
+  public user: RegisterRequest = {
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    country: "",
     twoFactorAuthentication: {
-      securityQuestionOne: null,
-      securityAnswerOne: null,
-      securityQuestionTwo: null,
-      securityAnswerTwo: null
-    }
-  }
+      securityQuestionOne: "",
+      securityAnswerOne: "",
+      securityQuestionTwo: "",
+      securityAnswerTwo: "",
+    },
+  };
+  private page = "Register";
+  private step = 0;
 
   @Emit()
   updatePage(page: string) {
     this.page = page;
   }
 
-  public next(): void {
+  public next(user: object): void {
+    this.updateUser(user);
     if (this.step !== 2) {
       this.step++;
       if (this.step === 2) {
@@ -122,11 +89,31 @@ export default class Register extends Vue {
     }
   }
 
-  public back(): void {
+  public back(user: object): void {
+    this.updateUser(user);
     if (this.step === 2) {
       // document.getElementById("submit").className -= "is-primary";
     }
     this.step--;
+  }
+
+  private updateUser(user: object) {
+    for (const [key, value] of Object.entries(user)) {
+      if (key === "securityQuestionOne" || key === "securityQuestionTwo") {
+        this.user.twoFactorAuthentication[key] = value;
+      } else {
+        this.user[key] = value;
+      }
+    }
+  }
+
+  private async register(user: object): Promise<void> {
+    BuefyService.startLoading();
+    this.updateUser(user);
+    if (ResponseUtils.successAuthProcessor(await AuthService.register(this.user))) {
+      this.updatePage('login')
+    }
+    BuefyService.stopLoading();
   }
 }
 </script>
@@ -137,7 +124,7 @@ export default class Register extends Vue {
     margin-top: 0 !important;
   }
 
-  #backButton{
+  #backButton {
     margin-top: 20px !important;
   }
 }

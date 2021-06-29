@@ -34,7 +34,8 @@ body {
 }
 </style>
 <script>
-import Footer from "@/components/Footer";
+import Footer from "@/components/Common/Footer";
+
 export default {
   components: { Footer },
 };

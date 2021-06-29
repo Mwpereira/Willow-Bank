@@ -7,8 +7,6 @@
   "moduleResolution": "module",
   "scripts": {
     "start": "serverless offline",
-    "start:ci:e2e": "serverless offline --httpPort 3000",
-    "start:ci:unit": "serverless offline --httpPort 3001",
     "deploy": "serverless deploy",
     "remove": "serverless remove",
     "lint": "tslint src/**/*.ts{,x} --fix"

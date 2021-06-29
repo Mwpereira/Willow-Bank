@@ -14,4 +14,8 @@ import Component from "vue-class-component";
 export default class Footer extends Vue {}
 </script>
 
-<style scoped></style>
+<style scoped>
+#Footer {
+  background: white;
+}
+</style>
