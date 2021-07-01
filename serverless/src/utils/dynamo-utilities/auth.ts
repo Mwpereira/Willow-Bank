@@ -3,7 +3,7 @@ import BcryptUtilities from '../bcrypt-utils';
 import {WillowBankSchema} from '../../models/willow-bank';
 import {RegisterRequest} from '../../interfaces/register-request';
 
-const willowBankTable: any = dynamoDB.model('willow-bank', WillowBankSchema);
+const willowBankTable: any = dynamoDB.model('willowBank', WillowBankSchema);
 
 /**
  * Modifies DynamoDB Table

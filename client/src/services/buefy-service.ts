@@ -11,7 +11,7 @@ export default class BuefyService {
     buefy.ToastProgrammatic.open({
       duration: 2500,
       message: message !== null ? message : "Success",
-      type: "is-dark",
+      type: "is-success",
       position: "is-bottom-right",
     });
   }

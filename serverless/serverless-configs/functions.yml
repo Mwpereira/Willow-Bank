@@ -5,20 +5,24 @@ verifyToken:
 register:
   handler: 'src/handlers/auth-handler.register'
   description: 'Creates New User'
+  timeout: 20
   events:
     - http:
         method: 'post'
         path: 'auth/register'
         cors: true
+        resultTtlInSeconds: 20
 
 login:
   handler: 'src/handlers/auth-handler.login'
   description: 'Authorizes User'
+  timeout: 10
   events:
     - http:
         method: 'post'
         path: 'auth/login'
         cors: true
+        resultTtlInSeconds: 10
 
 #getAccounts:
 #  handler: 'src/handlers/user-handler.getAccounts'

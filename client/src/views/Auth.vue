@@ -5,7 +5,7 @@
       class="has-text-weight-bold has-text-left is-size-5 pt-5 pl-6"
       v-on:click="$router.push('/')"
     >
-      <i class="fas fa-angle-left"></i>
+      <i class="fas fa-angle-left mr-1"></i>
       Back
     </p>
     <div class="columns is-centered section">
@@ -71,7 +71,8 @@ export default class Auth extends Vue {
 
 @media only screen and (max-width: 768px) {
   .section {
-    padding: 50px 15px 50px 15px !important;
+    padding: 50px 0px 50px 0px !important;
+    margin:  0px 12px 12px 5px !important;
   }
 
   .columns {

@@ -22,12 +22,12 @@ Resources:
   willowBank:
     Type: 'AWS::DynamoDB::Table'
     Properties:
-      TableName: willow-bank
+      TableName: willowBank
       KeySchema:
-        - AttributeName: 'id'
+        - AttributeName: 'email'
           KeyType: 'HASH'
       AttributeDefinitions:
-        - AttributeName: 'id'
+        - AttributeName: 'email'
           AttributeType: 'S'
       ProvisionedThroughput:
         ReadCapacityUnits: 5

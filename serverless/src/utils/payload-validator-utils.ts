@@ -56,13 +56,25 @@ export default class PayloadValidatorUtils {
     /**
      * Validates Expected 64 Char String
      *
-     * @param name
+     * @param str
+     * @return str
+     */
+    static validate64CharString(str: string): string {
+        assert(TypescriptUtils.checkString(str));
+        assert(this.validLength(str));
+        return str;
+    }
+
+    /**
+     * Validates Expected 64 Char String With No Min Value
+     *
+     * @param str
      * @return name
      */
-    static validate64CharString(name: string): string {
-        assert(TypescriptUtils.checkString(name));
-        assert(this.validLength(name));
-        return name;
+    static validate64CharNoMinValueString(str: string): string {
+        assert(TypescriptUtils.checkString(str));
+        assert(str.length > 0 && str.length <= 64);
+        return str;
     }
 
     /**
@@ -74,13 +86,13 @@ export default class PayloadValidatorUtils {
     static validateRegisterRequest(request: RegisterRequest): RegisterRequest {
         this.validateEmail(request.email);
         this.validatePassword(request.password);
-        this.validate64CharString(request.firstName);
-        this.validate64CharString(request.lastName);
-        this.validate64CharString(request.country);
+        this.validate64CharNoMinValueString(request.firstName);
+        this.validate64CharNoMinValueString(request.lastName);
+        this.validate64CharNoMinValueString(request.country);
         this.validate64CharString(request.twoFactorAuthentication.securityQuestionOne);
-        this.validate64CharString(request.twoFactorAuthentication.securityAnswerOne);
+        this.validate64CharNoMinValueString(request.twoFactorAuthentication.securityAnswerOne);
         this.validate64CharString(request.twoFactorAuthentication.securityQuestionTwo);
-        this.validate64CharString(request.twoFactorAuthentication.securityAnswerTwo);
+        this.validate64CharNoMinValueString(request.twoFactorAuthentication.securityAnswerTwo);
         return request;
     }
 

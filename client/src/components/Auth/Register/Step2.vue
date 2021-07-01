@@ -80,6 +80,7 @@
           <button
               :disabled="invalid || securityQuestionOne === '' || securityQuestionTwo === ''"
               class="button is-warning is-fullwidth has-text-weight-bold mt-5"
+              id="signupButton"
               type="submit"
           >
             Sign up
@@ -117,3 +118,9 @@ export default class Step2 extends Vue {
   }
 }
 </script>
+
+<style scoped>
+#signupButton {
+  margin-top: 0px !important;
+}
+</style>
