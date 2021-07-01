@@ -18,7 +18,7 @@
         icon="key"
         icon-pack="fas"
         password-reveal
-        rules="required"
+        rules="required|min_password:7|max_account_characters:64"
         type="password"
       >
       </BInputWithValidation>

@@ -19,7 +19,7 @@ Resources:
       RestApiId:
         Ref: 'ApiGatewayRestApi'
 
-  willow-bank:
+  willowBank:
     Type: 'AWS::DynamoDB::Table'
     Properties:
       TableName: willow-bank

@@ -1,4 +1,4 @@
-service: willow-bank
+service: willowBank
 
 frameworkVersion: '2'
 

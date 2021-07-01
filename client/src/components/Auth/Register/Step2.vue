@@ -32,7 +32,7 @@
           icon="key"
           icon-pack="fas"
           password-reveal
-          rules="required"
+          rules="required|max_account_characters:64"
           type="password"
       ></BInputWithValidation>
       <b-field class="mb-4" label="Security Question 2:">
@@ -55,7 +55,7 @@
           icon="key"
           icon-pack="fas"
           password-reveal
-          rules="required"
+          rules="required|max_account_characters:64"
           type="password"
       ></BInputWithValidation>
       <div class="columns is-vcentered">

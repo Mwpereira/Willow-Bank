@@ -20,7 +20,6 @@ login:
         path: 'auth/login'
         cors: true
 
-
 #getAccounts:
 #  handler: 'src/handlers/user-handler.getAccounts'
 #  description: "Gets User's Accounts"

@@ -49,9 +49,20 @@ export default class PayloadValidatorUtils {
      */
     static validatePassword(password: string): string {
         assert(TypescriptUtils.checkString(password));
-        assert(password.length > 6);
-        assert(password.length < 64);
+        assert(password.length <= 128 && password.length > 6);
         return password;
+    }
+
+    /**
+     * Validates Expected 64 Char String
+     *
+     * @param name
+     * @return name
+     */
+    static validate64CharString(name: string): string {
+        assert(TypescriptUtils.checkString(name));
+        assert(this.validLength(name));
+        return name;
     }
 
     /**
@@ -63,13 +74,13 @@ export default class PayloadValidatorUtils {
     static validateRegisterRequest(request: RegisterRequest): RegisterRequest {
         this.validateEmail(request.email);
         this.validatePassword(request.password);
-        assert(TypescriptUtils.checkString(request.firstName));
-        assert(TypescriptUtils.checkString(request.lastName));
-        assert(TypescriptUtils.checkString(request.country));
-        assert(TypescriptUtils.checkString(request.twoFactorAuthentication.securityQuestionOne));
-        assert(TypescriptUtils.checkString(request.twoFactorAuthentication.securityAnswerOne));
-        assert(TypescriptUtils.checkString(request.twoFactorAuthentication.securityQuestionTwo));
-        assert(TypescriptUtils.checkString(request.twoFactorAuthentication.securityAnswerTwo));
+        this.validate64CharString(request.firstName);
+        this.validate64CharString(request.lastName);
+        this.validate64CharString(request.country);
+        this.validate64CharString(request.twoFactorAuthentication.securityQuestionOne);
+        this.validate64CharString(request.twoFactorAuthentication.securityAnswerOne);
+        this.validate64CharString(request.twoFactorAuthentication.securityQuestionTwo);
+        this.validate64CharString(request.twoFactorAuthentication.securityAnswerTwo);
         return request;
     }
 
@@ -83,5 +94,17 @@ export default class PayloadValidatorUtils {
         this.validateEmail(request.email);
         this.validatePassword(request.password);
         return request;
+    }
+
+    /**
+     * Checks Length of String
+     *
+     * @param str
+     * @return name
+     */
+    private static validLength(str: string): string {
+        assert(str.length > 6);
+        assert(str.length <= 64);
+        return str;
     }
 }
