@@ -3,28 +3,28 @@
     <p class="title is-size-3 pb-2">
       Log in to <span id="bank">Willow Bank</span>
     </p>
-    <ValidationObserver rel="observer">
+    <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
       <form @submit.prevent="login()">
         <b-field class="mb-5" label="Email">
-          <b-input
+          <BInputWithValidation
               v-model="user.email"
               icon="envelope"
               icon-pack="fas"
               placeolder="Email"
-              required
+              rules="required|email"
               type="email"
           />
         </b-field>
         <b-field class="mb-5" label="Password">
-          <b-input
+          <BInputWithValidation
               v-model="user.password"
               icon="key"
               icon-pack="fas"
               password-reveal
-              required
+              rules="required"
               type="password"
           >
-          </b-input>
+          </BInputWithValidation>
         </b-field>
         <div class="columns is-vcentered">
           <div class="column">
@@ -39,6 +39,7 @@
           </div>
           <div class="column">
             <button
+                :disabled="invalid"
                 class="button is-primary is-fullwidth has-text-weight-bold mt-5"
                 type="submit"
             >
@@ -52,17 +53,24 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Prop, Vue} from "vue-property-decorator";
+import {Component, Emit, Vue} from "vue-property-decorator";
 import AuthService from "@/services/auth-service";
 import BuefyService from "@/services/buefy-service";
 import ResponseUtils from "@/utils/response-utils";
+import {ValidationObserver} from "vee-validate";
+import BInputWithValidation from "@/components/Common/Inputs/BInputWithValidation.vue";
 
-@Component
+@Component({
+  components: {
+    BInputWithValidation,
+    ValidationObserver,
+  },
+})
 export default class Login extends Vue {
-  @Prop() private page = "Login";
-  @Prop() private user = {
-    email: "",
-    password: "",
+  private page = "Login";
+  private user = {
+    email: null,
+    password: null,
   };
 
   @Emit()

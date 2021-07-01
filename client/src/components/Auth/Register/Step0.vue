@@ -1,26 +1,27 @@
 <template>
-  <form @submit.prevent="next({ email, password })">
+  <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
+    <form @submit.prevent="next({ email, password })">
     <b-field class="mb-5" label="Email">
-      <b-input
+      <BInputWithValidation
         v-model="email"
         icon="envelope"
         icon-pack="fas"
         placeolder="Email"
-        required
+        rules="required|email"
         type="email"
       >
-      </b-input>
+      </BInputWithValidation>
     </b-field>
     <b-field class="mb-5" label="Password">
-      <b-input
+      <BInputWithValidation
         v-model="password"
         icon="key"
         icon-pack="fas"
         password-reveal
-        required
+        rules="required"
         type="password"
       >
-      </b-input>
+      </BInputWithValidation>
     </b-field>
     <div class="columns is-vcentered">
       <div class="column mb">
@@ -33,6 +34,7 @@
       <div class="column">
         <button
           class="button is-warning is-fullwidth has-text-weight-bold mt-5"
+          :disabled="invalid"
           type="submit"
         >
           Next
@@ -40,13 +42,21 @@
       </div>
     </div>
   </form>
+  </ValidationObserver>
 </template>
 
 <script lang="ts">
 import { Emit, Prop, Vue } from "vue-property-decorator";
 import Component from "vue-class-component";
+import BInputWithValidation from "@/components/Common/Inputs/BInputWithValidation.vue";
+import {ValidationObserver} from "vee-validate";
 
-@Component
+@Component({
+  components: {
+    BInputWithValidation,
+    ValidationObserver,
+  },
+})
 export default class Step0 extends Vue {
   @Prop() public email!: string;
   @Prop() public password!: string;

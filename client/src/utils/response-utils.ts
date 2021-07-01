@@ -48,7 +48,15 @@ export default class ResponseUtils {
     };
 
     public static successAuthProcessor(response: AxiosResponse): boolean {
-        return response.status === 302 || response.status === 201
+        if (response.status === 302){
+            BuefyService.successToast("Signed In");
+            return true;
+        }
+        if(response.status === 201){
+            BuefyService.successToast("Account Created");
+            return true;
+        }
+        return false;
     };
 
     private static async checkInvalidTokenError(): Promise<void> {

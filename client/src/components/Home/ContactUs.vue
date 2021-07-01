@@ -17,7 +17,7 @@
         </p>
       </div>
       <div class="column">
-        <img src="../../assets/img/Home/contact.jpg" />
+        <img src="../../assets/img/Home/contact.png" />
       </div>
     </div>
   </div>
