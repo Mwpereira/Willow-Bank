@@ -42,7 +42,7 @@ export default class Auth extends Vue {
   @Watch("page")
   private switchAuth(): void {
     if (this.page !== this.$router.currentRoute.path.substr(1)) {
-      this.$router.push(`/${this.page}`);
+      WebsiteUtils.switchPage(`/${this.page}`);
       document.title =
         this.page.substr(0, 1).toUpperCase() +
         this.page.substr(1) +

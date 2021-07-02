@@ -32,7 +32,6 @@
           <button
               :disabled="invalid || country === ''"
               class="button is-warning is-fullwidth has-text-weight-bold mt-5"
-              id="nextButton"
               type="submit"
           >
             Next
@@ -69,9 +68,3 @@ export default class Step1 extends Vue {
   }
 }
 </script>
-
-<style scoped>
-#nextButton {
-  margin-top: 0px !important;
-}
-</style>

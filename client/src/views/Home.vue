@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="control has-text-centered mt-5 mb-6">
-      <a class="button is-primary is-medium" href="/register  " rel="noopener">
+      <a class="button is-primary is-medium" href="/register" rel="noopener">
         Let's Start Saving
       </a>
     </div>

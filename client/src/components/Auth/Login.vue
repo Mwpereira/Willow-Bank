@@ -59,6 +59,7 @@ import BuefyService from "@/services/buefy-service";
 import ResponseUtils from "@/utils/response-utils";
 import {ValidationObserver} from "vee-validate";
 import BInputWithValidation from "@/components/Common/Inputs/BInputWithValidation.vue";
+import WebsiteUtils from "@/utils/website-utils";
 
 @Component({
   components: {
@@ -80,8 +81,15 @@ export default class Login extends Vue {
 
   private async login(): Promise<void> {
     BuefyService.startLoading();
-    if (ResponseUtils.successAuthProcessor(await AuthService.login(this.user))) {
-      console.log("Test");
+    const response = await AuthService.login(this.user);
+    if (ResponseUtils.successAuthProcessor(response)) {
+      const data = response.data;
+      if (data.accounts !== '' && data.acceptedTermsAndConditions){
+        WebsiteUtils.switchPage('dashboard');
+      }
+      else {
+        WebsiteUtils.switchPage('firstTimeLogin');
+      }
     }
     BuefyService.stopLoading();
   }

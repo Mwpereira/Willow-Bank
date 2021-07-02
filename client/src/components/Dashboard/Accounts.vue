@@ -1,12 +1,14 @@
 <template>
-<p>Dashboard</p>
+
 </template>
 
 <script lang="ts">
 import {Component, Vue} from "vue-property-decorator";
 
 @Component
-export default class Dashboard extends Vue {}
+export default class Accounts extends Vue {}
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

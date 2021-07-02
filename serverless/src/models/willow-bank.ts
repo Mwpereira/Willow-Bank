@@ -21,6 +21,10 @@ export const WillowBankSchema = new DynamoDB.Schema({
         type: String,
         required: true,
     },
+    acceptedTermsAndConditions: {
+        type: Boolean,
+        required: true,
+    },
     lastLogin: {
         type: Number,
         required: true,

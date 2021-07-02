@@ -10,7 +10,7 @@ const willowBankTable: any = dynamoDB.model('willowBank', WillowBankSchema);
  */
 export default class Auth {
     /**
-     * Create User Account
+     * Create User
      *
      * @param _user
      * @return status
@@ -28,6 +28,7 @@ export default class Auth {
                     'securityQuestionTwo': _user.twoFactorAuthentication.securityQuestionOne,
                     'securityAnswerTwo': await BcryptUtilities.getHashedValue(_user.twoFactorAuthentication.securityAnswerTwo),
                 }),
+                acceptedTermsAndConditions: false,
                 lastLogin: Date.now(),
                 createdAt: Date.now(),
             })
