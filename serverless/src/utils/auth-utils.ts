@@ -128,6 +128,7 @@ export default class AuthUtilities {
                     )
                 ) {
                     delete userData.password
+                    delete userData.twoFactorAuthentication
                     const accessToken = await JwtUtils.generateJwt(userData);
 
                     if (await Auth.updateLastLogin(user.email)) {

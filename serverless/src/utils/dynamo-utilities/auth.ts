@@ -94,7 +94,6 @@ export default class Auth {
             .query()
             .where('email')
             .eq(_email)
-            .attributes(['email', 'password', 'lastLogin'])
             .exec()
             .then((result: any) => {
                 return result[0];
