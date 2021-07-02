@@ -94,6 +94,7 @@ export default class Auth {
             .query()
             .where('email')
             .eq(_email)
+            .attributes(['email', 'password', 'acceptedTermsAndConditions'])
             .exec()
             .then((result: any) => {
                 return result[0];

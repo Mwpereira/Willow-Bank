@@ -83,11 +83,14 @@ export default class Login extends Vue {
     BuefyService.startLoading();
     const response = await AuthService.login(this.user);
     if (ResponseUtils.successAuthProcessor(response)) {
+      this.$store.commit('auth_success');
+
       const data = response.data;
-      if (data.accounts !== '' && data.acceptedTermsAndConditions){
+      if (data.acceptedTermsAndConditions){
         WebsiteUtils.switchPage('dashboard');
       }
       else {
+        this.$store.commit();
         WebsiteUtils.switchPage('firstTimeLogin');
       }
     }

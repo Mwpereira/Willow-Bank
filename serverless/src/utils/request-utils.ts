@@ -15,6 +15,7 @@ export default class RequestUtils {
      * Retrieves user's email from authorizer token
      *
      * @param event
+     * @return email
      */
     static getEmail(event): string {
         return PayloadValidatorUtils.validateEmail(

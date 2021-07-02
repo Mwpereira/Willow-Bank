@@ -1,5 +1,5 @@
 verifyToken:
-  handler: 'src/handlers/auth-handler.verify'
+  handler: 'src/handlers/auth-handler.verifyToken'
   description: 'Verifies JWT'
 
 register:
@@ -23,6 +23,21 @@ login:
         path: 'auth/login'
         cors: true
         resultTtlInSeconds: 10
+
+acceptedTermsAndConditions:
+  handler: 'src/handlers/user-handler.acceptedTermsAndConditions'
+  description: 'Accepts Terms And Conditions'
+  timeout: 10
+  events:
+    - http:
+        method: 'put'
+        path: 'user/acceptedTermsAndConditions'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
 
 #getAccounts:
 #  handler: 'src/handlers/user-handler.getAccounts'

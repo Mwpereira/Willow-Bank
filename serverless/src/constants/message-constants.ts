@@ -18,6 +18,11 @@ export abstract class MessageConstants {
     public static readonly VALID_TOKEN: string = 'Valid Token';
 
     /**
+     * Success message for Accepting Terms and Conditions
+     */
+    public static readonly ACCEPT_TERMS_AND_CONDITIONS: string = 'Completed';
+
+    /**
      * Error message for Email already in use
      */
     public static readonly EMAIL_TAKEN: string = 'Email Already Taken';
@@ -47,4 +52,9 @@ export abstract class MessageConstants {
      * Error message for an Invalid Token
      */
     public static readonly TOKEN_NOT_FOUND: string = 'Token not found';
+
+    /**
+     * Error message for Accepting Terms and Conditions
+     */
+    public static readonly ACCEPT_TERMS_AND_CONDITIONS_FAIL: string = 'Error';
 }

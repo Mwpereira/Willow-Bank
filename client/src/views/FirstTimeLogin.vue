@@ -1,51 +1,44 @@
 <template>
-  <section class="mt-6">
+  <section class="mt-6 container">
     <b-steps
         v-model="activeStep"
-        :animated="isAnimated"
-        :has-navigation="hasNavigation"
-        :icon-next="nextIcon"
-        :icon-prev="prevIcon"
-        :label-position="labelPosition"
-        :mobile-mode="mobileMode"
-        :rounded="isRounded">
-      <b-step-item :clickable="isStepsClickable" class="mt-5" label="Select Accounts" step="1">
-        <h1 class="title has-text-centered">Select Accounts</h1>
-        <p class="is-size-5">Please choose the accounts you would like to open (cannot be updated):</p>
+        :animated="true"
+        :has-navigation="true"
+        :rounded="true"
+        mobile-mode="minimalist">
+      <b-step-item :clickable="activeStep > 0" class="mt-5" label="Select Account" step="1">
+        <h1 class="title has-text-centered mb-6">Select Account</h1>
+        <SelectAccounts/>
       </b-step-item>
 
-      <b-step-item :clickable="isStepsClickable" :type="{'is-success': isProfileSuccess}" class="mt-5"
+      <b-step-item :clickable="activeStep > 1" class="mt-5"
                    label="Terms & Services" step="2">
-        <h1 class="title has-text-centered">Terms & Services</h1>
-        <p class="is-size-5">Lorem ipsum dolor sit amet.</p>
+        <h1 class="title has-text-centered mb-6">Terms & Services</h1>
+        <TermsAndConditions :agree0="this.agree0" :agree1="this.agree1" :agree2="this.agree2"
+                            @update-agrees="updateAgrees($event)"/>
       </b-step-item>
 
-      <b-step-item :clickable="isStepsClickable" :step="3" class="mt-5" disabled label="Complete">
-        <h1 class="title has-text-centered">Complete</h1>
-        <p class="is-size-5">Let's Start Saving and Earning</p>
-        <button class="button is-primary is-size-6" v-on:click="dashboard()">Complete</button>
+      <b-step-item :clickable="activeStep > 1" :step="3" class="mt-5" disabled label="Complete">
+        <h1 class="title has-text-centered mb-6">Complete</h1>
+        <Complete/>
       </b-step-item>
 
-      <template v-if="customNavigation"
+      <template v-if="true"
                 #navigation="{previous, next}">
-        <b-button
-            :disabled="previous.disabled"
-            icon-left="backward"
-            icon-pack="fas"
-            outlined
-            type="is-danger"
-            @click.prevent="previous.action">
-          Previous
-        </b-button>
-        <b-button
-            :disabled="next.disabled"
-            icon-pack="fas"
-            icon-right="forward"
-            outlined
-            type="is-success"
-            @click.prevent="next.action">
-          Next
-        </b-button>
+        <div class="my-6">
+          <b-button
+              :disabled="previous.disabled"
+              class="mx-2"
+              @click.prevent="previous.action">
+            <i class="fas fa-angle-left"></i>
+          </b-button>
+          <b-button
+              :disabled="next.disabled || disableButton"
+              class="mx-2"
+              @click.prevent="next.action">
+            <i class="fas fa-angle-right"></i>
+          </b-button>
+        </div>
       </template>
     </b-steps>
   </section>
@@ -54,37 +47,45 @@
 <script lang="ts">
 import {Component, Vue} from "vue-property-decorator";
 import WebsiteUtils from "@/utils/website-utils";
+import TermsAndConditions from "@/components/Dashboard/FirstTimeLogin/TermsAndConditions.vue";
+import SelectAccounts from "@/components/Dashboard/FirstTimeLogin/SelectAccount.vue";
+import Complete from "@/components/Dashboard/FirstTimeLogin/Complete.vue";
 
-@Component
+@Component({
+  components: {Complete, SelectAccounts, TermsAndConditions}
+})
 export default class FirstTimeLogin extends Vue {
-  public activeStep: 0;
+  public activeStep = 0;
 
-  public showSocial: false;
-  public isAnimated: true;
-  public isRounded: true;
-  public isStepsClickable: false;
+  public agree0 = false;
+  public agree1 = false;
+  public agree2 = false;
 
-  public hasNavigation: true;
-  public customNavigation: false;
-  public isProfileSuccess: false;
+  get disableButton(): boolean {
+    return ((this.activeStep === 1) && (!this.agree0 || !this.agree1 || !this.agree2));
+  }
 
-  public prevIcon: 'chevron-left';
-  public nextIcon: 'chevron-right';
-  public labelPosition: 'bottom';
-  public mobileMode: 'minimalist';
+  public updateAgrees(agrees: any): void {
+    this.agree0 = agrees.agree0;
+    this.agree1 = agrees.agree1;
+    this.agree2 = agrees.agree2;
+  }
 
-  public dashboard(){
+  public dashboard() {
     WebsiteUtils.switchPage('dashboard')
   }
 
   mounted(): void {
+    if (this.$store.getters.isLoggedIn) {
+      WebsiteUtils.switchPage('dashboard');
+    }
     WebsiteUtils.updatePageTitle("Let's Get Started");
   }
 }
 </script>
 
 <style>
-.step-details{
+.step-details {
   margin-top: 7px !important;
 }
 </style>
