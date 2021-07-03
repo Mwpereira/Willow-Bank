@@ -23,8 +23,11 @@ import WebsiteUtils from "@/utils/website-utils";
 @Component
 export default class Complete extends Vue {
   public async complete() {
-    await UserService.acceptedTermsAndConditions();
-    WebsiteUtils.switchPage('dashboard')
+    const response = await UserService.acceptedTermsAndConditions();
+    if (response.data.acceptedTermsAndConditions){
+      this.$store.commit('setAcceptedTermsAndConditions', true);
+      WebsiteUtils.switchPage('dashboard')
+    }
   }
 }
 </script>

@@ -9,6 +9,12 @@ import WebsiteUtils from "@/utils/website-utils";
 @Component
 export default class Dashboard extends Vue {
   mounted(): void {
+    if(!this.$store.getters.isLoggedIn){
+      WebsiteUtils.switchPage('login');
+    }
+    if(this.$store.getters.isLoggedIn && !this.$store.getters.acceptedTermsAndConditions){
+      WebsiteUtils.switchPage('firstTimeLogin');
+    }
     WebsiteUtils.updatePageTitle("Dashboard");
   }
 }
