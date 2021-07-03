@@ -2,6 +2,8 @@ import axios, {AxiosResponse} from "axios";
 import {LoginRequest} from "@/interfaces/login-request";
 import {RegisterRequest} from "@/interfaces/register-request";
 import ResponseUtils from "@/utils/response-utils";
+import WebsiteUtils from "@/utils/website-utils";
+import store from "@/store";
 
 axios.defaults.withCredentials = true;
 
@@ -33,5 +35,20 @@ export default class AuthService {
             .catch((error) => {
                 return ResponseUtils.errorProcessor(error.response);
             });
+    }
+
+    public static async logout(): void {
+        const response = await axios
+            .get(`${this.url}/auth/logout`)
+            .then((response: AxiosResponse) => {
+                return response;
+            })
+            .catch((error) => {
+                return ResponseUtils.errorProcessor(error.response);
+            });
+        if (response.status === 200) {
+            store.commit('auth_logout');
+            WebsiteUtils.switchVue('login');
+        }
     }
 }

@@ -24,10 +24,20 @@ login:
         cors: true
         resultTtlInSeconds: 10
 
+logout:
+  handler: 'src/handlers/auth-handler.logout'
+  description: 'Authorizes User'
+  timeout: 10
+  events:
+    - http:
+        method: 'get'
+        path: 'auth/logout'
+        cors: true
+        resultTtlInSeconds: 10
+
 acceptedTermsAndConditions:
   handler: 'src/handlers/user-handler.acceptedTermsAndConditions'
   description: 'Accepts Terms And Conditions'
-  timeout: 10
   events:
     - http:
         method: 'post'
@@ -42,7 +52,6 @@ acceptedTermsAndConditions:
 getAccount:
   handler: 'src/handlers/user-handler.getAccount'
   description: "Gets User's Account"
-  timeout: 10
   events:
     - http:
         method: 'get'

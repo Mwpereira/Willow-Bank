@@ -26,6 +26,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "/dashboard",
+    alias: ["/dashboard/user/settings"],
     name: "Dashboard",
     component: Dashboard
   },

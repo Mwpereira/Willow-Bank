@@ -91,9 +91,9 @@ export default class Login extends Vue {
       this.$store.commit('setLastLogin', data.lastLogin);
 
       if (data.acceptedTermsAndConditions) {
-        WebsiteUtils.switchPage('dashboard');
+        WebsiteUtils.switchVue('dashboard');
       } else {
-        WebsiteUtils.switchPage('firstTimeLogin');
+        WebsiteUtils.switchVue('firstTimeLogin');
       }
     }
     BuefyService.stopLoading();

@@ -16,3 +16,7 @@ export const register: Handler = async (event: APIGatewayEvent) => {
 export const login: Handler = async (event: APIGatewayEvent) => {
     return await AuthUtils.login(event);
 }
+
+export const logout: Handler = async () => {
+    return await AuthUtils.logout();
+}

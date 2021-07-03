@@ -40,7 +40,7 @@ export default class Auth extends Vue {
 
   mounted(): void {
     if (this.$store.getters.isLoggedIn) {
-      WebsiteUtils.switchPage('dashboard');
+      WebsiteUtils.switchVue('dashboard');
     }
     this.page =
         this.$router.currentRoute.path.substr(1) === "login"
@@ -52,7 +52,7 @@ export default class Auth extends Vue {
   @Watch("page")
   private switchAuth(): void {
     if (this.page !== this.$router.currentRoute.path.substr(1)) {
-      WebsiteUtils.switchPage(`${this.page}`);
+      WebsiteUtils.switchVue(`${this.page}`);
       document.title =
           this.page.substr(0, 1).toUpperCase() +
           this.page.substr(1) +

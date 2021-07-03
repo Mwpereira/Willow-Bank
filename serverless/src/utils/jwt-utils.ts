@@ -37,6 +37,18 @@ export default class JwtUtils {
     }
 
     /**
+     * Expires JWT For Protected Routes
+     *
+     * @return JWT
+     */
+    static expireJwt(): string {
+        return jwt.sign(
+            {},
+            process.env.APP_SECRET
+        );
+    }
+
+    /**
      * Retrieves Token
      *
      * @param cookie

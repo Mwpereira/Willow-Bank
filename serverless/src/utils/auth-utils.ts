@@ -153,6 +153,27 @@ export default class AuthUtilities {
             return MessageUtil.error(400, MessageConstants.INVALID_REQUEST);
         }
     }
+
+    /**
+     *
+     * Expires JWT token
+     *
+     */
+    static async logout(): Promise<Response> {
+        try {
+            const accessToken = await JwtUtils.expireJwt();
+
+            return MessageUtil.successAuth(
+                200,
+                MessageConstants.EXPIRED_TOKEN,
+                accessToken,
+                false
+            );
+        } catch (error) {
+            console.log(error);
+            return MessageUtil.error(400, MessageConstants.INVALID_REQUEST);
+        }
+    }
 }
 
 

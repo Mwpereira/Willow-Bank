@@ -9,7 +9,7 @@ export default class UserService {
             ? `https://${process.env.VUE_APP_API}`
             : `http://${process.env.VUE_APP_API_LOCAL}`;
 
-    public static acceptedTermsAndConditions(): Promise<AxiosResponse> {
+    public static async acceptedTermsAndConditions(): Promise<AxiosResponse> {
         return axios
             .post(`${this.url}/user/acceptedTermsAndConditions`)
             .then((response: AxiosResponse) => {
@@ -20,7 +20,7 @@ export default class UserService {
             });
     }
 
-    public static getAccount(): Promise<AxiosResponse> {
+    public static async getAccount(): Promise<AxiosResponse> {
         return axios
             .get(`${this.url}/user/account`)
             .then((response: AxiosResponse) => {

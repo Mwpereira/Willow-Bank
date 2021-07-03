@@ -72,15 +72,15 @@ export default class FirstTimeLogin extends Vue {
   }
 
   public dashboard() {
-    WebsiteUtils.switchPage('dashboard')
+    WebsiteUtils.switchVue('dashboard')
   }
 
   mounted(): void {
     if (this.$store.getters.acceptedTermsAndConditions) {
-      WebsiteUtils.switchPage('dashboard');
+      WebsiteUtils.switchVue('dashboard');
     }
     if(!this.$store.getters.isLoggedIn){
-      WebsiteUtils.switchPage('login');
+      WebsiteUtils.switchVue('login');
     }
     WebsiteUtils.updatePageTitle("Let's Get Started");
   }

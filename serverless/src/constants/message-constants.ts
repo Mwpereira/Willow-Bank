@@ -18,6 +18,11 @@ export abstract class MessageConstants {
     public static readonly VALID_TOKEN: string = 'Valid Token';
 
     /**
+     * Success message for Logging Out
+     */
+    public static readonly EXPIRED_TOKEN: string = 'Signed Out';
+
+    /**
      * Success message for Accepting Terms and Conditions
      */
     public static readonly ACCEPTED_TERMS_AND_CONDITIONS: string = 'Completed';

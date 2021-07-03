@@ -26,7 +26,7 @@ export default class Complete extends Vue {
     const response = await UserService.acceptedTermsAndConditions();
     if (response.data.acceptedTermsAndConditions){
       this.$store.commit('setAcceptedTermsAndConditions', true);
-      WebsiteUtils.switchPage('dashboard')
+      WebsiteUtils.switchVue('dashboard')
     }
   }
 }

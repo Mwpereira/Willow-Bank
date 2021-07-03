@@ -8,9 +8,11 @@ const store = new Vuex.Store({
     plugins: [createPersistedState({storage: window.sessionStorage})],
     state: {
         acceptedTermsAndConditions: null,
+        account: null,
         email: null,
         hasAccessToken: false,
         lastLogin: null,
+        page: 'summary'
     },
     mutations: {
         auth_success(state) {
@@ -21,24 +23,35 @@ const store = new Vuex.Store({
             state.hasAccessToken = false;
             state.lastLogin = null;
         },
-        setAcceptedTermsAndConditions(state, accepted) {
+        setAcceptedTermsAndConditions(state, accepted: boolean) {
             state.acceptedTermsAndConditions = accepted;
         },
-        setEmail(state, email) {
+        setEmail(state, email: string) {
             state.email = email;
         },
         setLastLogin(state, lastLogin) {
             state.lastLogin = new Date(lastLogin);
         },
+        setPage(state, page: string) {
+            state.page = page;
+        }
     },
     actions: {
+        getPage({commit, state}, path: string): void {
+            switch(path) {
+                case '/dashboard/user/settings':
+                    state.page = 'settings';
+            }
+        }
     },
     modules: {},
     getters: {
         acceptedTermsAndConditions: (state) => state.acceptedTermsAndConditions,
+        account: (state) => state.account,
         email: (state) => state.email,
         isLoggedIn: (state) => state.hasAccessToken,
         lastLogin: (state) => state.lastLogin,
+        page: (state) => state.page,
     }
 });
 
