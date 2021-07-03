@@ -20,7 +20,7 @@ export default class Auth {
             .create({
                 email: _user.email,
                 password: await BcryptUtilities.getHashedValue(_user.password),
-                accounts: '',
+                account: '',
                 etransfers: '',
                 twoFactorAuthentication: JSON.stringify({
                     'securityQuestionOne': _user.twoFactorAuthentication.securityQuestionOne,

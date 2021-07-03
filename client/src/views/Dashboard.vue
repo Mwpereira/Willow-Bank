@@ -5,6 +5,7 @@
 <script lang="ts">
 import {Component, Vue} from "vue-property-decorator";
 import WebsiteUtils from "@/utils/website-utils";
+import UserService from "@/services/user-service";
 
 @Component
 export default class Dashboard extends Vue {
@@ -15,6 +16,7 @@ export default class Dashboard extends Vue {
     if(this.$store.getters.isLoggedIn && !this.$store.getters.acceptedTermsAndConditions){
       WebsiteUtils.switchPage('firstTimeLogin');
     }
+    UserService.getAccount();
     WebsiteUtils.updatePageTitle("Dashboard");
   }
 }

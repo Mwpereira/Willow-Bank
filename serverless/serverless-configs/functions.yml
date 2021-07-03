@@ -30,7 +30,7 @@ acceptedTermsAndConditions:
   timeout: 10
   events:
     - http:
-        method: 'put'
+        method: 'post'
         path: 'user/acceptedTermsAndConditions'
         cors: true
         authorizer:
@@ -39,16 +39,17 @@ acceptedTermsAndConditions:
           resultTtlInSeconds: 10
           indentitySource: method.request.header.Cookie
 
-#getAccounts:
-#  handler: 'src/handlers/user-handler.getAccounts'
-#  description: "Gets User's Accounts"
-#  events:
-#    - http:
-#        method: 'get'
-#        path: 'user/accounts'
-#        cors: true
-#        authorizer:
-#          name: verifyToken
-#          type: request
-#          resultTtlInSeconds: 10
-#          indentitySource: method.request.header.Cookie
+getAccount:
+  handler: 'src/handlers/user-handler.getAccount'
+  description: "Gets User's Account"
+  timeout: 10
+  events:
+    - http:
+        method: 'get'
+        path: 'user/account'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie

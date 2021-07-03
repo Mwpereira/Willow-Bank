@@ -20,7 +20,12 @@ export abstract class MessageConstants {
     /**
      * Success message for Accepting Terms and Conditions
      */
-    public static readonly ACCEPT_TERMS_AND_CONDITIONS: string = 'Completed';
+    public static readonly ACCEPTED_TERMS_AND_CONDITIONS: string = 'Completed';
+
+    /**
+     * Success message for getting user's Account
+     */
+    public static readonly ACCOUNT_GET_SUCCESS: string = 'Retrieved Account';
 
     /**
      * Error message for Email already in use
@@ -57,4 +62,9 @@ export abstract class MessageConstants {
      * Error message for Accepting Terms and Conditions
      */
     public static readonly ACCEPT_TERMS_AND_CONDITIONS_FAIL: string = 'Error';
+
+    /**
+     * Error message for failing to get user's Account
+     */
+    public static readonly ACCOUNT_GET_FAILED: string = 'Failed to get account';
 }

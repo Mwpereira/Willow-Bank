@@ -9,7 +9,7 @@ export const WillowBankSchema = new DynamoDB.Schema({
         type: String,
         required: true,
     },
-    accounts: {
+    account: {
         type: String,
         required: true,
     },

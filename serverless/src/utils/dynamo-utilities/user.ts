@@ -23,4 +23,25 @@ export default class User {
                 throw error;
             });
     }
+
+    public static getAccount(_email: string): Promise<object> {
+        return willowBankTable
+            .query()
+            .where('email')
+            .eq(_email)
+            .attributes(['account'])
+            .exec()
+            .then((result: any) => {
+                const account = result[0].account;
+                if (account === '') {
+                    return { accounts: null };
+                } else {
+                    return { accounts: JSON.parse(account) };
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                throw error;
+            });
+    }
 }
