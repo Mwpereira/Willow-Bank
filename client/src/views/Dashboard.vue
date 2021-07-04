@@ -10,18 +10,20 @@ import {Component, Vue} from "vue-property-decorator";
 import NavBar from "@/components/Dashboard/NavBar.vue";
 import WebsiteUtils from "@/utils/website-utils";
 import UserService from "@/services/user-service";
-import Summary from "@/components/Dashboard/Summary.vue";
-import Account from "@/components/Dashboard/Account.vue";
+import DashboardSummary from "@/components/Dashboard/Summary.vue";
+import Summary from "@/components/Dashboard/AccountSummary.vue";
 import Settings from "@/components/Dashboard/Settings.vue";
 import Etransfers from "@/components/Dashboard/Etransfers.vue";
+import PayBills from "@/components/Dashboard/AccountPayBills.vue";
 import Info from "@/components/Dashboard/Info.vue";
 import AuthService from "@/services/auth-service";
 
 @Component({
   components: {
     NavBar,
+    DashboardSummary,
     Summary,
-    Account,
+    PayBills,
     Settings,
     Etransfers,
     Info,

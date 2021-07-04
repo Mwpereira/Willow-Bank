@@ -14,13 +14,13 @@ const store = new Vuex.Store({
         account: null,
         email: null,
         lastLogin: null,
-        page: "Summary",
+        page: "DashboardSummary",
     },
     mutations: {
         async auth_logout(state) {
             state.email = null;
             state.lastLogin = null;
-            state.page = "Summary";
+            state.page = "DashboardSummary";
         },
         async setAcceptedTermsAndConditions(state, accepted: boolean) {
             state.acceptedTermsAndConditions = accepted;
@@ -42,7 +42,10 @@ const store = new Vuex.Store({
                     commit('setPage', "Settings");
                     break;
                 case "/dashboard/account/summary":
-                    commit('setPage', "Account");
+                    commit('setPage', "Summary");
+                    break;
+                case "/dashboard/account/paybills":
+                    commit('setPage', "PayBills");
                     break;
                 case "/dashboard/etransfers":
                     commit('setPage', "Etransfers");
@@ -51,7 +54,7 @@ const store = new Vuex.Store({
                     commit('setPage', "Info");
                     break;
                 case "/dashboard/view":
-                    commit('setPage', "Summary");
+                    commit('setPage', "DashboardSummary");
                     break;
             }
             WebsiteUtils.updatePageTitle(state.page);

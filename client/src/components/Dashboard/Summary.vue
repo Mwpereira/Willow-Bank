@@ -1,7 +1,7 @@
 <template>
   <div id="Summary" class="container">
     <div class="section has-text-left">
-      <p class="title">Summary</p>
+      <p class="title">Dashboard</p>
       <div class="card p-6 mb-5">
         <div class="columns">
           <div class="column">

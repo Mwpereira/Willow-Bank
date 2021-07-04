@@ -8,7 +8,7 @@
         <b-navbar-item v-on:click="switchPage('account/summary')"
           >Summary</b-navbar-item
         >
-        <b-navbar-item v-on:click="switchPage('account/pay-bills')"
+        <b-navbar-item v-on:click="switchPage('account/paybills')"
           >Pay Bills</b-navbar-item
         >
       </b-navbar-dropdown>

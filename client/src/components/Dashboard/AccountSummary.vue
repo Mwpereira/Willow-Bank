@@ -1,7 +1,7 @@
 <template>
-  <div id="Etransfers" class="container">
+  <div id="AccountSummary" class="container">
     <div class="section has-text-left">
-      <p class="title mb-6">eTransfer</p>
+      <p class="title mb-6">Account Summary</p>
     </div>
   </div>
 </template>
@@ -10,7 +10,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class Etransfers extends Vue {}
+export default class AccountSummary extends Vue {}
 </script>
 
 <style scoped></style>
