@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from 'vuex-persistedstate';
+import AuthService from "@/services/auth-service";
+import ResponseUtils from "@/utils/response-utils";
 
 Vue.use(Vuex);
 
@@ -38,7 +40,7 @@ const store = new Vuex.Store({
     },
     actions: {
         async getPage({commit, state}, path: string): Promise<void> {
-            switch(path) {
+            switch (path) {
                 case '/dashboard/user/settings':
                     state.page = 'Settings';
                     break;
@@ -51,6 +53,9 @@ const store = new Vuex.Store({
                 default:
                     state.page = 'Summary';
             }
+        },
+        async getRefreshToken(): Promise<boolean> {
+            return ResponseUtils.successProcessor(await AuthService.getRefreshToken());
         }
     },
     modules: {},

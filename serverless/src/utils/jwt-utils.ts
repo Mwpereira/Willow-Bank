@@ -29,8 +29,7 @@ export default class JwtUtils {
     static refreshJwt(user: any): string {
         return jwt.sign(
             {
-                sub: user.email,
-                // email: user.email,
+                sub: user.sub,
             },
             process.env.APP_SECRET
         );

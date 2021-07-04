@@ -62,6 +62,7 @@ export default class AuthUtilities {
             const user = JwtUtils.getDecodedToken(
                 JwtUtils.getToken(CookieUtilities.getCookie(event.headers))
             );
+            console.log(user)
             const accessToken = JwtUtils.refreshJwt(user);
 
             return MessageUtil.successAuth(

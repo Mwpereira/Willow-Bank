@@ -24,6 +24,20 @@ login:
         cors: true
         resultTtlInSeconds: 10
 
+refreshToken:
+  handler: 'src/handlers/auth-handler.refreshToken'
+  description: "Refreshes JWT Token"
+  events:
+    - http:
+        method: 'get'
+        path: 'auth/refreshToken'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
+
 logout:
   handler: 'src/handlers/auth-handler.logout'
   description: 'Authorizes User'

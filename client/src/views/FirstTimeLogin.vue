@@ -50,6 +50,7 @@ import WebsiteUtils from "@/utils/website-utils";
 import TermsAndConditions from "@/components/Dashboard/FirstTimeLogin/TermsAndConditions.vue";
 import SelectAccounts from "@/components/Dashboard/FirstTimeLogin/SelectAccount.vue";
 import Complete from "@/components/Dashboard/FirstTimeLogin/Complete.vue";
+import AuthService from "@/services/auth-service";
 
 @Component({
   components: {Complete, SelectAccounts, TermsAndConditions}
@@ -71,18 +72,18 @@ export default class FirstTimeLogin extends Vue {
     this.agree2 = agrees.agree2;
   }
 
-  public dashboard() {
-    WebsiteUtils.switchVue('dashboard')
+  public async dashboard(): Promise<void> {
+    await WebsiteUtils.switchVue('dashboard')
   }
 
-  mounted(): void {
+  async created(): Promise<void> {
     if (this.$store.getters.isLoggedIn && this.$store.getters.acceptedTermsAndConditions) {
-      WebsiteUtils.switchVue('dashboard');
+      await WebsiteUtils.switchVue('dashboard');
+    } else if (!this.$store.getters.isLoggedIn) {
+      await AuthService.logout();
+    } else {
+      await WebsiteUtils.updatePageTitle("Let's Get Started");
     }
-    if(!this.$store.getters.isLoggedIn){
-      WebsiteUtils.switchVue('login');
-    }
-    WebsiteUtils.updatePageTitle("Let's Get Started");
   }
 }
 </script>

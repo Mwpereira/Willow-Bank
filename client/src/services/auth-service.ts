@@ -37,6 +37,17 @@ export default class AuthService {
             });
     }
 
+    public static async getRefreshToken(): Promise<AxiosResponse> {
+        return axios
+            .get(`${this.url}/auth/refreshToken`)
+            .then((response: AxiosResponse) => {
+                return response;
+            })
+            .catch((error) => {
+                return ResponseUtils.errorProcessor(error.response);
+            });
+    }
+
     public static async logout(): Promise<void> {
         const response = await axios
             .get(`${this.url}/auth/logout`)
@@ -48,7 +59,7 @@ export default class AuthService {
             });
         if (response.status === 200) {
             store.commit('auth_logout');
-            WebsiteUtils.switchVue('login');
+            await WebsiteUtils.switchVue('login');
         }
     }
 }

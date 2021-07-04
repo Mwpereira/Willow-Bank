@@ -38,21 +38,22 @@ export default class Auth extends Vue {
   private page = "Auth";
   private user = null;
 
-  mounted(): void {
+  async created(): Promise<void> {
     if (this.$store.getters.isLoggedIn) {
-      WebsiteUtils.switchVue('dashboard');
+      await WebsiteUtils.switchVue('dashboard');
+    } else {
+      this.page =
+          this.$router.currentRoute.path.substr(1) === "login"
+              ? "login"
+              : "register";
+      await WebsiteUtils.updatePageTitle(this.page);
     }
-    this.page =
-        this.$router.currentRoute.path.substr(1) === "login"
-            ? "login"
-            : "register";
-    WebsiteUtils.updatePageTitle(this.page);
   }
 
   @Watch("page")
-  private switchAuth(): void {
+  private async switchAuth(): Promise<void> {
     if (this.page !== this.$router.currentRoute.path.substr(1)) {
-      WebsiteUtils.switchVue(`${this.page}`);
+      await WebsiteUtils.switchVue(`${this.page}`);
       document.title =
           this.page.substr(0, 1).toUpperCase() +
           this.page.substr(1) +
