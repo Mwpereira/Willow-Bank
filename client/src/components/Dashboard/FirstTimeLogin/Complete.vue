@@ -19,11 +19,15 @@
 import {Component, Vue} from "vue-property-decorator";
 import UserService from "@/services/user-service";
 import WebsiteUtils from "@/utils/website-utils";
+import BuefyService from "@/services/buefy-service";
 
 @Component
 export default class Complete extends Vue {
   public async complete() {
+    BuefyService.startLoading();
     const response = await UserService.acceptedTermsAndConditions();
+    BuefyService.stopLoading();
+    setTimeout(3000);
     if (response.data.acceptedTermsAndConditions) {
       await this.$store.commit('setAcceptedTermsAndConditions', true);
       await WebsiteUtils.switchVue('dashboard')

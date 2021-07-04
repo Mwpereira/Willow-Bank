@@ -51,7 +51,6 @@ const store = new Vuex.Store({
                 default:
                     state.page = 'Summary';
             }
-            console.log(path)
         }
     },
     modules: {},
