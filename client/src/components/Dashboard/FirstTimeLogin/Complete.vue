@@ -27,7 +27,7 @@ export default class Complete extends Vue {
     BuefyService.startLoading();
     const response = await UserService.acceptedTermsAndConditions();
     BuefyService.stopLoading();
-    setTimeout(3000);
+    new Promise(resolve => setTimeout(resolve, 1000));
     if (response.data.acceptedTermsAndConditions) {
       await this.$store.commit('setAcceptedTermsAndConditions', true);
       await WebsiteUtils.switchVue('dashboard')
