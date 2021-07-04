@@ -17,7 +17,7 @@ export default class WebsiteUtils {
      *
      * @param page
      */
-    public static async switchPage(page: string): void {
+    public static async switchPage(page: string): Promise<void> {
         if (page === 'dashboard'){
             await store.dispatch('getPage',`/dashboard`);
         }
@@ -31,7 +31,7 @@ export default class WebsiteUtils {
      *
      * @param prefix
      */
-    public static updatePageTitle(prefix: string): void {
+    public static updatePageTitle(prefix: string): Promise<void> {
         const title =
             prefix.substr(0, 1).toUpperCase() +
             prefix.substr(1) +

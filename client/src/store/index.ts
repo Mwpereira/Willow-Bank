@@ -37,7 +37,7 @@ const store = new Vuex.Store({
         }
     },
     actions: {
-        async getPage({commit, state}, path: string): void {
+        async getPage({commit, state}, path: string): Promise<void> {
             switch(path) {
                 case '/dashboard/user/settings':
                     state.page = 'Settings';
