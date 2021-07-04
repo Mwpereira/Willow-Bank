@@ -1,5 +1,6 @@
 import PropertiesConstants from "@/constants/properties-constants";
 import router from "@/router";
+import store from "@/store";
 
 export default class WebsiteUtils {
     /**
@@ -7,8 +8,8 @@ export default class WebsiteUtils {
      *
      * @param view
      */
-    public static switchVue(view: string): void {
-        router.push(`/${view}`);
+    public static async switchVue(view: string): void {
+        await router.push(`/${view}`);
     }
 
     /**
@@ -16,8 +17,13 @@ export default class WebsiteUtils {
      *
      * @param page
      */
-    public static switchPage(page: string): void {
-        log(`/dashboard/${page}`);
+    public static async switchPage(page: string): void {
+        if (page === 'dashboard'){
+            await store.dispatch('getPage',`/dashboard`);
+        }
+        else{
+            await store.dispatch('getPage',`/dashboard/${page}`);
+        }
     }
 
     /**

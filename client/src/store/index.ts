@@ -15,33 +15,43 @@ const store = new Vuex.Store({
         page: 'summary'
     },
     mutations: {
-        auth_success(state) {
+        async auth_success(state) {
             state.hasAccessToken = true;
         },
-        auth_logout(state) {
+        async auth_logout(state) {
             state.email = null;
             state.hasAccessToken = false;
             state.lastLogin = null;
         },
-        setAcceptedTermsAndConditions(state, accepted: boolean) {
+        async setAcceptedTermsAndConditions(state, accepted: boolean) {
             state.acceptedTermsAndConditions = accepted;
         },
-        setEmail(state, email: string) {
+        async setEmail(state, email: string) {
             state.email = email;
         },
-        setLastLogin(state, lastLogin) {
+        async setLastLogin(state, lastLogin) {
             state.lastLogin = new Date(lastLogin);
         },
-        setPage(state, page: string) {
+        async setPage(state, page: string) {
             state.page = page;
         }
     },
     actions: {
-        getPage({commit, state}, path: string): void {
+        async getPage({commit, state}, path: string): void {
             switch(path) {
                 case '/dashboard/user/settings':
-                    state.page = 'settings';
+                    state.page = 'Settings';
+                    break;
+                case '/dashboard/account/summary':
+                    state.page = 'Account';
+                    break;
+                case '/dashboard/etransfers':
+                    state.page = 'Etransfers';
+                    break;
+                default:
+                    state.page = 'Summary';
             }
+            console.log(path)
         }
     },
     modules: {},

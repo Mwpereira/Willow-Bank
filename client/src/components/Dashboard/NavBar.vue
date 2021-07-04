@@ -1,21 +1,21 @@
 <template>
   <b-navbar>
     <template #start>
-      <b-navbar-item :to="{ path: '/dashboard' }" tag="router-link">
+      <b-navbar-item v-on:click="switchPage('dashboard')">
         Dashboard
       </b-navbar-item>
       <b-navbar-dropdown label="Account">
-        <b-navbar-item v-on:click="switchPage('/dashboard/account/summary')">Summary</b-navbar-item>
-        <b-navbar-item v-on:click="switchPage('/dashboard/account/pay-bills')">Pay Bills</b-navbar-item>
+        <b-navbar-item v-on:click="switchPage('account/summary')">Summary</b-navbar-item>
+        <b-navbar-item v-on:click="switchPage('account/pay-bills')">Pay Bills</b-navbar-item>
       </b-navbar-dropdown>
-      <b-navbar-item v-on:click="switchPage('/dashboard/eTransfer')">eTransfer</b-navbar-item>
-      <b-navbar-item v-on:click="switchPage('/dashboard/info')">Info</b-navbar-item>
+      <b-navbar-item v-on:click="switchPage('etransfers')">eTransfer</b-navbar-item>
+      <b-navbar-item v-on:click="switchPage('info')">Info</b-navbar-item>
     </template>
 
     <template #end>
       <b-navbar-item tag="div">
         <div class="buttons">
-          <a class="button is-warning"  v-on:click="switchPage('/dashboard/user/settings')" rel="noopener">
+          <a class="button is-warning"  v-on:click="switchPage('user/settings')" rel="noopener">
             <strong>Settings</strong>
           </a>
           <a class="button is-light" rel="noopener" v-on:click="logout()"> Logout </a>
@@ -34,7 +34,7 @@ import AuthService from "@/services/auth-service";
 @Component
 export default class NavBar extends Vue {
   public switchPage(page: string): void {
-    WebsiteUtils.switchVue(page);
+    WebsiteUtils.switchPage(page);
   }
 
   public logout(): void {

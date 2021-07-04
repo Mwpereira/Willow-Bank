@@ -1,6 +1,6 @@
 <template>
-  <div id="Summary">
-    <p class="title">Summary</p>
+  <div id="Account">
+    <p class="title">Account</p>
   </div>
 </template>
 
@@ -8,12 +8,9 @@
 import {Component, Vue} from "vue-property-decorator";
 
 @Component
-export default class Summary extends Vue {
-  mounted(){
-    console.log("hello world")
-  }
-}
+export default class Account extends Vue {}
 </script>
 
 <style scoped>
+
 </style>

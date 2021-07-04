@@ -9,7 +9,7 @@
         <b-button class="mt-2 is-primary is-size-6" v-on:click="complete()">Complete & Continue</b-button>
       </div>
       <div class="column">
-        <img src="../../../assets/img/FirstTimeLogin/sapling.png" width="225" class="mt-5"/>
+        <img class="mt-5" src="../../../assets/img/FirstTimeLogin/sapling.png" width="225"/>
       </div>
     </div>
   </div>
@@ -24,9 +24,9 @@ import WebsiteUtils from "@/utils/website-utils";
 export default class Complete extends Vue {
   public async complete() {
     const response = await UserService.acceptedTermsAndConditions();
-    if (response.data.acceptedTermsAndConditions){
-      this.$store.commit('setAcceptedTermsAndConditions', true);
-      WebsiteUtils.switchVue('dashboard')
+    if (response.data.acceptedTermsAndConditions) {
+      await this.$store.commit('setAcceptedTermsAndConditions', true);
+      await WebsiteUtils.switchVue('dashboard')
     }
   }
 }
@@ -34,7 +34,7 @@ export default class Complete extends Vue {
 
 <style scoped>
 @media only screen and (max-width: 768px) {
-  .mb-6{
+  .mb-6 {
     margin-bottom: 12px !important;
   }
 }
