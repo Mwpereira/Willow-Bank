@@ -8,7 +8,7 @@ export default class WebsiteUtils {
      *
      * @param view
      */
-    public static async switchVue(view: string): void {
+    public static async switchVue(view: string): Promise<void> {
         await router.push(`/${view}`);
     }
 
@@ -31,7 +31,7 @@ export default class WebsiteUtils {
      *
      * @param prefix
      */
-    public static updatePageTitle(prefix: string): Promise<void> {
+    public static updatePageTitle(prefix: string): void {
         const title =
             prefix.substr(0, 1).toUpperCase() +
             prefix.substr(1) +
