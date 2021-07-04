@@ -30,6 +30,7 @@ import PropertiesConstants from "@/constants/properties-constants";
 import Login from "@/components/Auth/Login.vue";
 import Register from "@/components/Auth/Register.vue";
 import WebsiteUtils from "@/utils/website-utils";
+import {Route} from "vue-router";
 
 @Component({
   components: { Register, Login },
@@ -60,6 +61,12 @@ export default class Auth extends Vue {
         PropertiesConstants.titleSuffix;
     }
   }
+
+  @Watch('$route', { immediate: true, deep: true })
+  onUrlChange(newVal: Route) {
+    this.page = this.$router.currentRoute.path.substr(1);
+  }
+
 }
 </script>
 

@@ -64,6 +64,11 @@ export abstract class MessageConstants {
     public static readonly TOKEN_NOT_FOUND: string = 'Token not found';
 
     /**
+     * Error message for No Login
+     */
+    public static readonly NO_LOGIN: string = 'No Login';
+
+    /**
      * Error message for Accepting Terms and Conditions
      */
     public static readonly ACCEPT_TERMS_AND_CONDITIONS_FAIL: string = 'Error';

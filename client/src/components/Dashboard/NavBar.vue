@@ -1,7 +1,7 @@
 <template>
   <b-navbar>
     <template #start>
-      <b-navbar-item v-on:click="switchPage('dashboard')">
+      <b-navbar-item v-on:click="switchPage('dashboard/view')">
         Dashboard
       </b-navbar-item>
       <b-navbar-dropdown label="Account">
@@ -42,6 +42,7 @@ import { Vue } from "vue-property-decorator";
 import Component from "vue-class-component";
 import WebsiteUtils from "@/utils/website-utils";
 import AuthService from "@/services/auth-service";
+import BuefyService from "@/services/buefy-service";
 
 @Component
 export default class NavBar extends Vue {
@@ -51,6 +52,7 @@ export default class NavBar extends Vue {
 
   public logout(): void {
     AuthService.logout();
+    BuefyService.successToast('Signed Out');
   }
 }
 </script>

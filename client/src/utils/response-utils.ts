@@ -1,7 +1,6 @@
-import store from "../store";
-import router from "../router/index";
 import { AxiosResponse } from "axios";
 import BuefyService from "@/services/buefy-service";
+import AuthService from "@/services/auth-service";
 
 /**
  * Response Utilities for Client
@@ -62,7 +61,6 @@ export default class ResponseUtils {
   }
 
   private static async checkInvalidTokenError(): Promise<void> {
-    await store.dispatch("logout");
-    await router.push("/login");
+    await AuthService.logout();
   }
 }

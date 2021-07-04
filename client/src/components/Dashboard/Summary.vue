@@ -22,8 +22,8 @@
             <p class="has-text-weight-bold">Last Login</p>
           </div>
           <div class="column">
-            <p class="is-size-1">email</p>
-            <p class="has-text-weight-bold">Email</p>
+            <p class="is-size-1">0</p>
+            <p class="has-text-weight-bold">Notifications</p>
           </div>
         </div>
       </div>
@@ -35,11 +35,7 @@
 import {Component, Vue} from "vue-property-decorator";
 
 @Component
-export default class Summary extends Vue {
-  mounted() {
-    console.log("hello world");
-  }
-}
+export default class Summary extends Vue {}
 </script>
 
 <style scoped></style>

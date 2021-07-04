@@ -59,7 +59,7 @@ export default class AuthUtilities {
      */
     static async refreshToken(event: APIGatewayEvent): Promise<Response> {
         try {
-            const user = JwtUtils.getDecodedToken(
+            const user: any = JwtUtils.getDecodedToken(
                 JwtUtils.getToken(CookieUtilities.getCookie(event.headers))
             );
             const accessToken = JwtUtils.refreshJwt(user);
