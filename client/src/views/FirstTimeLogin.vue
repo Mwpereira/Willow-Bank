@@ -1,41 +1,62 @@
 <template>
   <section class="mt-6 container">
     <b-steps
-        v-model="activeStep"
-        :animated="true"
-        :has-navigation="true"
-        :rounded="true"
-        mobile-mode="minimalist">
-      <b-step-item :clickable="activeStep > 0" class="mt-5" label="Select Account" step="1">
+      v-model="activeStep"
+      :animated="true"
+      :has-navigation="true"
+      :rounded="true"
+      mobile-mode="minimalist"
+    >
+      <b-step-item
+        :clickable="activeStep > 0"
+        class="mt-5"
+        label="Select Account"
+        step="1"
+      >
         <h1 class="title has-text-centered mb-6">Select Account</h1>
-        <SelectAccounts/>
+        <SelectAccounts />
       </b-step-item>
 
-      <b-step-item :clickable="activeStep > 1" class="mt-5"
-                   label="Terms & Services" step="2">
+      <b-step-item
+        :clickable="activeStep > 1"
+        class="mt-5"
+        label="Terms & Services"
+        step="2"
+      >
         <h1 class="title has-text-centered mb-6">Terms & Services</h1>
-        <TermsAndConditions :agree0="this.agree0" :agree1="this.agree1" :agree2="this.agree2"
-                            @update-agrees="updateAgrees($event)"/>
+        <TermsAndConditions
+          :agree0="this.agree0"
+          :agree1="this.agree1"
+          :agree2="this.agree2"
+          @update-agrees="updateAgrees($event)"
+        />
       </b-step-item>
 
-      <b-step-item :clickable="activeStep > 1" :step="3" class="mt-5" disabled label="Complete">
+      <b-step-item
+        :clickable="activeStep > 1"
+        :step="3"
+        class="mt-5"
+        disabled
+        label="Complete"
+      >
         <h1 class="title has-text-centered mb-6">Complete</h1>
-        <Complete/>
+        <Complete />
       </b-step-item>
 
-      <template v-if="true"
-                #navigation="{previous, next}">
+      <template v-if="true" #navigation="{ previous, next }">
         <div class="my-6">
           <b-button
-              :disabled="previous.disabled"
-              class="mx-2"
-              @click.prevent="previous.action">
+            :disabled="previous.disabled"
+            class="mx-2"
+            @click.prevent="previous.action"
+          >
             <i class="fas fa-angle-left"></i>
           </b-button>
           <b-button
-              :disabled="next.disabled || disableButton"
-              class="mx-2"
-              @click.prevent="next.action">
+            :disabled="next.disabled || disableButton"
+            class="mx-2"
+            @click.prevent="next.action"
+          >
             <i class="fas fa-angle-right"></i>
           </b-button>
         </div>
@@ -45,7 +66,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import WebsiteUtils from "@/utils/website-utils";
 import TermsAndConditions from "@/components/Dashboard/FirstTimeLogin/TermsAndConditions.vue";
 import SelectAccounts from "@/components/Dashboard/FirstTimeLogin/SelectAccount.vue";
@@ -53,7 +74,7 @@ import Complete from "@/components/Dashboard/FirstTimeLogin/Complete.vue";
 import AuthService from "@/services/auth-service";
 
 @Component({
-  components: {Complete, SelectAccounts, TermsAndConditions}
+  components: { Complete, SelectAccounts, TermsAndConditions },
 })
 export default class FirstTimeLogin extends Vue {
   public activeStep = 0;
@@ -63,7 +84,9 @@ export default class FirstTimeLogin extends Vue {
   public agree2 = false;
 
   get disableButton(): boolean {
-    return ((this.activeStep === 1) && (!this.agree0 || !this.agree1 || !this.agree2));
+    return (
+      this.activeStep === 1 && (!this.agree0 || !this.agree1 || !this.agree2)
+    );
   }
 
   public updateAgrees(agrees: any): void {
@@ -73,12 +96,15 @@ export default class FirstTimeLogin extends Vue {
   }
 
   public async dashboard(): Promise<void> {
-    await WebsiteUtils.switchVue('dashboard')
+    await WebsiteUtils.switchVue("dashboard");
   }
 
   async created(): Promise<void> {
-    if (this.$store.getters.isLoggedIn && this.$store.getters.acceptedTermsAndConditions) {
-      await WebsiteUtils.switchVue('dashboard');
+    if (
+      this.$store.getters.isLoggedIn &&
+      this.$store.getters.acceptedTermsAndConditions
+    ) {
+      await WebsiteUtils.switchVue("dashboard");
     } else if (!this.$store.getters.isLoggedIn) {
       await AuthService.logout();
     } else {

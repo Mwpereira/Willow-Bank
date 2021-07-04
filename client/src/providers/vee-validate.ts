@@ -23,7 +23,6 @@ extend("min_password", {
   message: "Password must be 7 or more characters long",
 });
 
-
 extend("confirmed", {
   ...confirmed,
   message: "Passwords do not match",

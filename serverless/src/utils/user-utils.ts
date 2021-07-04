@@ -1,8 +1,8 @@
-import {Response} from "../interfaces/response";
-import MessageUtil from "./response-utils";
-import {MessageConstants} from "../constants/message-constants";
-import RequestUtils from "./request-utils";
-import User from "./dynamo-utilities/user";
+import {Response} from '../interfaces/response';
+import MessageUtil from './response-utils';
+import {MessageConstants} from '../constants/message-constants';
+import RequestUtils from './request-utils';
+import User from './dynamo-utilities/user';
 
 /**
  * User Utilities

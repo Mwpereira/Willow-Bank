@@ -10,7 +10,7 @@ export default class User {
     public static acceptedTermsAndConditions(email: string): Promise<boolean> {
         return willowBankTable
             .update({
-                    email: email
+                    email
                 },
                 {
                     acceptedTermsAndConditions: true,
@@ -34,9 +34,9 @@ export default class User {
             .then((result: any) => {
                 const account = result[0].account;
                 if (account === '') {
-                    return { accounts: null };
+                    return { account: null };
                 } else {
-                    return { accounts: JSON.parse(account) };
+                    return { account: JSON.parse(account) };
                 }
             })
             .catch((error) => {

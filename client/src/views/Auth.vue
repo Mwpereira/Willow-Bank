@@ -1,9 +1,9 @@
 <template>
   <div id="Auth">
     <p
-        id="backButton"
-        class="has-text-weight-bold has-text-left is-size-5 pt-5 pl-6"
-        v-on:click="$router.push('/')"
+      id="backButton"
+      class="has-text-weight-bold has-text-left is-size-5 pt-5 pl-6"
+      v-on:click="$router.push('/')"
     >
       <i class="fas fa-angle-left mr-1"></i>
       Back
@@ -12,10 +12,10 @@
       <div class="column is-narrow">
         <div class="card p-6 mb-6">
           <div v-if="this.page === 'login'">
-            <Login @login="user = $event" @update-page="page = $event"/>
+            <Login @login="user = $event" @update-page="page = $event" />
           </div>
           <div v-else>
-            <Register @register="user = $event" @update-page="page = $event"/>
+            <Register @register="user = $event" @update-page="page = $event" />
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Watch} from "vue-property-decorator";
+import { Vue, Watch } from "vue-property-decorator";
 import Component from "vue-class-component";
 import PropertiesConstants from "@/constants/properties-constants";
 import Login from "@/components/Auth/Login.vue";
@@ -32,7 +32,7 @@ import Register from "@/components/Auth/Register.vue";
 import WebsiteUtils from "@/utils/website-utils";
 
 @Component({
-  components: {Register, Login},
+  components: { Register, Login },
 })
 export default class Auth extends Vue {
   private page = "Auth";
@@ -40,12 +40,12 @@ export default class Auth extends Vue {
 
   async created(): Promise<void> {
     if (this.$store.getters.isLoggedIn) {
-      await WebsiteUtils.switchVue('dashboard');
+      await WebsiteUtils.switchVue("dashboard");
     } else {
       this.page =
-          this.$router.currentRoute.path.substr(1) === "login"
-              ? "login"
-              : "register";
+        this.$router.currentRoute.path.substr(1) === "login"
+          ? "login"
+          : "register";
       await WebsiteUtils.updatePageTitle(this.page);
     }
   }
@@ -55,9 +55,9 @@ export default class Auth extends Vue {
     if (this.page !== this.$router.currentRoute.path.substr(1)) {
       await WebsiteUtils.switchVue(`${this.page}`);
       document.title =
-          this.page.substr(0, 1).toUpperCase() +
-          this.page.substr(1) +
-          PropertiesConstants.titleSuffix;
+        this.page.substr(0, 1).toUpperCase() +
+        this.page.substr(1) +
+        PropertiesConstants.titleSuffix;
     }
   }
 }

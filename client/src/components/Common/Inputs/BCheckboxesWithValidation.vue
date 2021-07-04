@@ -1,7 +1,12 @@
 <template>
-  <ValidationProvider :vid="vid" :name="$attrs.label" :rules="rules" v-slot="{ errors }">
+  <ValidationProvider
+    :vid="vid"
+    :name="$attrs.label"
+    :rules="rules"
+    v-slot="{ errors }"
+  >
     <div class="block">
-      <slot/>
+      <slot />
       <p class="has-text-danger">{{ errors[0] }}</p>
     </div>
   </ValidationProvider>
@@ -12,16 +17,16 @@ import { ValidationProvider } from "vee-validate";
 
 export default {
   components: {
-    ValidationProvider
+    ValidationProvider,
   },
   props: {
     vid: {
-      type: String
+      type: String,
     },
     rules: {
       type: [Object, String],
-      default: ""
-    }
-  }
+      default: "",
+    },
+  },
 };
 </script>

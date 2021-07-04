@@ -1,12 +1,12 @@
 <template>
   <div id="Dashboard">
-    <NavBar/>
-    <Page :is="page"/>
+    <NavBar />
+    <Page :is="page" />
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import NavBar from "@/components/Dashboard/NavBar.vue";
 import WebsiteUtils from "@/utils/website-utils";
 import UserService from "@/services/user-service";
@@ -24,7 +24,7 @@ import AuthService from "@/services/auth-service";
     Account,
     Settings,
     Etransfers,
-    Info
+    Info,
   },
 })
 export default class Dashboard extends Vue {
@@ -34,25 +34,27 @@ export default class Dashboard extends Vue {
 
   async created(): Promise<void> {
     if (!this.$store.getters.isLoggedIn) {
-      await WebsiteUtils.switchVue('login');
-    }
-    else if (this.$store.getters.isLoggedIn && !this.$store.getters.acceptedTermsAndConditions) {
-      await WebsiteUtils.switchVue('firstTimeLogin');
-    }
-    else
-    {
-      this.$store.dispatch('getRefreshToken').then(async (validAccessToken) => {
+      await WebsiteUtils.switchVue("login");
+    } else if (
+      this.$store.getters.isLoggedIn &&
+      !this.$store.getters.acceptedTermsAndConditions
+    ) {
+      await WebsiteUtils.switchVue("firstTimeLogin");
+    } else {
+      this.$store.dispatch("getRefreshToken").then(async (validAccessToken) => {
         if (!validAccessToken) {
           await AuthService.logout();
-        }
-        else {
-          if ((this.$store.getters.account === null)) {
+        } else {
+          if (this.$store.getters.account === null) {
             await UserService.getAccount();
           }
-          if (this.$router.currentRoute.path !== '/dashboard') {
-            await this.$store.dispatch('getPage', this.$router.currentRoute.path);
+          if (this.$router.currentRoute.path !== "/dashboard") {
+            await this.$store.dispatch(
+              "getPage",
+              this.$router.currentRoute.path
+            );
           } else {
-            this.$store.commit('setPage', 'Summary')
+            this.$store.commit("setPage", "Summary");
             WebsiteUtils.updatePageTitle("Dashboard");
           }
         }

@@ -110,8 +110,10 @@ export default class Register extends Vue {
   private async register(user: object): Promise<void> {
     BuefyService.startLoading();
     this.updateUser(user);
-    if (ResponseUtils.successAuthProcessor(await AuthService.register(this.user))) {
-      this.updatePage('login')
+    if (
+      ResponseUtils.successAuthProcessor(await AuthService.register(this.user))
+    ) {
+      this.updatePage("login");
     }
     BuefyService.stopLoading();
   }

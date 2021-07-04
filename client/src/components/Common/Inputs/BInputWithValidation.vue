@@ -1,18 +1,22 @@
 <template>
   <ValidationProvider
-      :vid="vid"
-      :name="$attrs.name || $attrs.label"
-      :rules="rules"
-      v-slot="{ errors, valid }"
+    :vid="vid"
+    :name="$attrs.name || $attrs.label"
+    :rules="rules"
+    v-slot="{ errors, valid }"
   >
     <b-field
-        v-bind="$attrs"
-        :type="{ 'is-danger': errors[0], 'is-success': valid }"
-        :message="errors"
-        style="margin-bottom: 12px"
-        :auto-id="fieldAutoId"
+      v-bind="$attrs"
+      :type="{ 'is-danger': errors[0], 'is-success': valid }"
+      :message="errors"
+      style="margin-bottom: 12px"
+      :auto-id="fieldAutoId"
     >
-      <b-input v-model="innerValue" v-bind="$attrs" :auto-id="inputAutoId"></b-input>
+      <b-input
+        v-model="innerValue"
+        v-bind="$attrs"
+        :auto-id="inputAutoId"
+      ></b-input>
     </b-field>
   </ValidationProvider>
 </template>
@@ -22,29 +26,29 @@ import { ValidationProvider } from "vee-validate";
 
 export default {
   components: {
-    ValidationProvider
+    ValidationProvider,
   },
   props: {
     vid: {
-      type: String
+      type: String,
     },
     rules: {
       type: [Object, String],
-      default: ""
+      default: "",
     },
     // Must be included in props
     value: {
-      type: null
+      type: null,
     },
-    fieldAutoId:{
-      type: String
+    fieldAutoId: {
+      type: String,
     },
-    inputAutoId:{
-      type: String
+    inputAutoId: {
+      type: String,
     },
   },
   data: () => ({
-    innerValue: ""
+    innerValue: "",
   }),
   watch: {
     // Handles internal model changes.
@@ -54,12 +58,12 @@ export default {
     // Handles external model changes.
     value(newVal) {
       this.innerValue = newVal;
-    }
+    },
   },
   created() {
     if (this.value) {
       this.innerValue = this.value;
     }
-  }
+  },
 };
 </script>

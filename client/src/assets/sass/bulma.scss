@@ -1,0 +1,27 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+$family-primary: 'Roboto';
+
+//$grey-darker: #191919
+//
+$primary: #75bd9f;
+
+$linkedin: #0077b5;
+$linkedin-invert: findColorInvert($linkedin);
+$twitter: #55acee;
+$twitter-invert: findColorInvert($twitter);
+$github: #333;
+$github-invert: findColorInvert($github);
+
+// 5. Add new color variables to the color map.
+@import "../../../node_modules/bulma/sass/utilities/derived-variables";
+$addColors: (
+"twitter":($twitter, $twitter-invert),
+"linkedin": ($linkedin, $linkedin-invert),
+"github": ($github, $github-invert)
+);
+$colors: map-merge($colors, $addColors);
+
+// Import only what you need from Bulma
+@import '../../../node_modules/bulma/bulma.sass';

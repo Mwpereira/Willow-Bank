@@ -28,14 +28,14 @@ const routes: Array<RouteConfig> = [
     path: "/dashboard",
     alias: ["/dashboard/user/settings"],
     name: "Dashboard",
-    component: Dashboard
+    component: Dashboard,
   },
   {
     path: "/firstTimeLogin",
     alias: "/firstTimeLogin",
     name: "FirstTimeLogin",
-    component: FirstTimeLogin
-  }
+    component: FirstTimeLogin,
+  },
 ];
 
 const router = new VueRouter({

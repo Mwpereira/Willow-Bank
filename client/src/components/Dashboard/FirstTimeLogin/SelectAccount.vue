@@ -13,20 +13,22 @@
         </div>
       </div>
       <div class="column">
-        <img src="../../../assets/img/FirstTimeLogin/piggy-bank.png" width="225" class="mt-5" />
+        <img
+          src="../../../assets/img/FirstTimeLogin/piggy-bank.png"
+          width="225"
+          class="mt-5"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class SelectAccount extends Vue {
-  public selectedAccount() {
-
-  }
+  public selectedAccount() {}
 }
 </script>
 
@@ -36,7 +38,7 @@ export default class SelectAccount extends Vue {
 }
 
 @media only screen and (max-width: 768px) {
-  .mb-6{
+  .mb-6 {
     margin-bottom: 12px !important;
   }
 }

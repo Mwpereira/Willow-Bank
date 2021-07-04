@@ -8,7 +8,7 @@
           src="../../assets/img/Home/bitcoin.png"
         />
         <p class="is-size-3 has-text-weight-bold mb-3">Financial Flexibility</p>
-        <p>Have you stay in control of <br/><b>your money</b></p>
+        <p>Have you stay in control of <br /><b>your money</b></p>
       </div>
       <div class="column">
         <img
