@@ -1,12 +1,12 @@
 <template>
   <div id="Dashboard">
-    <NavBar/>
-    <Page :is="page"/>
+    <NavBar />
+    <Page :is="page" />
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import NavBar from "@/components/Dashboard/NavBar.vue";
 import WebsiteUtils from "@/utils/website-utils";
 import UserService from "@/services/user-service";
@@ -35,9 +35,7 @@ export default class Dashboard extends Vue {
   }
 
   async created(): Promise<void> {
-    if (
-        !this.$store.getters.acceptedTermsAndConditions
-    ) {
+    if (!this.$store.getters.acceptedTermsAndConditions) {
       await WebsiteUtils.switchVue("firstTimeLogin");
     } else {
       this.$store.dispatch("getRefreshToken").then(async (validAccessToken) => {
@@ -47,10 +45,7 @@ export default class Dashboard extends Vue {
           if (this.$store.getters.account === null) {
             await UserService.getAccount();
           }
-          await this.$store.dispatch(
-              "getPage",
-              this.$router.currentRoute.path
-          );
+          await this.$store.dispatch("getPage", this.$router.currentRoute.path);
         }
       });
     }

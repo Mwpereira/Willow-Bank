@@ -84,7 +84,7 @@ export default class Login extends Vue {
     const response = await AuthService.login(this.user);
     if (ResponseUtils.successAuthProcessor(response)) {
       const data = response.data;
-      
+
       this.$store.commit(
         "setAcceptedTermsAndConditions",
         data.acceptedTermsAndConditions

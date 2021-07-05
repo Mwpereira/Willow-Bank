@@ -52,7 +52,7 @@ export default class NavBar extends Vue {
 
   public logout(): void {
     AuthService.logout();
-    BuefyService.successToast('Signed Out');
+    BuefyService.successToast("Signed Out");
   }
 }
 </script>

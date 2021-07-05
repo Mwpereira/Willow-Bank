@@ -1,6 +1,8 @@
 <template>
-  <div id="Settings">
-    <p class="title">Settings</p>
+  <div id="Settings" class="container">
+    <div class="section has-text-left">
+      <p class="title mb-6">Settings</p>
+    </div>
   </div>
 </template>
 

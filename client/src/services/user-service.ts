@@ -10,7 +10,7 @@ export default class UserService {
       : `http://${process.env.VUE_APP_API_LOCAL}`;
 
   public static async acceptedTermsAndConditions(): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .post(`${this.url}/user/acceptedTermsAndConditions`)
       .then((response: AxiosResponse) => {
         return response;

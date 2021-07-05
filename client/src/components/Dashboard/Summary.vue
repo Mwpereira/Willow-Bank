@@ -9,7 +9,7 @@
             <p class="has-text-weight-bold">Premium Savings Account Balance</p>
           </div>
           <div class="column">
-            <p class="is-size-1 ">0</p>
+            <p class="is-size-1">0</p>
             <p class="has-text-weight-bold">Number of Transactions</p>
           </div>
         </div>
@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class Summary extends Vue {}

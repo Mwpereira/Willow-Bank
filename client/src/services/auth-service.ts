@@ -38,7 +38,7 @@ export default class AuthService {
   }
 
   public static async getRefreshToken(): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .get(`${this.url}/auth/refreshToken`)
       .then((response: AxiosResponse) => {
         return response;

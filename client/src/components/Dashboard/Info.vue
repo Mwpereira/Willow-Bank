@@ -7,14 +7,14 @@
       <p class="my-3">Back end: <b>AWS Serverless + TS</b></p>
       <p class="my-3">Created By: <b>Michael Pereira</b></p>
       <a href="https://ko-fi.com/michaelpereira" target="_blank">
-        <b-button class="is-warning has-text-weight-bold mt-5 my-2" >
+        <b-button class="is-warning has-text-weight-bold mt-5 my-2">
           <span class="mr-3">
             <i class="fas fa-mug-hot"></i>
           </span>
           Buy me a coffee
         </b-button>
       </a>
-      <br>
+      <br />
       <a href="https://github.com/mwpereira/" target="_blank">
         <b-button class="is-github has-text-weight-bold my-2 has-text-white">
           <span class="mr-3">
@@ -23,7 +23,7 @@
           Github
         </b-button>
       </a>
-      <br>
+      <br />
       <a href="https://www.linkedin.com/in/michael-pereira-07/" target="_blank">
         <b-button class="is-linkedin has-text-weight-bold my-2 has-text-white">
           <span class="mr-3">
@@ -38,11 +38,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class Info extends Vue {
-}
+export default class Info extends Vue {}
 </script>
 
 <style scoped></style>
