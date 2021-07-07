@@ -40,6 +40,7 @@ export default class AuthUtilities {
                     methodArn
                 );
             } else {
+                console.log("Deny: " + decoded)
                 return JwtUtils.generatePolicyResponse(
                     decoded.sub,
                     'Deny',

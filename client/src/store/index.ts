@@ -18,6 +18,7 @@ const store = new Vuex.Store({
   },
   mutations: {
     async auth_logout(state) {
+      state.acceptedTermsAndConditions = null;
       state.email = null;
       state.lastLogin = null;
       state.page = "DashboardSummary";
