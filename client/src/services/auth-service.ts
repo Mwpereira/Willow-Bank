@@ -49,7 +49,9 @@ export default class AuthService {
   }
 
   public static async logout(): Promise<void> {
-    const response = await axios
+    store.commit("auth_logout");
+    await WebsiteUtils.switchVue("login");
+    await axios
       .get(`${this.url}/auth/logout`)
       .then((response: AxiosResponse) => {
         return response;
@@ -57,9 +59,5 @@ export default class AuthService {
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
-    if (response.status === 200) {
-      store.commit("auth_logout");
-      await WebsiteUtils.switchVue("login");
-    }
   }
 }

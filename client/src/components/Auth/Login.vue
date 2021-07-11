@@ -85,6 +85,7 @@ export default class Login extends Vue {
     if (ResponseUtils.successAuthProcessor(response)) {
       const data = response.data;
 
+      await this.$store.commit("auth_success");
       this.$store.commit(
         "setAcceptedTermsAndConditions",
         data.acceptedTermsAndConditions
@@ -93,9 +94,9 @@ export default class Login extends Vue {
       this.$store.commit("setLastLogin", data.lastLogin);
 
       if (data.acceptedTermsAndConditions) {
-        WebsiteUtils.switchVue("dashboard");
+        await WebsiteUtils.switchVue("dashboard");
       } else {
-        WebsiteUtils.switchVue("firstTimeLogin");
+        await WebsiteUtils.switchVue("firstTimeLogin");
       }
     }
     BuefyService.stopLoading();

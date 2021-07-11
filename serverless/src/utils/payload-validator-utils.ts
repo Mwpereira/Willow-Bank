@@ -1,6 +1,6 @@
 import assert from 'assert';
-import * as validator from 'validator';
 import * as uuid from 'uuid';
+import * as validator from 'validator';
 import {LoginRequest} from '../interfaces/login-request';
 import {RegisterRequest} from '../interfaces/register-request';
 import TypescriptUtils from './typescript-utils';

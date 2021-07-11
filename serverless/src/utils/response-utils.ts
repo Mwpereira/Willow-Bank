@@ -1,7 +1,7 @@
-import {Response} from '../interfaces/response';
-import {AccessToken} from '../interfaces/access-token';
-import CookieUtilities from './cookie-utils';
 import {responseHeader} from '../constants/header-constants';
+import {AccessToken} from '../interfaces/access-token';
+import {Response} from '../interfaces/response';
+import CookieUtilities from './cookie-utils';
 
 /**
  * Creates Response for API calls

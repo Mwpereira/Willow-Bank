@@ -1,7 +1,7 @@
 import * as dynamoDB from 'dynamoose';
-import BcryptUtilities from '../bcrypt-utils';
-import {WillowBankSchema} from '../../models/willow-bank';
 import {RegisterRequest} from '../../interfaces/register-request';
+import {WillowBankSchema} from '../../models/willow-bank';
+import BcryptUtilities from '../bcrypt-utils';
 
 const willowBankTable: any = dynamoDB.model('willowBank', WillowBankSchema);
 

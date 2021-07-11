@@ -12,14 +12,22 @@ const store = new Vuex.Store({
   state: {
     acceptedTermsAndConditions: null,
     account: null,
+    country: null,
     email: null,
+    firstName: null,
+    isLoggedIn: false,
     lastLogin: null,
+    lastName: null,
     page: "DashboardSummary",
   },
   mutations: {
+    auth_success(state) {
+      state.isLoggedIn = true;
+    },
     async auth_logout(state) {
       state.acceptedTermsAndConditions = null;
       state.email = null;
+      state.isLoggedIn = false;
       state.lastLogin = null;
       state.page = "DashboardSummary";
     },
@@ -62,7 +70,7 @@ const store = new Vuex.Store({
     },
     async getRefreshToken(): Promise<boolean> {
       return ResponseUtils.successProcessor(
-          await AuthService.getRefreshToken()
+        await AuthService.getRefreshToken()
       );
     },
   },
@@ -70,8 +78,12 @@ const store = new Vuex.Store({
   getters: {
     acceptedTermsAndConditions: (state) => state.acceptedTermsAndConditions,
     account: (state) => state.account,
+    country: (state) => state.country,
     email: (state) => state.email,
+    firstName: (state) => state.firstName,
+    isLoggedIn: (state) => state.isLoggedIn,
     lastLogin: (state) => state.lastLogin,
+    lastName: (state) => state.lastName,
     page: (state) => state.page,
   },
 });

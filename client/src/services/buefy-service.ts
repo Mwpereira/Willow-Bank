@@ -9,7 +9,7 @@ export default class BuefyService {
 
   public static successToast(message: string) {
     buefy.ToastProgrammatic.open({
-      duration: 2500,
+      duration: 2000,
       message: message !== null ? message : "Success",
       type: "is-success",
       position: "is-bottom-right",
@@ -18,7 +18,7 @@ export default class BuefyService {
 
   public static dangerToast(error: string) {
     buefy.ToastProgrammatic.open({
-      duration: 2500,
+      duration: 2000,
       message: error !== null ? error : "Error",
       type: "is-danger",
       position: "is-bottom-right",

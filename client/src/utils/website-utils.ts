@@ -31,13 +31,19 @@ export default class WebsiteUtils {
    * @param prefix
    */
   public static updatePageTitle(prefix: string): void {
-    const title =
-      prefix.substr(0, 1).toUpperCase() +
-      prefix.substr(1) +
-      PropertiesConstants.titleSuffix;
+    if (prefix === "DashboardSummary") {
+      document.title = "Dashboard Summary" + PropertiesConstants.titleSuffix;
+    } else if (prefix === "Etransfers") {
+      document.title = "eTransfers" + PropertiesConstants.titleSuffix;
+    } else {
+      const title =
+        prefix.substr(0, 1).toUpperCase() +
+        prefix.substr(1) +
+        PropertiesConstants.titleSuffix;
 
-    if (document.title !== title) {
-      document.title = title;
+      if (document.title !== title) {
+        document.title = title;
+      }
     }
   }
 }

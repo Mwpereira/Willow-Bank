@@ -17,7 +17,7 @@
       "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
     },
     "object-literal-sort-keys": false,
-    "ordered-imports": false,
+    "ordered-imports": true,
     "quotemark": [true, "single"]
   },
   "jsRules": {

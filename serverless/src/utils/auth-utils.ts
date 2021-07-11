@@ -1,15 +1,15 @@
 import {APIGatewayEvent} from 'aws-lambda';
-import MessageUtil from './response-utils';
-import PayloadValidatorUtils from './payload-validator-utils';
-import RequestUtils from './request-utils';
+import {MessageConstants} from '../constants/message-constants';
+import {LoginRequest} from '../interfaces/login-request';
+import {RegisterRequest} from '../interfaces/register-request';
+import {Response} from '../interfaces/response';
 import BcryptUtils from './bcrypt-utils';
-import JwtUtils from './jwt-utils';
 import CookieUtilities from './cookie-utils';
 import Auth from './dynamo-utilities/auth';
-import {RegisterRequest} from '../interfaces/register-request';
-import {LoginRequest} from '../interfaces/login-request';
-import {Response} from '../interfaces/response';
-import {MessageConstants} from '../constants/message-constants';
+import JwtUtils from './jwt-utils';
+import PayloadValidatorUtils from './payload-validator-utils';
+import RequestUtils from './request-utils';
+import MessageUtil from './response-utils';
 
 /**
  * Authentication methods + Lambda Authorizer
@@ -40,7 +40,7 @@ export default class AuthUtilities {
                     methodArn
                 );
             } else {
-                console.log("Deny: " + decoded)
+                console.log('Deny: ' + decoded)
                 return JwtUtils.generatePolicyResponse(
                     decoded.sub,
                     'Deny',

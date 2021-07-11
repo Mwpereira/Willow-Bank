@@ -38,6 +38,7 @@ export default class Dashboard extends Vue {
     if (!this.$store.getters.acceptedTermsAndConditions) {
       await WebsiteUtils.switchVue("firstTimeLogin");
     } else {
+      await this.$store.dispatch("getPage", this.$router.currentRoute.path);
       this.$store.dispatch("getRefreshToken").then(async (validAccessToken) => {
         if (!validAccessToken) {
           await AuthService.logout();
@@ -45,7 +46,6 @@ export default class Dashboard extends Vue {
           if (this.$store.getters.account === null) {
             await UserService.getAccount();
           }
-          await this.$store.dispatch("getPage", this.$router.currentRoute.path);
         }
       });
     }

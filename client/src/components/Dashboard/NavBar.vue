@@ -13,7 +13,7 @@
         >
       </b-navbar-dropdown>
       <b-navbar-item v-on:click="switchPage('etransfers')"
-        >eTransfer</b-navbar-item
+        >eTransfers</b-navbar-item
       >
       <b-navbar-item v-on:click="switchPage('info')">Info</b-navbar-item>
     </template>
