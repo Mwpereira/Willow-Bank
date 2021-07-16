@@ -44,4 +44,21 @@ export default class User {
                 throw error;
             });
     }
+
+    public static updateTwoFactorAuthentication(email: string, _data: object): Promise<boolean> {
+        return willowBankTable
+            .update({
+                    email
+                },
+                {
+                    twoFactorAuthentication: JSON.stringify(_data),
+                })
+            .then(() => {
+                return true;
+            })
+            .catch((error) => {
+                console.log(error);
+                throw error;
+            });
+    }
 }

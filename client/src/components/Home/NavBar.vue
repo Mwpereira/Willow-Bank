@@ -5,13 +5,13 @@
         Home
       </b-navbar-item>
       <b-navbar-dropdown label="Benefits">
-        <b-navbar-item href="#Benefits"> Info</b-navbar-item>
-        <b-navbar-item href="#SavingsCalculator">
+        <b-navbar-item href="#benefits"> Info</b-navbar-item>
+        <b-navbar-item href="#savings-calculator">
           Savings Calculator
         </b-navbar-item>
       </b-navbar-dropdown>
-      <b-navbar-item href="#Goals"> Goals</b-navbar-item>
-      <b-navbar-item href="#ContactUs"> Contact Us</b-navbar-item>
+      <b-navbar-item href="#goals"> Goals</b-navbar-item>
+      <b-navbar-item href="#contact-us"> Contact Us</b-navbar-item>
     </template>
 
     <template #end>

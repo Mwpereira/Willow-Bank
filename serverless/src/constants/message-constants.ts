@@ -77,4 +77,9 @@ export abstract class MessageConstants {
      * Error message for failing to get user's Account
      */
     public static readonly ACCOUNT_GET_FAILED: string = 'Failed to get account';
+
+    /**
+     * Error message for an Invalid Message
+     */
+    public static readonly INVALID_MESSAGE: string = 'Invalid Message';
 }

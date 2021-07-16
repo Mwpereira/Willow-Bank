@@ -55,13 +55,9 @@ serverless offline
 -   _ChartJS_ - for creating and presenting data in a modern chart
 -   _axios_ - for the promise based HTTP client to handle requests
 
-## 🧪 Testing
+### Figma
 
-### Run Cypress e2e tests
-
-```
-npm run test:e2e
-```
+Link to [Figma Design](https://www.figma.com/file/fygsMgOzkKq5MHs2Hvjma5/WillowBank?node-id=0%3A1)
 
 ### Gallery
 

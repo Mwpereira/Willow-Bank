@@ -17,5 +17,11 @@ export default class Footer extends Vue {}
 <style scoped>
 #Footer {
   background: white;
+  clear: both;
+  position: relative;
+  height: 50px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
 }
 </style>

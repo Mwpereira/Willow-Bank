@@ -1,9 +1,12 @@
 import * as dynamoDB from 'dynamoose';
+import { SQS } from 'aws-sdk';
 import {RegisterRequest} from '../../interfaces/register-request';
 import {WillowBankSchema} from '../../models/willow-bank';
 import BcryptUtilities from '../bcrypt-utils';
+import {SqsUtils} from "../sqs-utils";
 
 const willowBankTable: any = dynamoDB.model('willowBank', WillowBankSchema);
+const sqs: SQS = new SQS();
 
 /**
  * Modifies DynamoDB Table
@@ -29,17 +32,23 @@ export default class Auth {
                     transactions: {},
                     contacts: {},
                 }),
-                twoFactorAuthentication: JSON.stringify({
-                    'securityQuestionOne': _user.twoFactorAuthentication.securityQuestionOne,
-                    'securityAnswerOne': await BcryptUtilities.getHashedValue(_user.twoFactorAuthentication.securityAnswerOne),
-                    'securityQuestionTwo': _user.twoFactorAuthentication.securityQuestionOne,
-                    'securityAnswerTwo': await BcryptUtilities.getHashedValue(_user.twoFactorAuthentication.securityAnswerTwo),
-                }),
+                twoFactorAuthentication: '',
+                twoFactorAuthenticationEnabled: false,
                 acceptedTermsAndConditions: false,
                 lastLogin: Date.now(),
                 createdAt: Date.now(),
             })
-            .then(() => {
+            .then(async () => {
+                console.log(sqs.getQueueUrl({QueueName: 'updateTwoFactorAuthenticationSQS'}));
+                let sqsParams = SqsUtils.sqsParams(sqs);
+                sqsParams.MessageBody = JSON.stringify({
+                    'email': _user.email,
+                    'securityQuestionOne': _user.twoFactorAuthentication.securityQuestionOne,
+                    'securityAnswerOne': _user.twoFactorAuthentication.securityAnswerOne,
+                    'securityQuestionTwo': _user.twoFactorAuthentication.securityQuestionOne,
+                    'securityAnswerTwo': _user.twoFactorAuthentication.securityAnswerTwo,
+                });
+                await sqs.sendMessage(sqsParams).promise();
                 return true;
             })
             .catch((error) => {

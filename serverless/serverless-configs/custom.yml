@@ -1,0 +1,5 @@
+updateTwoFactorAuthenticationSQS:
+  arn:
+    Fn::GetAtt: [ 'updateTwoFactorAuthenticationSQS', 'Arn' ]
+  url:
+    Ref: 'updateTwoFactorAuthenticationSQS'

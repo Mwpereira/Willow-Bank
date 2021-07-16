@@ -9,24 +9,24 @@
         <Benefits />
       </div>
     </div>
-    <PageDown class="mt-5 mb-6" />
+    <PageDown class="my-6 pb-5" />
     <div id="section-savingscalculator" class="section">
       <div class="container">
         <SavingsCalculator />
       </div>
     </div>
-    <PageDown class="mt-5 mb-6" />
+    <PageDown class="my-6" />
     <div id="section-goals" class="section">
       <div class="container">
         <Goals />
       </div>
     </div>
-    <div class="control has-text-centered mt-5 mb-6">
+    <div class="control has-text-centered mt-5 mb-6 pb-6">
       <a class="button is-primary is-medium" href="/register" rel="noopener">
         Let's Start Saving
       </a>
     </div>
-    <div id="section-contact" class="section">
+    <div id="section-contact" class="section my-6">
       <div class="container">
         <Contact />
       </div>

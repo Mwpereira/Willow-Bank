@@ -16,6 +16,7 @@ custom:
     includeModules:
       forceExclude:
         -aws-sdk
+  variables: ${file(serverless-configs/custom.yml)}
 
 provider:
   name: aws
@@ -35,7 +36,17 @@ provider:
         - dynamodb:DescribeTable
       # Restrict our IAM role permissions to
       # the specific table for the stage
-      Resource: "arn:aws:dynamodb:*:*:*"
+      Resource:
+        "arn:aws:dynamodb:*:*:*"
+    - Effect: Allow
+      Action:
+        - sqs:SendMessage
+        - sqs:ReceiveMessage
+        - sqs:GetQueueUrl
+        - sqs:GetQueueAttributes
+      Resource:
+        "arn:aws:sqs:*:*:*"
 
 functions: ${file(serverless-configs/functions.yml)}
 resources: ${file(serverless-configs/resources.yml)}
+

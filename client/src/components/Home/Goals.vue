@@ -1,6 +1,6 @@
 <template>
-  <div id="Goals">
-    <p class="is-size-2 has-text-centered has-text-weight-bold">Our Goals</p>
+  <div id="goals">
+    <p class="is-size-2 has-text-centered has-text-weight-bold mb-2">Our Goals</p>
     <div class="columns is-multiline">
       <div class="column">
         <img

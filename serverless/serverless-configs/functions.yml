@@ -1,7 +1,6 @@
 verifyToken:
   handler: 'src/handlers/auth-handler.verifyToken'
   description: 'Verifies JWT'
-  timeout: 10
 
 register:
   handler: 'src/handlers/auth-handler.register'
@@ -75,3 +74,12 @@ getAccount:
           type: request
           resultTtlInSeconds: 10
           indentitySource: method.request.header.Cookie
+
+updateTwoFactorAuthentication:
+  description: Sets Two Factor Authentication for a User
+  handler: 'src/handlers/user-handler.updateTwoFactorAuthentication'
+  timeout: 30
+  events:
+    - sqs:
+        arn: ${self:custom.variables.updateTwoFactorAuthenticationSQS.arn}
+        batchSize: 1

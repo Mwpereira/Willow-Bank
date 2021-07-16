@@ -1,6 +1,6 @@
 <template>
-  <div id="ContactUs">
-    <p class="is-size-2 has-text-centered has-text-weight-bold">Contact Us</p>
+  <div id="contact-us">
+    <p class="is-size-2 has-text-centered has-text-weight-bold mb-2">Contact Us</p>
     <div class="columns is-vcentered">
       <div class="column">
         <p class="has-text-weight-bold is-size-4 mt-5 mb-3">Connect With Us</p>

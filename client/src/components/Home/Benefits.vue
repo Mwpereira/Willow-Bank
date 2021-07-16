@@ -1,6 +1,6 @@
 <template>
-  <div id="Benefits">
-    <p class="is-size-2 has-text-centered has-text-weight-bold">Our Benefits</p>
+  <div id="benefits">
+    <p class="is-size-2 has-text-centered has-text-weight-bold mb-2">Our Benefits</p>
     <div class="columns">
       <div class="column">
         <img

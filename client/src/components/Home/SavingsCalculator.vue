@@ -1,5 +1,5 @@
 <template>
-  <div id="SavingsCalculator">
+  <div id="savings-calculator">
     <p class="is-size-2 has-text-centered has-text-weight-bold mb-6">
       Savings Calculator
     </p>
