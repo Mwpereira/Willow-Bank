@@ -9,6 +9,14 @@ export const getAccount: Handler = async (event: APIGatewayEvent) => {
     return await UserUtils.getAccount(event);
 }
 
+export const getSettings: Handler = async (event: APIGatewayEvent) => {
+    return await UserUtils.getSettings(event);
+}
+
+export const updateSettings: Handler = async (event: APIGatewayEvent) => {
+    return await UserUtils.updateSettings(event);
+}
+
 export const updateTwoFactorAuthentication: Handler = async (event: SQSEvent) => {
     return await UserUtils.updateTwoFactorAuthentication(event);
 }

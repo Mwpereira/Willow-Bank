@@ -33,6 +33,16 @@ export abstract class MessageConstants {
     public static readonly ACCOUNT_GET_SUCCESS: string = 'Retrieved Account';
 
     /**
+     * Success message for getting user's Settings
+     */
+    public static readonly SETTINGS_GET_SUCCESS: string = 'Retrieved Settings';
+
+    /**
+     * Success message for updating user's Settings
+     */
+    public static readonly SETTINGS_UPDATE_SUCCESS: string = 'Updated Settings';
+
+    /**
      * Success message for updating Two Factor Authentication
      */
     public static readonly TFA_UPDATED: string = 'TFA Updated';
@@ -92,6 +102,16 @@ export abstract class MessageConstants {
      * Error message for failing to get user's Account
      */
     public static readonly ACCOUNT_GET_FAILED: string = 'Failed to get account';
+
+    /**
+     * Error message for failing to get user's Settings
+     */
+    public static readonly SETTINGS_GET_FAILED: string = 'Failed to get settings';
+
+    /**
+     * Error message for failing to update user's Settings
+     */
+    public static readonly SETTINGS_UPDATE_FAILED: string = 'Failed to update settings';
 
     /**
      * Error message for an Invalid Message

@@ -31,9 +31,8 @@
         class="mb-5"
         icon="key"
         icon-pack="fas"
-        password-reveal
         rules="required|max_account_characters:64"
-        type="password"
+        type="text"
       ></BInputWithValidation>
       <b-field class="mb-4" label="Security Question 2:">
         <b-select
@@ -54,9 +53,8 @@
         class="mb-5"
         icon="key"
         icon-pack="fas"
-        password-reveal
         rules="required|max_account_characters:64"
-        type="password"
+        type="text"
       ></BInputWithValidation>
       <div class="columns is-vcentered">
         <div class="column">

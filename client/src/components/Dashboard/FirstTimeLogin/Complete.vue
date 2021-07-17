@@ -9,14 +9,17 @@
         <p class="my-2 py-1">Initial Investment: <b>$10,000</b></p>
         <p class="my-2 py-1">Interest Rate: <b>7%</b></p>
         <b-button class="mt-2 is-primary is-size-6" v-on:click="complete()"
-          >Complete & Continue</b-button
+        >Complete & Continue
+        </b-button
         >
       </div>
       <div class="column">
         <img
-          class="mt-5"
-          src="../../../assets/img/FirstTimeLogin/sapling.png"
-          width="225"
+            alt="Complete Registration"
+            class="mt-5"
+            src="../../../assets/img/FirstTimeLogin/sapling.webp"
+            webp-fallback=".png"
+            width="225"
         />
       </div>
     </div>
@@ -24,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import UserService from "@/services/user-service";
 import WebsiteUtils from "@/utils/website-utils";
 import BuefyService from "@/services/buefy-service";

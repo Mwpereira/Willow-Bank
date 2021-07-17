@@ -5,37 +5,39 @@
         <p class="is-size-5 my-5">Please read and agree to the following:</p>
         <b-field>
           <b-checkbox
-            v-model="agree0"
-            class="my-2"
-            type="is-warning"
-            v-on:click="allowNext()"
-            >I Allow My Data To Be Encrypted, Hashed & Stored
+              v-model="agree0"
+              class="my-2"
+              type="is-warning"
+              v-on:click="allowNext()"
+          >I Allow My Data To Be Encrypted, Hashed & Stored
           </b-checkbox>
         </b-field>
         <b-field>
           <b-checkbox
-            v-model="agree1"
-            class="my-2"
-            type="is-warning"
-            v-on:click="allowNext()"
-            >I Agree To Pay Taxes On Any Savings Account Earnings
+              v-model="agree1"
+              class="my-2"
+              type="is-warning"
+              v-on:click="allowNext()"
+          >I Agree To Pay Taxes On Any Savings Account Earnings
           </b-checkbox>
         </b-field>
         <b-field>
           <b-checkbox
-            v-model="agree2"
-            class="my-2"
-            type="is-warning"
-            v-on:click="allowNext()"
-            >I Acknowledge All Of This Is Fake :)
+              v-model="agree2"
+              class="my-2"
+              type="is-warning"
+              v-on:click="allowNext()"
+          >I Acknowledge All Of This Is Fake :)
           </b-checkbox>
         </b-field>
       </div>
       <div class="column">
         <img
-          src="../../../assets/img/FirstTimeLogin/contract.png"
-          width="225"
-          class="mt-5"
+            alt="Terms and Conditions"
+            class="mt-5"
+            src="../../../assets/img/FirstTimeLogin/contract.webp"
+            webp-fallback=".png"
+            width="225"
         />
       </div>
     </div>
@@ -43,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
+import {Component, Emit, Prop, Vue, Watch} from "vue-property-decorator";
 
 @Component
 export default class TermsAndConditions extends Vue {
@@ -51,7 +53,8 @@ export default class TermsAndConditions extends Vue {
   @Prop() public agree1 = false;
   @Prop() public agree2 = false;
 
-  @Emit() updateAgrees(agrees: object): void {}
+  @Emit() updateAgrees(agrees: object): void {
+  }
 
   @Watch("agree0")
   @Watch("agree1")

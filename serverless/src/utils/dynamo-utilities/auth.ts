@@ -32,6 +32,11 @@ export default class Auth {
                     transactions: {},
                     contacts: {},
                 }),
+                settings: JSON.stringify({
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    country: user.country
+                }),
                 twoFactorAuthentication: '',
                 twoFactorAuthenticationEnabled: false,
                 acceptedTermsAndConditions: false,

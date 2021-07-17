@@ -60,6 +60,7 @@ import ResponseUtils from "@/utils/response-utils";
 import { ValidationObserver } from "vee-validate";
 import BInputWithValidation from "@/components/Common/Inputs/BInputWithValidation.vue";
 import WebsiteUtils from "@/utils/website-utils";
+import {LoginRequest} from "@/interfaces/login-request";
 
 @Component({
   components: {
@@ -69,7 +70,7 @@ import WebsiteUtils from "@/utils/website-utils";
 })
 export default class Login extends Vue {
   private page = "Login";
-  private user = {
+  private user: LoginRequest = {
     email: null,
     password: null,
   };
@@ -81,24 +82,7 @@ export default class Login extends Vue {
 
   private async login(): Promise<void> {
     BuefyService.startLoading();
-    const response = await AuthService.login(this.user);
-    if (ResponseUtils.successAuthProcessor(response)) {
-      const data = response.data;
-
-      await this.$store.commit("auth_success");
-      this.$store.commit(
-        "setAcceptedTermsAndConditions",
-        data.acceptedTermsAndConditions
-      );
-      this.$store.commit("setEmail", data.email);
-      this.$store.commit("setLastLogin", data.lastLogin);
-
-      if (data.acceptedTermsAndConditions) {
-        await WebsiteUtils.switchVue("dashboard");
-      } else {
-        await WebsiteUtils.switchVue("firstTimeLogin");
-      }
-    }
+    await this.$store.dispatch('login', this.user);
     BuefyService.stopLoading();
   }
 }

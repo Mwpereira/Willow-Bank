@@ -4,7 +4,12 @@
       <div class="container">
         <div class="columns is-vcentered is-centered">
           <div class="column">
-            <img width="375px" src="../../assets/img/logo.png" />
+            <img
+                alt="WillowBank Logo"
+                width="375px"
+                src="../../assets/img/logo.webp"
+                webp-fallback=".png"
+            />
             <p class="subtitle is-italic is-size-5 py-5 mb-5">
               Watch your money grow...
             </p>

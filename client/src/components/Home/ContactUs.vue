@@ -3,7 +3,7 @@
     <p class="is-size-2 has-text-centered has-text-weight-bold mb-2">Contact Us</p>
     <div class="columns is-vcentered">
       <div class="column">
-        <p class="has-text-weight-bold is-size-4 mt-5 mb-3">Connect With Us</p>
+        <p class="has-text-weight-bold is-size-4 my-5">Connect With Us</p>
         <p class="py-4">
           <i class="far fa-envelope"></i
           ><span class="ml-3">support@willowbankfinancial.com</span>
@@ -17,7 +17,11 @@
         </p>
       </div>
       <div class="column">
-        <img src="../../assets/img/Home/contact.png" />
+        <img
+            alt="Contact Us"
+            src="../../assets/img/Home/contact.png"
+            webp-fallback=".png"
+        />
       </div>
     </div>
   </div>

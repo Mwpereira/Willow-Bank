@@ -5,11 +5,11 @@
       <div class="card p-6 mb-5">
         <div class="columns">
           <div class="column">
-            <p class="is-size-1 has-text-primary">$10,000</p>
+            <p class="is-size-1 has-text-primary">${{ account.balance.toLocaleString() }}</p>
             <p class="has-text-weight-bold">Premium Savings Account Balance</p>
           </div>
           <div class="column">
-            <p class="is-size-1">0</p>
+            <p class="is-size-1">{{ Object.keys(account.transactions).length }}</p>
             <p class="has-text-weight-bold">Number of Transactions</p>
           </div>
         </div>
@@ -35,7 +35,11 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class Summary extends Vue {}
+export default class Summary extends Vue {
+  get account(){
+    return this.$store.getters.account;
+  }
+}
 </script>
 
 <style scoped></style>

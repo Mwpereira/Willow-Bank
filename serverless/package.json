@@ -11,7 +11,7 @@
     "remove": "serverless remove",
     "lint": "tslint src/**/*.ts{,x} --fix"
   },
-  "devDependencies": {
+  "dependencies": {
     "@types/aws-lambda": "^8.10.70",
     "@types/aws-sdk": "^2.7.0",
     "@types/bcryptjs": "^2.4.2",

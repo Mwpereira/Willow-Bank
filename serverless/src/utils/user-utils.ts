@@ -34,7 +34,7 @@ export default class UserUtils {
             const email = RequestUtils.getEmail(event);
             const account = await User.getAccount(email);
 
-            if (account !== undefined) {
+            if (account) {
                 return MessageUtil.success(
                     200,
                     MessageConstants.ACCOUNT_GET_SUCCESS,
@@ -42,6 +42,46 @@ export default class UserUtils {
                 );
             }
             return MessageUtil.error(404, MessageConstants.ACCOUNT_GET_FAILED);
+        } catch (error) {
+            console.log(error);
+            return MessageUtil.error(400, MessageConstants.INVALID_REQUEST);
+        }
+    }
+
+    public static async getSettings(event: APIGatewayEvent): Promise<Response> {
+        try {
+            const email = RequestUtils.getEmail(event);
+            const settings = await User.getSettings(email);
+
+            if (settings) {
+                return MessageUtil.success(
+                    200,
+                    MessageConstants.SETTINGS_GET_SUCCESS,
+                    settings
+                );
+            }
+            return MessageUtil.error(404, MessageConstants.SETTINGS_GET_FAILED);
+        } catch (error) {
+            console.log(error);
+            return MessageUtil.error(400, MessageConstants.INVALID_REQUEST);
+        }
+    }
+
+    public static async updateSettings(event: APIGatewayEvent): Promise<Response> {
+        try {
+            const email = RequestUtils.getEmail(event);
+            const settings = await User.getSettings(email);
+            settings = settings.settings;
+            settings.country = RequestUtils.getRequest(event).country;
+
+            if (await user.updateSettings(email, settings)) {
+                return MessageUtil.success(
+                    200,
+                    MessageConstants.SETTINGS_UPDATE_SUCCESS,
+                    settings
+                );
+            }
+            return MessageUtil.error(404, MessageConstants.SETTINGS_UPDATE_FAILED);
         } catch (error) {
             console.log(error);
             return MessageUtil.error(400, MessageConstants.INVALID_REQUEST);
