@@ -23,29 +23,8 @@ provider:
   runtime: nodejs12.x
   stage: dev
   region: us-east-1
+  iamRoleStatements: ${file(serverless-configs/iamrolestatements.yml)}
 
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Scan
-        - dynamodb:Query
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-        - dynamodb:DescribeTable
-      # Restrict our IAM role permissions to
-      # the specific table for the stage
-      Resource:
-        "arn:aws:dynamodb:*:*:*"
-    - Effect: Allow
-      Action:
-        - sqs:SendMessage
-        - sqs:ReceiveMessage
-        - sqs:GetQueueUrl
-        - sqs:GetQueueAttributes
-      Resource:
-        "arn:aws:sqs:*:*:*"
 
 functions: ${file(serverless-configs/functions.yml)}
 resources: ${file(serverless-configs/resources.yml)}

@@ -33,6 +33,21 @@ export abstract class MessageConstants {
     public static readonly ACCOUNT_GET_SUCCESS: string = 'Retrieved Account';
 
     /**
+     * Success message for updating Two Factor Authentication
+     */
+    public static readonly TFA_UPDATED: string = 'TFA Updated';
+
+    /**
+     * Success message for adding a Payee
+     */
+    public static readonly PAYEE_ADDED: string = 'Payee Added';
+
+    /**
+     * Success message for deleting a Payee
+     */
+    public static readonly PAYEE_DELETED: string = 'Payee Removed';
+
+    /**
      * Error message for Email already in use
      */
     public static readonly EMAIL_TAKEN: string = 'Email Already Taken';
@@ -82,4 +97,9 @@ export abstract class MessageConstants {
      * Error message for an Invalid Message
      */
     public static readonly INVALID_MESSAGE: string = 'Invalid Message';
+
+    /**
+     * Error message for updating Payees
+     */
+    public static readonly PAYEES_UPDATE_FAILED: string = 'Payees Failed to Update';
 }

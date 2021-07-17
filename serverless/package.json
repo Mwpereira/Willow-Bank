@@ -1,5 +1,5 @@
 {
-  "name": "willow-bank-serverless",
+  "name": "WillowBank",
   "version": "1.0.0",
   "description": "Serverless webpack using Typescript",
   "author": "Michael W. Pereira",
@@ -11,7 +11,7 @@
     "remove": "serverless remove",
     "lint": "tslint src/**/*.ts{,x} --fix"
   },
-  "dependencies": {
+  "devDependencies": {
     "@types/aws-lambda": "^8.10.70",
     "@types/aws-sdk": "^2.7.0",
     "@types/bcryptjs": "^2.4.2",
@@ -22,7 +22,7 @@
     "@types/lodash": "^4.14.168",
     "@types/node": "^14.14.10",
     "@types/source-map": "^0.5.2",
-    "@types/uuid": "^8.3.0",
+    "@types/uuid": "^8.3.1",
     "babel-runtime": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",

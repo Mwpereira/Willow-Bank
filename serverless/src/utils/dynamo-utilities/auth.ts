@@ -15,14 +15,14 @@ export default class Auth {
     /**
      * Create User
      *
-     * @param _user
+     * @param user
      * @return status
      */
-    static async createUser(_user: RegisterRequest): Promise<boolean> {
+    static async createUser(user: RegisterRequest): Promise<boolean> {
         return willowBankTable
             .create({
-                email: _user.email,
-                password: await BcryptUtilities.getHashedValue(_user.password),
+                email: user.email,
+                password: await BcryptUtilities.getHashedValue(user.password),
                 account: JSON.stringify({
                     balance: 10000,
                     transactions: {},
@@ -40,13 +40,15 @@ export default class Auth {
             })
             .then(async () => {
                 console.log(sqs.getQueueUrl({QueueName: 'updateTwoFactorAuthenticationSQS'}));
-                let sqsParams = SqsUtils.sqsParams(sqs);
+                let sqsParams = SqsUtils.sqsParams();
                 sqsParams.MessageBody = JSON.stringify({
-                    'email': _user.email,
-                    'securityQuestionOne': _user.twoFactorAuthentication.securityQuestionOne,
-                    'securityAnswerOne': _user.twoFactorAuthentication.securityAnswerOne,
-                    'securityQuestionTwo': _user.twoFactorAuthentication.securityQuestionOne,
-                    'securityAnswerTwo': _user.twoFactorAuthentication.securityAnswerTwo,
+                    'email': user.email,
+                    twoFactorAuthentication: {
+                        'securityQuestionOne': user.twoFactorAuthentication.securityQuestionOne,
+                        'securityAnswerOne': user.twoFactorAuthentication.securityAnswerOne,
+                        'securityQuestionTwo': user.twoFactorAuthentication.securityQuestionOne,
+                        'securityAnswerTwo': user.twoFactorAuthentication.securityAnswerTwo,
+                    }
                 });
                 await sqs.sendMessage(sqsParams).promise();
                 return true;
@@ -60,12 +62,12 @@ export default class Auth {
     /**
      * Deletes User
      *
-     * @param _email
+     * @param email
      * @return status
      */
-    static willowBankTable(_email: string): boolean {
+    static willowBankTable(email: string): boolean {
         return willowBankTable
-            .delete({email: _email})
+            .delete({email: email})
             .then(() => {
                 return true;
             })
@@ -78,13 +80,13 @@ export default class Auth {
     /**
      * Gets if the user already exists in the table
      *
-     * @param _email
+     * @param email
      * @returns user id
      */
-    static getUserExists(_email: string): any {
+    static getUserExists(email: string): any {
         return willowBankTable
             .query('email')
-            .eq(_email)
+            .eq(email)
             .attributes(['email'])
             .exec()
             .then((result: any) => {
@@ -105,11 +107,11 @@ export default class Auth {
      * @param _email
      * @returns user id and key
      */
-    static getUserData(_email: string): any {
+    static getUserData(email: string): any {
         return willowBankTable
             .query()
             .where('email')
-            .eq(_email)
+            .eq(email)
             .attributes(['email', 'password', 'acceptedTermsAndConditions'])
             .exec()
             .then((result: any) => {
@@ -124,14 +126,14 @@ export default class Auth {
     /**
      * Updates User's Last Login
      *
-     * @param _email
+     * @param email
      * @return update auth status
      */
-    static updateLastLogin(_email: string): Promise<boolean> {
+    static updateLastLogin(email: string): Promise<boolean> {
         return willowBankTable
             .update(
                 {
-                    email: _email,
+                    email: email,
                 },
                 {
                     lastLogin: Date.now(),

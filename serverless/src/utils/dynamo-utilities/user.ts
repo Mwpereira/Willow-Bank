@@ -1,5 +1,6 @@
 import * as dynamoDB from 'dynamoose';
 import {WillowBankSchema} from '../../models/willow-bank';
+import {Account} from "../../interfaces/account";
 
 const willowBankTable: any = dynamoDB.model('willowBank', WillowBankSchema);
 
@@ -24,20 +25,15 @@ export default class User {
             });
     }
 
-    public static getAccount(_email: string): Promise<object> {
+    public static getAccount(email: string): Promise<Account> {
         return willowBankTable
             .query()
             .where('email')
-            .eq(_email)
+            .eq(email)
             .attributes(['account'])
             .exec()
             .then((result: any) => {
-                const account = result[0].account;
-                if (account === '') {
-                    return { account: null };
-                } else {
-                    return { account: JSON.parse(account) };
-                }
+                return {account: JSON.parse(result[0].account)};
             })
             .catch((error) => {
                 console.log(error);
@@ -45,13 +41,30 @@ export default class User {
             });
     }
 
-    public static updateTwoFactorAuthentication(email: string, _data: object): Promise<boolean> {
+    public static updateTwoFactorAuthentication(email: string, data: object): Promise<boolean> {
         return willowBankTable
             .update({
                     email
                 },
                 {
-                    twoFactorAuthentication: JSON.stringify(_data),
+                    twoFactorAuthentication: JSON.stringify(data),
+                })
+            .then(() => {
+                return true;
+            })
+            .catch((error) => {
+                console.log(error);
+                throw error;
+            });
+    }
+
+    public static updateAccount(email: string, data: object): Promise<boolean> {
+        return willowBankTable
+            .update({
+                    email
+                },
+                {
+                    account: JSON.stringify(data),
                 })
             .then(() => {
                 return true;

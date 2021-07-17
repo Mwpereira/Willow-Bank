@@ -1,6 +1,4 @@
-import {Request} from './request';
-
-export interface LoginRequest extends Request{
+export interface LoginRequest {
     email: string,
     password: string
 }
