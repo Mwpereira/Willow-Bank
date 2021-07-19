@@ -5,10 +5,10 @@
         <div class="columns is-vcentered is-centered">
           <div class="column">
             <img
-                alt="WillowBank Logo"
-                width="375px"
-                src="../../assets/img/logo.webp"
-                webp-fallback=".png"
+              alt="WillowBank Logo"
+              src="../../assets/img/logo.webp"
+              webp-fallback=".png"
+              width="375px"
             />
             <p class="subtitle is-italic is-size-5 py-5 mb-5">
               Watch your money grow...

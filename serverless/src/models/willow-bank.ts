@@ -34,11 +34,11 @@ export const WillowBankSchema = new DynamoDB.Schema({
         required: true,
     },
     lastLogin: {
-        type: Number,
+        type: String,
         required: true,
     },
     createdAt: {
-        type: Number,
+        type: String,
         required: true,
     },
 });

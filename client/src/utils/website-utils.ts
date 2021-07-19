@@ -35,6 +35,8 @@ export default class WebsiteUtils {
       document.title = "Dashboard Summary" + PropertiesConstants.titleSuffix;
     } else if (prefix === "Etransfers") {
       document.title = "eTransfers" + PropertiesConstants.titleSuffix;
+    } else if (prefix === "Summary") {
+      document.title = "Account Summary" + PropertiesConstants.titleSuffix;
     } else {
       const title =
         prefix.substr(0, 1).toUpperCase() +

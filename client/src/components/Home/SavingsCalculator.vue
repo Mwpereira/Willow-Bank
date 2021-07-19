@@ -13,38 +13,38 @@
           <div class="has-text-left mb-6">
             <b-field label="Enter Savings Account Balance ($)">
               <b-slider
-                  v-model="balance"
-                  :max="100000"
-                  :min="100"
-                  :tooltip="false"
-                  indicator
+                v-model="balance"
+                :max="100000"
+                :min="100"
+                :tooltip="false"
+                indicator
               ></b-slider>
             </b-field>
           </div>
           <div class="has-text-left mb-6">
             <b-field label="Time Period (number of years)">
               <b-slider
-                  v-model="years"
-                  :max="25"
-                  :min="1"
-                  :tooltip="false"
-                  indicator
+                v-model="years"
+                :max="25"
+                :min="1"
+                :tooltip="false"
+                indicator
               ></b-slider>
             </b-field>
           </div>
         </div>
         <p class="is-size-4 my-5">
           After <b>{{ years }} years</b> your <b>${{ oldBalance }}</b> will turn
-          into <b style="color: #75bd9f">${{ newBalance }}</b> <br/>which is a
+          into <b style="color: #75bd9f">${{ newBalance }}</b> <br />which is a
           <b style="color: #75bd9f">{{ percentIncrease }}%</b> increase!
         </p>
       </div>
       <div class="column">
         <img
-            alt="Savings Calculator"
-            src="../../assets/img/Home/calculator.webp"
-            webp-fallback=".png"
-            width="400"
+          alt="Savings Calculator"
+          src="../../assets/img/Home/calculator.webp"
+          webp-fallback=".png"
+          width="400"
         />
       </div>
     </div>
@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 
 @Component
 export default class SavingsCalculator extends Vue {
@@ -69,14 +69,14 @@ export default class SavingsCalculator extends Vue {
     const amount = this.balance * Math.pow(1 + 0.07 / 12, 12 * this.years);
     const interest = amount - this.balance;
     this.newBalance = (this.balance + parseFloat(interest.toFixed(2))).toFixed(
-        2
+      2
     );
     this.percentIncrease = (
-        (parseFloat(this.newBalance) / this.balance) * 100 -
-        100
+      (parseFloat(this.newBalance) / this.balance) * 100 -
+      100
     ).toFixed(2);
     this.newBalance = parseFloat(
-        (this.balance + parseFloat(interest.toFixed(2))).toFixed(2)
+      (this.balance + parseFloat(interest.toFixed(2))).toFixed(2)
     ).toLocaleString();
   }
 

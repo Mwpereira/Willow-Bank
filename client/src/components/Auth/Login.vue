@@ -60,7 +60,7 @@ import ResponseUtils from "@/utils/response-utils";
 import { ValidationObserver } from "vee-validate";
 import BInputWithValidation from "@/components/Common/Inputs/BInputWithValidation.vue";
 import WebsiteUtils from "@/utils/website-utils";
-import {LoginRequest} from "@/interfaces/login-request";
+import { LoginRequest } from "@/interfaces/login-request";
 
 @Component({
   components: {
@@ -82,7 +82,7 @@ export default class Login extends Vue {
 
   private async login(): Promise<void> {
     BuefyService.startLoading();
-    await this.$store.dispatch('login', this.user);
+    await this.$store.dispatch("login", this.user);
     BuefyService.stopLoading();
   }
 }

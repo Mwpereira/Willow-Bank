@@ -111,9 +111,9 @@ export default class Register extends Vue {
     BuefyService.startLoading();
 
     this.updateUser(user);
-   if (await this.$store.dispatch('register', this.user)) {
-     this.updatePage("login");
-   }
+    if (await this.$store.dispatch("register", this.user)) {
+      this.updatePage("login");
+    }
 
     BuefyService.stopLoading();
   }

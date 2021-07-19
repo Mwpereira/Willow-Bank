@@ -1,9 +1,9 @@
 import * as dynamoDB from 'dynamoose';
+import {Account} from '../../interfaces/account';
+import {AccountData} from '../../interfaces/account-data';
+import {Settings} from '../../interfaces/settings';
+import {SettingsData} from '../../interfaces/settings-data';
 import {WillowBankSchema} from '../../models/willow-bank';
-import {Account} from "../../interfaces/account";
-import {Settings} from "../../interfaces/settings";
-import {AccountData} from "../../interfaces/account-data";
-import {SettingsData} from "../../interfaces/settings-data";
 
 const willowBankTable: any = dynamoDB.model('willowBank', WillowBankSchema);
 
@@ -52,8 +52,10 @@ export default class User {
             .attributes(['settings'])
             .exec()
             .then((result: any) => {
+                console.log(result[0])
+                console.log(result[0].settings)
                 const settings = JSON.parse(result[0].settings);
-                return responseData ? {settings: JSON.parse(result[0].settings)} : settings;
+                return responseData ? {settings} : settings;
             })
             .catch((error) => {
                 console.log(error);
@@ -85,6 +87,23 @@ export default class User {
                 },
                 {
                     twoFactorAuthentication: JSON.stringify(data),
+                })
+            .then(() => {
+                return true;
+            })
+            .catch((error) => {
+                console.log(error);
+                throw error;
+            });
+    }
+
+    public static updateTwoFactorAuthenticationEnabled(email: string, enabled: boolean): Promise<boolean> {
+        return willowBankTable
+            .update({
+                    email
+                },
+                {
+                    twoFactorAuthenticationEnabled: enabled,
                 })
             .then(() => {
                 return true;

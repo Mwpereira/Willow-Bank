@@ -1,7 +1,23 @@
+#Authorizer
 verifyToken:
   handler: 'src/handlers/auth-handler.verifyToken'
   description: 'Verifies JWT'
 
+refreshToken:
+  handler: 'src/handlers/auth-handler.refreshToken'
+  description: "Refreshes JWT Token"
+  events:
+    - http:
+        method: 'get'
+        path: 'auth/refreshToken'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
+
+#Auth
 register:
   handler: 'src/handlers/auth-handler.register'
   description: 'Creates New User'
@@ -23,20 +39,6 @@ login:
         cors: true
         resultTtlInSeconds: 10
 
-refreshToken:
-  handler: 'src/handlers/auth-handler.refreshToken'
-  description: "Refreshes JWT Token"
-  events:
-    - http:
-        method: 'get'
-        path: 'auth/refreshToken'
-        cors: true
-        authorizer:
-          name: verifyToken
-          type: request
-          resultTtlInSeconds: 10
-          indentitySource: method.request.header.Cookie
-
 logout:
   handler: 'src/handlers/auth-handler.logout'
   description: 'Authorizes User'
@@ -47,6 +49,35 @@ logout:
         cors: true
         resultTtlInSeconds: 10
 
+updateEmail:
+  handler: 'src/handlers/auth-handler.updateEmail'
+  description: "Updates User's Email"
+  events:
+    - http:
+        method: 'put'
+        path: 'auth/updateEmail'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
+
+changePassword:
+  handler: 'src/handlers/auth-handler.changePassword'
+  description: "Changes User's Password"
+  events:
+    - http:
+        method: 'put'
+        path: 'auth/changePassword'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
+
+#User
 acceptedTermsAndConditions:
   handler: 'src/handlers/user-handler.acceptedTermsAndConditions'
   description: 'Accepts Terms And Conditions'
@@ -118,12 +149,12 @@ updateCredentials:
           indentitySource: method.request.header.Cookie
 
 updateTwoFactorAuthenticationSettings:
-  handler: 'src/handlers/user-handler.getSettings'
+  handler: 'src/handlers/auth-handler.getSettings'
   description: "Updates User's Two Factor Authentication Settings"
   events:
     - http:
         method: 'put'
-        path: 'user/update-tfa-settings'
+        path: 'auth/updateTFASettings'
         cors: true
         authorizer:
           name: verifyToken
@@ -132,12 +163,12 @@ updateTwoFactorAuthenticationSettings:
           indentitySource: method.request.header.Cookie
 
 updateTwoFactorAuthenticationEnabled:
-  handler: 'src/handlers/user-handler.getSettings'
+  handler: 'src/handlers/auth-handler.updateTwoFactorAuthenticationEnabled'
   description: "Updates User's Two Factor Authentication Enabled Settings"
   events:
     - http:
         method: 'put'
-        path: 'user/update-tfa-enabled'
+        path: 'auth/updateTFAState'
         cors: true
         authorizer:
           name: verifyToken
@@ -145,6 +176,7 @@ updateTwoFactorAuthenticationEnabled:
           resultTtlInSeconds: 10
           indentitySource: method.request.header.Cookie
 
+#SQS
 updateTwoFactorAuthentication:
   description: "Sets Two Factor Authentication for a User"
   handler: 'src/handlers/user-handler.updateTwoFactorAuthentication'
@@ -153,3 +185,42 @@ updateTwoFactorAuthentication:
     - sqs:
         arn: ${self:custom.variables.updateTwoFactorAuthenticationSQS.arn}
         batchSize: 1
+#
+#addPayee:
+#  description: "Adds Payee"
+#  events:
+#    - http:
+#        method: 'post'
+#        path: 'user/account/addPayee'
+#        cors: true
+#        authorizer:
+#          name: verifyToken
+#          type: request
+#          resultTtlInSeconds: 10
+#          indentitySource: method.request.header.Cookie
+#
+#removePayee:
+#  description: "Removes Payee"
+#  events:
+#    - http:
+#        method: 'post'
+#        path: 'user/account/removePayee'
+#        cors: true
+#        authorizer:
+#          name: verifyToken
+#          type: request
+#          resultTtlInSeconds: 10
+#          indentitySource: method.request.header.Cookie
+#
+#sendMoney:
+#  description: "Sends Money"
+#  events:
+#    - http:
+#        method: 'post'
+#        path: 'user/account/sendMoney'
+#        cors: true
+#        authorizer:
+#          name: verifyToken
+#          type: request
+#          resultTtlInSeconds: 10
+#          indentitySource: method.request.header.Cookie

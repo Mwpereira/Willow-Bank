@@ -1,26 +1,22 @@
-import {APIGatewayEvent, Handler, SQSEvent} from 'aws-lambda';
+import {APIGatewayEvent, Handler} from 'aws-lambda';
 import UserUtils from '../utils/user-utils';
 
 export const acceptedTermsAndConditions: Handler = async (event: APIGatewayEvent) => {
-    return await UserUtils.acceptedTermsAndConditions(event);
+  return await UserUtils.acceptedTermsAndConditions(event);
 }
 
 export const getAccount: Handler = async (event: APIGatewayEvent) => {
-    return await UserUtils.getAccount(event);
+  return await UserUtils.getAccount(event);
 }
 
 export const getSettings: Handler = async (event: APIGatewayEvent) => {
-    return await UserUtils.getSettings(event);
+  return await UserUtils.getSettings(event);
 }
 
 export const updateSettings: Handler = async (event: APIGatewayEvent) => {
-    return await UserUtils.updateSettings(event);
-}
-
-export const updateTwoFactorAuthentication: Handler = async (event: SQSEvent) => {
-    return await UserUtils.updateTwoFactorAuthentication(event);
+  return await UserUtils.updateSettings(event);
 }
 
 export const updatePayees: Handler = async (event: APIGatewayEvent) => {
-    return await UserUtils.updatePayees(event);
+  return await UserUtils.updatePayees(event);
 }

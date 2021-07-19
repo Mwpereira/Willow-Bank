@@ -14,11 +14,11 @@
       </div>
       <div class="column">
         <img
-            alt="Select Account"
-            class="mt-5"
-            src="../../../assets/img/FirstTimeLogin/piggy-bank.webp"
-            webp-fallback=".png"
-            width="225"
+          alt="Select Account"
+          class="mt-5"
+          src="../../../assets/img/FirstTimeLogin/piggy-bank.webp"
+          webp-fallback=".png"
+          width="225"
         />
       </div>
     </div>
@@ -26,12 +26,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class SelectAccount extends Vue {
-  public selectedAccount() {
-  }
+  public selectedAccount() {}
 }
 </script>
 

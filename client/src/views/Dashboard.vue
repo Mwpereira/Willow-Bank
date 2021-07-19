@@ -41,10 +41,13 @@ export default class Dashboard extends Vue {
       await this.$store.dispatch("getPage", this.$router.currentRoute.path);
       this.$store.dispatch("getRefreshToken").then(async (validAccessToken) => {
         if (!validAccessToken) {
-          await this.$store.dispatch('logout');
+          await this.$store.dispatch("logout");
         } else {
           if (this.$store.getters.account === null) {
-            await this.$store.dispatch('getAccount');
+            await this.$store.dispatch("getAccount");
+          }
+          if (this.$store.getters.settings === null) {
+            await this.$store.dispatch("getSettings");
           }
         }
       });

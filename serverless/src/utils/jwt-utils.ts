@@ -9,12 +9,18 @@ export default class JwtUtils {
      * Generates JWT For Protected Routes
      *
      * @param userData
+     * @param twoFactorAuthenticationEnabled
+     * @param authorized
      * @return JWT
      */
-    static generateJwt(userData: any): string {
+    static generateJwt(userData: any, twoFactorAuthenticationEnabled: boolean, authorized: boolean): string {
         return jwt.sign(
             {
                 sub: userData.email,
+                twoFactorAuthentication: {
+                    enabled: twoFactorAuthenticationEnabled,
+                    authorized
+                }
             },
             process.env.APP_SECRET
         );

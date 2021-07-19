@@ -1,6 +1,8 @@
 <template>
   <div id="contact-us">
-    <p class="is-size-2 has-text-centered has-text-weight-bold mb-2">Contact Us</p>
+    <p class="is-size-2 has-text-centered has-text-weight-bold mb-2">
+      Contact Us
+    </p>
     <div class="columns is-vcentered">
       <div class="column">
         <p class="has-text-weight-bold is-size-4 my-5">Connect With Us</p>
@@ -18,9 +20,9 @@
       </div>
       <div class="column">
         <img
-            alt="Contact Us"
-            src="../../assets/img/Home/contact.png"
-            webp-fallback=".png"
+          alt="Contact Us"
+          src="../../assets/img/Home/contact.png"
+          webp-fallback=".png"
         />
       </div>
     </div>

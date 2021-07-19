@@ -1,10 +1,11 @@
 <template>
   <div id="ChangePassword" class="">
+    <p class="mb-4"><b>Current Email:</b> {{ email }}</p>
     <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
-      <form @submit.prevent="next({ email, password })">
-        <b-field class="mb-5" label="Email">
+      <form @submit.prevent="updateEmail(newEmail)">
+        <b-field label="Email">
           <BInputWithValidation
-            v-model="email"
+            v-model="newEmail"
             icon="envelope"
             icon-pack="fas"
             placeolder="Email"
@@ -13,9 +14,39 @@
           >
           </BInputWithValidation>
         </b-field>
-        <b-field class="mb-5" label="Password">
+        <div class="columns is-vcentered">
+          <div class="column"></div>
+          <div class="column">
+            <button
+              :disabled="invalid"
+              class="button is-warning is-fullwidth has-text-weight-bold mt-5"
+              type="submit"
+            >
+              Update Email
+            </button>
+          </div>
+        </div>
+      </form>
+    </ValidationObserver>
+    <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
+      <form
+        class="mt-6"
+        @submit.prevent="changePassword(currentPassword, newPassword)"
+      >
+        <b-field label="Current Password">
           <BInputWithValidation
-            v-model="password"
+            v-model="currentPassword"
+            icon="key"
+            icon-pack="fas"
+            password-reveal
+            rules="required|min_password:7|max_account_characters:64"
+            type="password"
+          >
+          </BInputWithValidation>
+        </b-field>
+        <b-field label="New Password">
+          <BInputWithValidation
+            v-model="newPassword"
             icon="key"
             icon-pack="fas"
             password-reveal
@@ -25,21 +56,14 @@
           </BInputWithValidation>
         </b-field>
         <div class="columns is-vcentered">
-          <div class="column">
-            <b-button
-              id="backButton"
-              class="button is-white is-fullwidth has-text-weight-bold mt-5"
-              v-on:click="back({ firstName, lastName, country })"
-              >Cancel
-            </b-button>
-          </div>
+          <div class="column"></div>
           <div class="column">
             <button
-              :disabled="invalid || country === ''"
+              :disabled="invalid"
               class="button is-warning is-fullwidth has-text-weight-bold mt-5"
               type="submit"
             >
-              Save
+              Change Password
             </button>
           </div>
         </div>
@@ -48,10 +72,11 @@
   </div>
 </template>
 <script lang="ts">
-import { Emit, Prop, Vue } from "vue-property-decorator";
-import Component from "vue-class-component";
 import BInputWithValidation from "@/components/Common/Inputs/BInputWithValidation.vue";
+import BuefyService from "@/services/buefy-service";
 import { ValidationObserver } from "vee-validate";
+import Component from "vue-class-component";
+import { Vue } from "vue-property-decorator";
 
 @Component({
   components: {
@@ -60,8 +85,42 @@ import { ValidationObserver } from "vee-validate";
   },
 })
 export default class ChangeCredentials extends Vue {
-  public email!: string;
-  public password!: string;
+  public newEmail!: string;
+  public currentPassword!: string;
+  public newPassword!: string;
+
+  get email(): string {
+    return this.$store.getters.email;
+  }
+
+  public async updateEmail(newEmail: string): void {
+    BuefyService.startLoading();
+
+    if (await this.$store.dispatch("updateEmail", newEmail)) {
+      this.newEmail = "";
+    }
+
+    BuefyService.stopLoading();
+  }
+
+  public async changePassword(
+    currentPassword: string,
+    newPassword: string
+  ): void {
+    BuefyService.startLoading();
+
+    if (
+      await this.$store.dispatch("changePassword", {
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      })
+    ) {
+      this.currentPassword = "";
+      this.newPassword = "";
+    }
+
+    BuefyService.stopLoading();
+  }
 }
 </script>
 

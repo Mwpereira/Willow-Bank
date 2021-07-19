@@ -1,9 +1,10 @@
-import * as dynamoDB from 'dynamoose';
 import { SQS } from 'aws-sdk';
+import * as dynamoDB from 'dynamoose';
+import moment from 'moment';
 import {RegisterRequest} from '../../interfaces/register-request';
 import {WillowBankSchema} from '../../models/willow-bank';
 import BcryptUtilities from '../bcrypt-utils';
-import {SqsUtils} from "../sqs-utils";
+import {SqsUtils} from '../sqs-utils';
 
 const willowBankTable: any = dynamoDB.model('willowBank', WillowBankSchema);
 const sqs: SQS = new SQS();
@@ -40,12 +41,12 @@ export default class Auth {
                 twoFactorAuthentication: '',
                 twoFactorAuthenticationEnabled: false,
                 acceptedTermsAndConditions: false,
-                lastLogin: Date.now(),
-                createdAt: Date.now(),
+                lastLogin: moment().format('MMMM Do YYYY, h:mm:ss a'),
+                createdAt: moment().format('MMMM Do YYYY, h:mm:ss a'),
             })
             .then(async () => {
                 console.log(sqs.getQueueUrl({QueueName: 'updateTwoFactorAuthenticationSQS'}));
-                let sqsParams = SqsUtils.sqsParams();
+                const sqsParams = SqsUtils.sqsParams();
                 sqsParams.MessageBody = JSON.stringify({
                     'email': user.email,
                     twoFactorAuthentication: {
@@ -70,9 +71,9 @@ export default class Auth {
      * @param email
      * @return status
      */
-    static willowBankTable(email: string): boolean {
+    static deleteUser(email: string): boolean {
         return willowBankTable
-            .delete({email: email})
+            .delete({email})
             .then(() => {
                 return true;
             })
@@ -81,6 +82,29 @@ export default class Auth {
                 return false;
             });
     }
+
+  /**
+   * Gets the user data
+   *
+   * @param email
+   * @returns user
+   */
+  static getUser(email: string): any {
+    return willowBankTable
+      .query('email')
+      .eq(email)
+      .exec()
+      .then((result: any) => {
+        if (result.count === 1) {
+          return result[0];
+        } else {
+          return undefined;
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
     /**
      * Gets if the user already exists in the table
@@ -109,7 +133,7 @@ export default class Auth {
     /**
      * Gets User Data
      *
-     * @param _email
+     * @param email
      * @returns user id and key
      */
     static getUserData(email: string): any {
@@ -117,7 +141,7 @@ export default class Auth {
             .query()
             .where('email')
             .eq(email)
-            .attributes(['email', 'password', 'acceptedTermsAndConditions'])
+            .attributes(['email', 'password', 'acceptedTermsAndConditions', 'lastLogin', 'twoFactorAuthenticationEnabled'])
             .exec()
             .then((result: any) => {
                 return result[0];
@@ -127,6 +151,61 @@ export default class Auth {
                 return null;
             });
     }
+
+  /**
+   * Create Existing User
+   *
+   * @param user
+   * @return status
+   */
+  static async createExistingUser(user: any): Promise<boolean> {
+    return willowBankTable
+      .create({
+        email: user.email,
+        password: user.password,
+        account: user.account,
+        etransfers: user.etransfers,
+        settings: user.settings,
+        twoFactorAuthentication: user.twoFactorAuthentication,
+        twoFactorAuthenticationEnabled: user.twoFactorAuthenticationEnabled,
+        acceptedTermsAndConditions: user.acceptedTermsAndConditions,
+        lastLogin: user.lastLogin,
+        createdAt: user.createdAt,
+      })
+      .then(async () => {
+        return true;
+      })
+      .catch((error) => {
+        console.log(error);
+        return false;
+      });
+  }
+
+  /**
+   * Updates User's Password
+   *
+   * @param email
+   * @param password
+   * @return update auth status
+   */
+  static async changePassword(email, password: string): Promise<boolean> {
+    return willowBankTable
+      .update(
+        {
+          email,
+        },
+        {
+          password: await BcryptUtilities.getHashedValue(password),
+        }
+      )
+      .then(() => {
+        return true;
+      })
+      .catch((error) => {
+        console.log(error);
+        return false;
+      });
+  }
 
     /**
      * Updates User's Last Login
@@ -138,10 +217,10 @@ export default class Auth {
         return willowBankTable
             .update(
                 {
-                    email: email,
+                    email,
                 },
                 {
-                    lastLogin: Date.now(),
+                    lastLogin:  moment().format('MMMM Do YYYY, h:mm:ss a'),
                 }
             )
             .then(() => {
