@@ -12,7 +12,7 @@ export default class UserService {
 
   public static async acceptedTermsAndConditions(): Promise<AxiosResponse> {
     return axios
-      .put(`${this.url}/user/acceptedTermsAndConditions`)
+      .put(`${this.url}/user/acceptedTermsAndConditions`, JSON.stringify({acceptedTermsAndConditions: true}))
       .then((response: AxiosResponse) => {
         return response;
       })

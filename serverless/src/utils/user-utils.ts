@@ -16,9 +16,11 @@ export default class UserUtils {
   public static async acceptedTermsAndConditions(event: APIGatewayEvent): Promise<Response> {
     try {
       const email = RequestUtils.getEmail(event);
-      if (await User.acceptedTermsAndConditions(email)) {
+      const accepted = RequestUtils.getRequest(event).acceptedTermsAndConditions;
+
+      if (await User.acceptedTermsAndConditions(email, accepted)) {
         return MessageUtil.success(200, MessageConstants.ACCEPTED_TERMS_AND_CONDITIONS, {
-          acceptedTermsAndConditions: true
+          acceptedTermsAndConditions: accepted
         });
       }
       return MessageUtil.error(400, MessageConstants.ACCEPT_TERMS_AND_CONDITIONS_FAIL);

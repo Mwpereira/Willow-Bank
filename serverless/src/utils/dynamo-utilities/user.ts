@@ -11,13 +11,13 @@ const willowBankTable: any = dynamoDB.model('willowBank', WillowBankSchema);
  * Modifies DynamoDB Table
  */
 export default class User {
-    public static acceptedTermsAndConditions(email: string): Promise<boolean> {
+    public static acceptedTermsAndConditions(email: string, accepted: boolean): Promise<boolean> {
         return willowBankTable
             .update({
                     email
                 },
                 {
-                    acceptedTermsAndConditions: true,
+                    acceptedTermsAndConditions: accepted,
                 })
             .then(() => {
                 return true;
