@@ -84,7 +84,7 @@ export default class FirstTimeLogin extends Vue {
 
   get disableButton(): boolean {
     return (
-      this.activeStep === 1 && (!this.agree0 || !this.agree1 || !this.agree2)
+      this.activeStep === 1 && (!!this.agree0 || !!this.agree1 || !!this.agree2)
     );
   }
 
