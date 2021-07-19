@@ -93,7 +93,7 @@ export default class ChangeCredentials extends Vue {
     return this.$store.getters.email;
   }
 
-  public async updateEmail(newEmail: string): void {
+  public async updateEmail(newEmail: string): Promise<void> {
     BuefyService.startLoading();
 
     if (await this.$store.dispatch("updateEmail", newEmail)) {
@@ -106,7 +106,7 @@ export default class ChangeCredentials extends Vue {
   public async changePassword(
     currentPassword: string,
     newPassword: string
-  ): void {
+  ): Promise<void> {
     BuefyService.startLoading();
 
     if (

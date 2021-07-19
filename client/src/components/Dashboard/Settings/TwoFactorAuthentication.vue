@@ -51,7 +51,7 @@ export default class TwoFactorAuthentication extends Vue {
       this.$store.getters.twoFactorAuthenticationEnabled;
   }
 
-  public async updateTwoFactorAuthenticationEnabled() {
+  public async updateTwoFactorAuthenticationEnabled(): Promise<void> {
     BuefyService.startLoading();
 
     await this.$store.dispatch(
