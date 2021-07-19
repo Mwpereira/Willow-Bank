@@ -73,7 +73,7 @@ export default class AuthService {
   }
 
   public static async changePassword(
-    passwords: string
+    passwords: object
   ): Promise<AxiosResponse> {
     return await axios
       .put(`${this.url}/auth/changePassword`, JSON.stringify(passwords))
