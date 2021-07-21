@@ -1,4 +1,4 @@
 export enum MessageAction {
-    ADD=('ADD'),
-    DELETE=('DELETE')
+  ADD = ('ADD'),
+  DELETE = ('DELETE'),
 }
