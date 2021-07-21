@@ -1,16 +1,9 @@
 <template>
   <div id="TwoFactorAuthentication" class="">
     <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
-      <form
-        @submit.prevent="
-          updateTwoFactorAuthenticationEnabled(twoFactorAuthenticationEnabled)
-        "
-      >
+      <form @submit.prevent="updateTwoFactorAuthenticationEnabled(tfaEnabled)">
         <b-field>
-          <b-checkbox
-            v-model="twoFactorAuthenticationEnabled"
-            class="my-2"
-            type="is-warning"
+          <b-checkbox v-model="tfaEnabled" class="my-2" type="is-warning"
             >Enable Two Factor Authentication
           </b-checkbox>
         </b-field>
@@ -18,7 +11,7 @@
           <div class="column"></div>
           <div class="column">
             <button
-              :disabled="false"
+              :disabled="tfaEnabled === twoFactorAuthenticationEnabled"
               class="button is-warning is-fullwidth has-text-weight-bold mt-5"
               type="submit"
             >
@@ -44,19 +37,28 @@ import { ValidationObserver } from "vee-validate";
   },
 })
 export default class TwoFactorAuthentication extends Vue {
-  public twoFactorAuthenticationEnabled!: boolean;
+  private tfaEnabled = false;
 
-  created(): void {
-    this.twoFactorAuthenticationEnabled =
-      this.$store.getters.twoFactorAuthenticationEnabled;
+  get twoFactorAuthenticationEnabled(): boolean {
+    return this.$store.getters.twoFactorAuthenticationEnabled;
   }
 
-  public async updateTwoFactorAuthenticationEnabled(): Promise<void> {
+  test() {
+    console.log("adasd");
+  }
+
+  created(): void {
+    this.tfaEnabled = this.twoFactorAuthenticationEnabled;
+  }
+
+  public async updateTwoFactorAuthenticationEnabled(
+    tfaEnabled: boolean
+  ): Promise<void> {
     BuefyService.startLoading();
 
     await this.$store.dispatch(
       "saveTwoFactorAuthenticationEnabled",
-      this.twoFactorAuthenticationEnabled
+      tfaEnabled
     );
 
     BuefyService.stopLoading();

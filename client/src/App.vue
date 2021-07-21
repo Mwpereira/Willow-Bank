@@ -8,8 +8,8 @@
         aria-close-label="Close notification"
       >
         Our site uses cookies to provide you the best service and experience. We
-        will store these cookies with no confidential data to ensure the
-        strongest security and protection.
+        store these cookies with advanced encryption to ensure the strongest
+        security and protection.
       </b-notification>
     </div>
     <Footer />

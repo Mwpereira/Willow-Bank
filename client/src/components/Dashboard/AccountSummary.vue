@@ -13,7 +13,13 @@
           </p>
           <p class="my-3">
             <b>Latest Transaction:</b>
-            {{ account.transactions[0] ? account.transactions[0].date : "N/A" }}
+            {{
+              account.transactions[account.transactions.length - 1]
+                ? account.transactions[
+                    account.transactions.length - 1
+                  ].date.split(",")[0]
+                : "N/A"
+            }}
           </p>
         </div>
         <div class="column">
@@ -35,6 +41,7 @@
 <script lang="ts">
 import Transactions from "@/components/Dashboard/Accounts/Transactions.vue";
 import { Component, Vue } from "vue-property-decorator";
+
 @Component({
   components: { Transactions },
 })

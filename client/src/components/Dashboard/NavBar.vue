@@ -6,15 +6,28 @@
       </b-navbar-item>
       <b-navbar-dropdown label="Account">
         <b-navbar-item v-on:click="switchPage('account/summary')"
-          >Summary</b-navbar-item
+        >Summary
+        </b-navbar-item
         >
-        <b-navbar-item v-on:click="switchPage('account/paybills')"
-          >Pay Bills</b-navbar-item
+        <b-navbar-item v-on:click="switchPage('account/payBills')"
+        >Pay Bills
+        </b-navbar-item
+        >
+        <b-navbar-item v-on:click="switchPage('account/managePayees')"
+        >Manage Payees
+        </b-navbar-item
         >
       </b-navbar-dropdown>
-      <b-navbar-item v-on:click="switchPage('etransfers')"
-        >eTransfers</b-navbar-item
-      >
+      <b-navbar-dropdown label="eTransfer">
+        <b-navbar-item v-on:click="switchPage('account/eTransfer')"
+        >Send eTransfer
+        </b-navbar-item
+        >
+        <b-navbar-item v-on:click="switchPage('account/manageContacts')"
+        >Manage Contacts
+        </b-navbar-item
+        >
+      </b-navbar-dropdown>
       <b-navbar-item v-on:click="switchPage('info')">Info</b-navbar-item>
     </template>
 
@@ -22,9 +35,9 @@
       <b-navbar-item tag="div">
         <div class="buttons">
           <a
-            class="button is-warning"
-            v-on:click="switchPage('user/settings')"
-            rel="noopener"
+              class="button is-warning"
+              rel="noopener"
+              v-on:click="switchPage('user/settings')"
           >
             <strong>Settings</strong>
           </a>
@@ -38,11 +51,11 @@
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-property-decorator";
-import Component from "vue-class-component";
-import WebsiteUtils from "@/utils/website-utils";
-import AuthService from "@/services/auth-service";
-import BuefyService from "@/services/buefy-service";
+import AuthService from '@/services/auth-service';
+import BuefyService from '@/services/buefy-service';
+import WebsiteUtils from '@/utils/website-utils';
+import Component from 'vue-class-component';
+import {Vue} from 'vue-property-decorator';
 
 @Component
 export default class NavBar extends Vue {
@@ -52,7 +65,7 @@ export default class NavBar extends Vue {
 
   public logout(): void {
     AuthService.logout();
-    BuefyService.successToast("Signed Out");
+    BuefyService.successToast('Signed Out');
   }
 }
 </script>

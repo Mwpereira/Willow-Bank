@@ -1,3 +1,5 @@
+import { AdminTransaction } from "@/interfaces/admin-transaction";
+import { Transaction } from "@/interfaces/transaction";
 import ResponseUtils from "@/utils/response-utils";
 import axios, { AxiosResponse } from "axios";
 import { Settings } from "@/interfaces/settings";
@@ -12,7 +14,10 @@ export default class UserService {
 
   public static async acceptedTermsAndConditions(): Promise<AxiosResponse> {
     return axios
-      .put(`${this.url}/user/acceptedTermsAndConditions`, JSON.stringify({acceptedTermsAndConditions: true}))
+      .put(
+        `${this.url}/user/acceptedTermsAndConditions`,
+        JSON.stringify({ acceptedTermsAndConditions: true })
+      )
       .then((response: AxiosResponse) => {
         return response;
       })
@@ -48,6 +53,32 @@ export default class UserService {
   ): Promise<AxiosResponse> {
     return axios
       .put(`${this.url}/user/settings`, settings)
+      .then((response: AxiosResponse) => {
+        return response;
+      })
+      .catch((error) => {
+        return ResponseUtils.errorProcessor(error.response);
+      });
+  }
+
+  public static async payBill(
+    transaction: Transaction
+  ): Promise<AxiosResponse> {
+    return axios
+      .post(`${this.url}/user/payBill`, transaction)
+      .then((response: AxiosResponse) => {
+        return response;
+      })
+      .catch((error) => {
+        return ResponseUtils.errorProcessor(error.response);
+      });
+  }
+
+  public static async sendAdminTransaction(
+    transaction: AdminTransaction
+  ): Promise<AxiosResponse> {
+    return axios
+      .post(`${this.url}/user/sendAdminTransaction`, transaction)
       .then((response: AxiosResponse) => {
         return response;
       })

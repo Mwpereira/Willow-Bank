@@ -6,17 +6,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import NavBar from "@/components/Dashboard/NavBar.vue";
-import WebsiteUtils from "@/utils/website-utils";
-import UserService from "@/services/user-service";
-import DashboardSummary from "@/components/Dashboard/Summary.vue";
-import Summary from "@/components/Dashboard/AccountSummary.vue";
-import Settings from "@/components/Dashboard/Settings.vue";
-import Etransfers from "@/components/Dashboard/Etransfers.vue";
 import PayBills from "@/components/Dashboard/AccountPayBills.vue";
+import Summary from "@/components/Dashboard/AccountSummary.vue";
+import Etransfers from "@/components/Dashboard/Etransfers.vue";
 import Info from "@/components/Dashboard/Info.vue";
-import AuthService from "@/services/auth-service";
+import NavBar from "@/components/Dashboard/NavBar.vue";
+import Settings from "@/components/Dashboard/Settings.vue";
+import DashboardSummary from "@/components/Dashboard/Summary.vue";
+import WebsiteUtils from "@/utils/website-utils";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({
   components: {
@@ -43,12 +41,8 @@ export default class Dashboard extends Vue {
         if (!validAccessToken) {
           await this.$store.dispatch("logout");
         } else {
-          if (this.$store.getters.account === null) {
-            await this.$store.dispatch("getAccount");
-          }
-          if (this.$store.getters.settings === null) {
-            await this.$store.dispatch("getSettings");
-          }
+          await this.$store.dispatch("getAccount");
+          await this.$store.dispatch("getSettings");
         }
       });
     }

@@ -176,6 +176,20 @@ updateTwoFactorAuthenticationEnabled:
           resultTtlInSeconds: 10
           indentitySource: method.request.header.Cookie
 
+sendAdminTransaction:
+  handler: 'src/handlers/user-handler.sendAdminTransaction'
+  description: "Deposits/Withdraws money from User Account"
+  events:
+    - http:
+        method: 'post'
+        path: 'user/sendAdminTransaction'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
+
 #SQS
 updateTwoFactorAuthentication:
   description: "Sets Two Factor Authentication for a User"

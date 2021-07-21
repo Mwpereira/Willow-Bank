@@ -20,3 +20,7 @@ export const updateSettings: Handler = async (event: APIGatewayEvent) => {
 export const updatePayees: Handler = async (event: APIGatewayEvent) => {
   return await UserUtils.updatePayees(event);
 }
+
+export const sendAdminTransaction: Handler = async (event: APIGatewayEvent) => {
+  return await UserUtils.sendAdminTransaction(event);
+}

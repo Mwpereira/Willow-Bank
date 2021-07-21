@@ -18,7 +18,7 @@
           <div class="column"></div>
           <div class="column">
             <button
-              :disabled="invalid"
+              :disabled="invalid || newEmail === email"
               class="button is-warning is-fullwidth has-text-weight-bold mt-5"
               type="submit"
             >
@@ -71,6 +71,7 @@
     </ValidationObserver>
   </div>
 </template>
+
 <script lang="ts">
 import BInputWithValidation from "@/components/Common/Inputs/BInputWithValidation.vue";
 import BuefyService from "@/services/buefy-service";
@@ -85,9 +86,9 @@ import { Vue } from "vue-property-decorator";
   },
 })
 export default class ChangeCredentials extends Vue {
-  public newEmail!: string;
-  public currentPassword!: string;
-  public newPassword!: string;
+  public newEmail = "";
+  public currentPassword = "";
+  public newPassword = "";
 
   get email(): string {
     return this.$store.getters.email;
@@ -97,7 +98,7 @@ export default class ChangeCredentials extends Vue {
     BuefyService.startLoading();
 
     if (await this.$store.dispatch("updateEmail", newEmail)) {
-      this.newEmail = "";
+      this.$router.go(0);
     }
 
     BuefyService.stopLoading();
@@ -115,8 +116,7 @@ export default class ChangeCredentials extends Vue {
         newPassword: newPassword,
       })
     ) {
-      this.currentPassword = "";
-      this.newPassword = "";
+      this.$router.go(0);
     }
 
     BuefyService.stopLoading();

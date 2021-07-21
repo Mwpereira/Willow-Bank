@@ -12,25 +12,30 @@
         <b-tab-item label="2FA">
           <TwoFactorAuthentication />
         </b-tab-item>
+        <b-tab-item label="Admin">
+          <Admin />
+        </b-tab-item>
       </b-tabs>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import Admin from "@/components/Dashboard/Settings/Admin.vue";
 import { Component, Vue } from "vue-property-decorator";
 import UserData from "@/components/Dashboard/Settings/UserData.vue";
 import TwoFactorAuthentication from "@/components/Dashboard/Settings/TwoFactorAuthentication.vue";
 import ChangeCredentials from "@/components/Dashboard/Settings/ChangeCredentials.vue";
 
 @Component({
-  components: { TwoFactorAuthentication, ChangeCredentials, UserData },
+  components: { Admin, TwoFactorAuthentication, ChangeCredentials, UserData },
 })
 export default class Settings extends Vue {}
 </script>
 
 <style scoped>
 #tabs {
-  max-width: 600px;
+  max-width: 650px;
+  min-height: 575px;
 }
 </style>

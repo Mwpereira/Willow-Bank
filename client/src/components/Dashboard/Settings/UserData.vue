@@ -25,7 +25,7 @@
           <div class="column"></div>
           <div class="column">
             <button
-              :disabled="invalid"
+              :disabled="country === settings.country"
               class="button is-warning is-fullwidth has-text-weight-bold mt-5"
               type="submit"
             >
@@ -55,14 +55,10 @@ import BuefyService from "@/services/buefy-service";
 export default class UserData extends Vue {
   private firstName!: string;
   private lastName!: string;
-  private country!: string;
+  private country = "Canada";
 
-  get settings() {
+  get settings(): string {
     return this.$store.getters.settings;
-  }
-
-  get countrySame() {
-    return this.country === this.settings.country;
   }
 
   public async save(settings: Settings): Promise<void> {

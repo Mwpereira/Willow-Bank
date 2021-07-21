@@ -216,7 +216,7 @@ export default class AuthUtilities {
       }
     } catch (error) {
       console.log(error);
-      return MessageUtil.error(400, MessageConstants.INVALID_REQUEST);
+      return MessageUtil.error(400, MessageConstants.INVALID_CREDENTIALS);
     }
   }
 

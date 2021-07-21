@@ -1,10 +1,12 @@
 import {
-  alpha_dash,
   confirmed,
   email,
   min,
   max,
   required,
+  max_value,
+  numeric,
+  min_value,
 } from "vee-validate/dist/rules";
 import { extend } from "vee-validate";
 
@@ -31,4 +33,14 @@ extend("confirmed", {
 extend("max_account_characters", {
   ...max,
   message: "Exceeds 64 character limit",
+});
+
+extend("min_value", {
+  ...min_value,
+  message: "Cannot be less than $1",
+});
+
+extend("max_value", {
+  ...max_value,
+  message: "Cannot be more than $10,000",
 });

@@ -73,6 +73,16 @@ export abstract class MessageConstants {
   public static readonly PASSWORD_CHANGED_SUCCESS: string = 'Password Changed';
 
   /**
+   * Success message for an admin deposit in a User's account
+   */
+  public static readonly ADMIN_DEPOSIT_SUCCESS: string = 'Money Deposited';
+
+  /**
+   * Success message for an admin withdraw in a User's account
+   */
+  public static readonly ADMIN_WITHDRAW_SUCCESS: string = 'Money Withdrawn';
+
+  /**
    * Error message for Email already in use
    */
   public static readonly EMAIL_TAKEN: string = 'Email Already Taken';
@@ -153,4 +163,9 @@ export abstract class MessageConstants {
    * Error message for changing User's Password
    */
   public static readonly PASSWORD_CHANGED_FAILED: string = 'Failed to Change Password';
+
+  /**
+   * Error message for an admin transaction into a User's Account
+   */
+  public static readonly ADMIN_TRANSACTION_FAILED: string = 'Transaction Failed';
 }

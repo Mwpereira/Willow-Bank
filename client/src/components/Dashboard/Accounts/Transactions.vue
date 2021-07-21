@@ -3,7 +3,7 @@
     <p class="has-text-weight-bold is-size-5 mb-5">Transactions</p>
     <b-table
       :columns="columns"
-      :data="data"
+      :data="account.transactions"
       :paginated="true"
       :pagination-simple="false"
       :pagination-rounded="false"
@@ -31,7 +31,7 @@ export default class AccountSummary extends Vue {
       numeric: true,
     },
     {
-      field: "receiver",
+      field: "payee",
       label: "Payee/Contact",
     },
     {
