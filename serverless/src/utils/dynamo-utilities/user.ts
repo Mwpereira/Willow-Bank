@@ -1,7 +1,6 @@
 import * as dynamoDB from 'dynamoose';
 import {Account} from '../../interfaces/account';
 import {Settings} from '../../interfaces/settings';
-import {SettingsData} from '../../interfaces/settings-data';
 import {WillowBankSchema} from '../../models/willow-bank';
 
 const willowBankTable: any = dynamoDB.model('willowBank', WillowBankSchema);
@@ -59,7 +58,7 @@ export default class User {
       });
   }
 
-  public static updateSettings(email: string, settings: Settings): Promise<SettingsData> {
+  public static updateSettings(email: string, settings: Settings): Promise<Settings> {
     return willowBankTable
       .update({
           email

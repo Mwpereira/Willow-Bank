@@ -13,6 +13,7 @@ import Info from "@/components/Dashboard/Info.vue";
 import NavBar from "@/components/Dashboard/NavBar.vue";
 import Settings from "@/components/Dashboard/Settings.vue";
 import DashboardSummary from "@/components/Dashboard/Summary.vue";
+import BuefyService from '@/services/buefy-service';
 import WebsiteUtils from "@/utils/website-utils";
 import { Component, Vue } from "vue-property-decorator";
 
@@ -41,8 +42,11 @@ export default class Dashboard extends Vue {
         if (!validAccessToken) {
           await this.$store.dispatch("logout");
         } else {
-          await this.$store.dispatch("getAccount");
-          await this.$store.dispatch("getSettings");
+          BuefyService.startLoading();
+          this.$store.dispatch("getAccount").then(async ()=> {
+            await this.$store.dispatch("getSettings");
+          })
+          BuefyService.stopLoading();
         }
       });
     }
