@@ -49,9 +49,8 @@ export default class Dashboard extends Vue {
         if (!validAccessToken) {
           await this.$store.dispatch('logout');
         } else {
-          this.$store.dispatch('getAccount').then(async () => {
-            await this.$store.dispatch('getSettings');
-          })
+          await this.$store.dispatch('getAccount');
+          await this.$store.dispatch('getSettings');
         }
       });
     }
