@@ -1,5 +1,4 @@
 import {AdminTransaction} from '@/interfaces/admin-transaction';
-import {Payee} from '@/interfaces/payee';
 import {Settings} from '@/interfaces/settings';
 import {Transaction} from '@/interfaces/transaction';
 import {UpdatePayeeRequest} from '@/interfaces/update-payee-request';
