@@ -9,16 +9,16 @@
         <p class="my-2 py-1">Initial Investment: <b>$10,000</b></p>
         <p class="my-2 py-1">Interest Rate: <b>7%</b></p>
         <b-button class="mt-2 is-primary is-size-6" v-on:click="complete()"
-          >Complete & Continue
+        >Complete & Continue
         </b-button>
       </div>
       <div class="column">
         <img
-          alt="Complete Registration"
-          class="mt-5"
-          src="../../../assets/img/FirstTimeLogin/sapling.webp"
-          webp-fallback=".png"
-          width="225"
+            alt="Complete Registration"
+            class="mt-5"
+            src="../../../assets/img/FirstTimeLogin/sapling.webp"
+            webp-fallback=".png"
+            width="225"
         />
       </div>
     </div>
@@ -26,18 +26,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import UserService from "@/services/user-service";
-import WebsiteUtils from "@/utils/website-utils";
-import BuefyService from "@/services/buefy-service";
+import WebsiteUtils from '@/utils/website-utils';
+import {Component, Vue} from 'vue-property-decorator';
 
 @Component
 export default class Complete extends Vue {
   public async complete() {
-    this.$store.dispatch("acceptedTermsAndConditions").then(async (result)=> {
-      if (result){
+    this.$store.dispatch('acceptedTermsAndConditions').then(async (result) => {
+      if (result) {
         new Promise((resolve) => setTimeout(resolve, 1000));
-        await WebsiteUtils.switchVue("dashboard");
+        await WebsiteUtils.switchVue('dashboard');
       }
     });
   }

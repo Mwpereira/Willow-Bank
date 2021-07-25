@@ -74,12 +74,15 @@ const store = new Vuex.Store({
     async acceptedTermsAndConditions({commit}): Promise<boolean> {
       response = await UserService.acceptedTermsAndConditions();
 
-      commit(
-        'setAcceptedTermsAndConditions',
-        response.data.acceptedTermsAndConditions
-      );
-
-      return response.data.acceptedTermsAndConditions;
+      if (ResponseUtils.successProcessor(response)) {
+        commit(
+          'setAcceptedTermsAndConditions',
+          response.data.acceptedTermsAndConditions
+        );
+        BuefyService.successToast(response.data.message);
+        return true;
+      }
+      return false;
     },
     async changePassword({commit}, passwords: object): Promise<boolean> {
       response = await AuthService.changePassword(passwords);
