@@ -34,7 +34,7 @@ import BuefyService from "@/services/buefy-service";
 @Component
 export default class Complete extends Vue {
   public async complete() {
-    this.$store.dispatch("acceptedTermsAndConditions").then((result)=> {
+    this.$store.dispatch("acceptedTermsAndConditions").then(async (result)=> {
       if (result){
         new Promise((resolve) => setTimeout(resolve, 1000));
         await WebsiteUtils.switchVue("dashboard");
