@@ -1,14 +1,16 @@
-import { AdminTransaction } from "@/interfaces/admin-transaction";
-import { Transaction } from "@/interfaces/transaction";
-import ResponseUtils from "@/utils/response-utils";
-import axios, { AxiosResponse } from "axios";
-import { Settings } from "@/interfaces/settings";
+import {AdminTransaction} from '@/interfaces/admin-transaction';
+import {Payee} from '@/interfaces/payee';
+import {Settings} from '@/interfaces/settings';
+import {Transaction} from '@/interfaces/transaction';
+import {UpdatePayeeRequest} from '@/interfaces/update-payee-request';
+import ResponseUtils from '@/utils/response-utils';
+import axios, {AxiosResponse} from 'axios';
 
 axios.defaults.withCredentials = true;
 
 export default class UserService {
   private static readonly url: any =
-    process.env.VUE_APP_MODE === "PRODUCTION"
+    process.env.VUE_APP_MODE === 'PRODUCTION'
       ? `https://${process.env.VUE_APP_API}`
       : `http://${process.env.VUE_APP_API_LOCAL}`;
 
@@ -16,7 +18,7 @@ export default class UserService {
     return axios
       .put(
         `${this.url}/user/acceptedTermsAndConditions`,
-        JSON.stringify({ acceptedTermsAndConditions: true })
+        JSON.stringify({acceptedTermsAndConditions: true})
       )
       .then((response: AxiosResponse) => {
         return response;
@@ -61,11 +63,24 @@ export default class UserService {
       });
   }
 
+  public static async updatePayees(
+    payee: UpdatePayeeRequest
+  ): Promise<AxiosResponse> {
+    return axios
+      .put(`${this.url}/user/account/updatePayees`, payee)
+      .then((response: AxiosResponse) => {
+        return response;
+      })
+      .catch((error) => {
+        return ResponseUtils.errorProcessor(error.response);
+      });
+  }
+
   public static async payBill(
     transaction: Transaction
   ): Promise<AxiosResponse> {
     return axios
-      .post(`${this.url}/user/payBill`, transaction)
+      .post(`${this.url}/user/account/payBill`, transaction)
       .then((response: AxiosResponse) => {
         return response;
       })

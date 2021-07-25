@@ -3,7 +3,6 @@
 
 $family-primary: 'Roboto';
 
-//$grey-darker: #191919
 $primary: #75bd9f;
 
 $linkedin: #0077b5;
@@ -13,7 +12,6 @@ $twitter-invert: findColorInvert($twitter);
 $github: #333;
 $github-invert: findColorInvert($github);
 
-// 5. Add new color variables to the color map.
 @import "../../../node_modules/bulma/sass/utilities/derived-variables";
 $addColors: (
 "twitter":($twitter, $twitter-invert),

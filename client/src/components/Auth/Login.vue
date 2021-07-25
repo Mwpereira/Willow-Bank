@@ -82,7 +82,9 @@ export default class Login extends Vue {
 
   private async login(): Promise<void> {
     BuefyService.startLoading();
+
     await this.$store.dispatch("login", this.user);
+
     BuefyService.stopLoading();
   }
 }

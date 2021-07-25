@@ -1,15 +1,15 @@
-import { LoginRequest } from "@/interfaces/login-request";
-import { RegisterRequest } from "@/interfaces/register-request";
-import store from "@/store";
-import ResponseUtils from "@/utils/response-utils";
-import WebsiteUtils from "@/utils/website-utils";
-import axios, { AxiosResponse } from "axios";
+import {LoginRequest} from '@/interfaces/login-request';
+import {RegisterRequest} from '@/interfaces/register-request';
+import store from '@/store';
+import ResponseUtils from '@/utils/response-utils';
+import WebsiteUtils from '@/utils/website-utils';
+import axios, {AxiosResponse} from 'axios';
 
 axios.defaults.withCredentials = true;
 
 export default class AuthService {
   private static readonly url: any =
-    process.env.VUE_APP_MODE === "PRODUCTION"
+    process.env.VUE_APP_MODE === 'PRODUCTION'
       ? `https://${process.env.VUE_APP_API}`
       : `http://${process.env.VUE_APP_API_LOCAL}`;
 
@@ -49,8 +49,8 @@ export default class AuthService {
   }
 
   public static async logout(): Promise<void> {
-    store.commit("auth_logout");
-    await WebsiteUtils.switchVue("login");
+    store.commit('auth_logout');
+    await WebsiteUtils.switchVue('login');
     await axios
       .get(`${this.url}/auth/logout`)
       .then((response: AxiosResponse) => {
@@ -63,7 +63,7 @@ export default class AuthService {
 
   public static async updateEmail(email: string): Promise<AxiosResponse> {
     return await axios
-      .put(`${this.url}/auth/updateEmail`, JSON.stringify({ newEmail: email }))
+      .put(`${this.url}/auth/updateEmail`, JSON.stringify({newEmail: email}))
       .then((response: AxiosResponse) => {
         return response;
       })

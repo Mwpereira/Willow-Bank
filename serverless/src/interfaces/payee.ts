@@ -1,5 +1,4 @@
 export interface Payee {
-    id: string,
-    payee: string,
+    name: string,
     accountNumber: string
 }

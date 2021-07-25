@@ -120,6 +120,34 @@ getSettings:
           resultTtlInSeconds: 10
           indentitySource: method.request.header.Cookie
 
+payBills:
+  handler: 'src/handlers/user-handler.payBill'
+  description: "Pay Bill"
+  events:
+    - http:
+        method: 'post'
+        path: 'user/account/payBill'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
+
+updatePayees:
+  handler: 'src/handlers/user-handler.updatePayees'
+  description: "Updates Payees"
+  events:
+    - http:
+        method: 'put'
+        path: 'user/account/updatePayees'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
+
 updateSettings:
   handler: 'src/handlers/user-handler.updateSettings'
   description: "Updates User's Settings"
@@ -199,32 +227,7 @@ updateTwoFactorAuthentication:
     - sqs:
         arn: ${self:custom.variables.updateTwoFactorAuthenticationSQS.arn}
         batchSize: 1
-#
-#addPayee:
-#  description: "Adds Payee"
-#  events:
-#    - http:
-#        method: 'post'
-#        path: 'user/account/addPayee'
-#        cors: true
-#        authorizer:
-#          name: verifyToken
-#          type: request
-#          resultTtlInSeconds: 10
-#          indentitySource: method.request.header.Cookie
-#
-#removePayee:
-#  description: "Removes Payee"
-#  events:
-#    - http:
-#        method: 'post'
-#        path: 'user/account/removePayee'
-#        cors: true
-#        authorizer:
-#          name: verifyToken
-#          type: request
-#          resultTtlInSeconds: 10
-#          indentitySource: method.request.header.Cookie
+
 #
 #sendMoney:
 #  description: "Sends Money"

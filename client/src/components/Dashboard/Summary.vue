@@ -1,53 +1,53 @@
 <template>
   <div id="Summary" class="container">
     <div class="section has-text-left">
-      <p class="title">Dashboard</p>
-      <div class="card p-6 mb-5">
-        <div class="columns">
-          <div class="column">
-            <p class="is-size-1 has-text-primary">
-              ${{ account.balance.toLocaleString() }}
-            </p>
-            <p class="has-text-weight-bold">Premium Savings Account Balance</p>
-          </div>
-          <div class="column">
-            <p class="is-size-1">
-              {{ Object.keys(account.transactions).length }}
-            </p>
-            <p class="has-text-weight-bold">Number of Transactions</p>
+      <p class="title mb-6">Account Summary</p>
+      <div class="columns">
+        <div class="column is-size-5">
+          <p class="my-3">
+            <b>Account Balance:</b> ${{ account.balance.toLocaleString() }}
+          </p>
+          <p class="my-3">
+            <b>Number of Transactions:</b>
+            {{ Object.keys(account.transactions).length }}
+          </p>
+          <p class="my-3">
+            <b>Latest Transaction:</b>
+            {{
+              account.transactions[account.transactions.length - 1]
+                ? account.transactions[
+                    account.transactions.length - 1
+                  ].date.split(",")[0]
+                : "N/A"
+            }}
+          </p>
+        </div>
+        <div class="column">
+          <div class="card mb-6">
+            <div class="card-header p-6">
+              <span>
+                <i class="fas fa-coins"></i>
+              </span>
+              <p class="ml-3">Premium Savings Account</p>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="card p-6 mb-5">
-        <div class="columns">
-          <div class="column">
-            <p class="is-size-3 mb-2">{{ lastLogin.split(",")[0] }}</p>
-            <p class="has-text-weight-bold">Last Login</p>
-          </div>
-          <div class="column">
-            <p class="is-size-3 mb-2">0</p>
-            <p class="has-text-weight-bold">Notifications</p>
-          </div>
-        </div>
-      </div>
+      <Transactions />
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import Transactions from "@/components/Dashboard/Accounts/Transactions.vue";
 import { Component, Vue } from "vue-property-decorator";
 
-@Component
+@Component({
+  components: { Transactions },
+})
 export default class Summary extends Vue {
   get account() {
     return this.$store.getters.account;
   }
-
-  get lastLogin() {
-    return this.$store.getters.lastLogin;
-  }
 }
 </script>
-
-<style scoped></style>

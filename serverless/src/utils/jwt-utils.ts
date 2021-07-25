@@ -16,7 +16,7 @@ export default class JwtUtils {
   static generateJwt(userData: any, twoFactorAuthenticationEnabled: boolean, authorized: boolean): string {
     return jwt.sign(
       {
-        sub: userData.email,
+        sub: userData.email.toLowerCase(),
         twoFactorAuthentication: {
           enabled: twoFactorAuthenticationEnabled,
           authorized
@@ -35,7 +35,7 @@ export default class JwtUtils {
   static refreshJwt(user: any): string {
     return jwt.sign(
       {
-        sub: user.sub,
+        sub: user.sub.toLowerCase(),
       },
       process.env.APP_SECRET
     );

@@ -12,7 +12,7 @@ export default class User {
   public static acceptedTermsAndConditions(email: string, accepted: boolean): Promise<boolean> {
     return willowBankTable
       .update({
-          email
+          email: email.toLowerCase(),
         },
         {
           acceptedTermsAndConditions: accepted,
@@ -30,7 +30,7 @@ export default class User {
     return willowBankTable
       .query()
       .where('email')
-      .eq(email)
+      .eq(email.toLowerCase())
       .attributes(['account'])
       .exec()
       .then((result: any) => {
@@ -46,7 +46,7 @@ export default class User {
     return willowBankTable
       .query()
       .where('email')
-      .eq(email)
+      .eq(email.toLowerCase())
       .attributes(['settings'])
       .exec()
       .then((result: any) => {
@@ -61,7 +61,7 @@ export default class User {
   public static updateSettings(email: string, settings: Settings): Promise<Settings> {
     return willowBankTable
       .update({
-          email
+          email: email.toLowerCase(),
         },
         {
           settings: JSON.stringify(settings),
@@ -78,7 +78,7 @@ export default class User {
   public static updateTwoFactorAuthentication(email: string, data: object): Promise<boolean> {
     return willowBankTable
       .update({
-          email
+          email: email.toLowerCase(),
         },
         {
           twoFactorAuthentication: JSON.stringify(data),
@@ -95,7 +95,7 @@ export default class User {
   public static updateTwoFactorAuthenticationEnabled(email: string, enabled: boolean): Promise<boolean> {
     return willowBankTable
       .update({
-          email
+          email: email.toLowerCase(),
         },
         {
           twoFactorAuthenticationEnabled: enabled,
@@ -112,7 +112,7 @@ export default class User {
   public static updateAccount(email: string, data: object): Promise<boolean> {
     return willowBankTable
       .update({
-          email
+          email: email.toLowerCase(),
         },
         {
           account: JSON.stringify(data),

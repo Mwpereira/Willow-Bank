@@ -21,6 +21,10 @@ export const updatePayees: Handler = async (event: APIGatewayEvent) => {
   return await UserUtils.updatePayees(event);
 }
 
+export const payBill: Handler = async (event: APIGatewayEvent) => {
+  return await UserUtils.payBill(event);
+}
+
 export const sendAdminTransaction: Handler = async (event: APIGatewayEvent) => {
   return await UserUtils.sendAdminTransaction(event);
 }

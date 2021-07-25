@@ -44,3 +44,13 @@ extend("max_value", {
   ...max_value,
   message: "Cannot be more than $10,000",
 });
+
+extend("min_an_value", {
+  ...min_value,
+  message: "Invalid account number",
+});
+
+extend("max_an_value", {
+  ...max_value,
+  message: "Exceeds account number length",
+});

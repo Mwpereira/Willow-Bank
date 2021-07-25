@@ -5,17 +5,17 @@ import {Account} from '../interfaces/account';
 import {Transaction} from '../interfaces/transaction';
 
 export default class TransactionUtils {
-  public static generateTransaction(account: Account, amount: number, transactionAction: TransactionActions): Transaction {
+  public static getTransaction(account: Account, amount: number, transactionAction: TransactionActions, receiver?: string): Transaction {
     return {
       id: account.transactions.length + 1,
-      payee: 'Willow Bank',
+      receiver: receiver ? receiver : 'Willow Bank',
       type: transactionAction ? transactionAction : TransactionTypes.ADMIN,
       amount: `$${amount.toLocaleString()}`,
       date: moment().format('MMMM Do YYYY, h:mm:ss a')
     } as Transaction;
   }
 
-  public static generateAdminTransaction(account: Account, amount: number, transactionAction: TransactionActions): Account {
+  public static generateTransaction(account: Account, amount: number, transactionAction: TransactionActions, receiver?: string): Account {
     amount = parseFloat(amount.toFixed(2));
 
     if (transactionAction === TransactionActions.DEPOSIT) {
@@ -30,7 +30,7 @@ export default class TransactionUtils {
     }
 
     account.balance = parseFloat(account.balance.toFixed(2));
-    account.transactions.push(this.generateTransaction(account, amount, transactionAction));
+    account.transactions.push(this.getTransaction(account, amount, transactionAction, receiver));
 
     return account;
   }

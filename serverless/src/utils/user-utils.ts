@@ -1,9 +1,7 @@
 import {APIGatewayEvent} from 'aws-lambda';
-import * as uuid from 'uuid';
 import {MessageConstants} from '../constants/message-constants';
 import {MessageAction} from '../enums/message-action';
 import {TransactionActions} from '../enums/transaction-actions';
-import {Account} from '../interfaces/account';
 import {Payee} from '../interfaces/payee';
 import {Response} from '../interfaces/response';
 import User from './dynamo-utilities/user';
@@ -94,27 +92,50 @@ export default class UserUtils {
   public static async updatePayees(event: APIGatewayEvent): Promise<Response> {
     try {
       const email = RequestUtils.getEmail(event);
-      const account: Account = await User.getAccount(email);
+      const account = await User.getAccount(email);
 
       const data = RequestUtils.getRequest(event);
       const action = data.messageAction;
-      const payee: Payee = data.payee;
+
+      delete data.messageAction;
+      const payee: Payee = data;
 
       if (action === MessageAction.ADD) {
-        payee.id = uuid.v4();
-        account.payees[payee.id] = payee;
+        account.payees[payee.name] = payee;
       } else {
-        delete account.payees[payee.id];
+        delete account.payees[payee.name];
       }
 
       if (await user.updateAccount(email, account)) {
         return MessageUtil.success(
           200,
-          action === 'ADD' ? MessageConstants.PAYEE_ADDED_SUCCESS : MessageConstants.PAYEE_DELETED_SUCCESS,
-          account
+          action === MessageAction.ADD ? MessageConstants.PAYEE_ADDED_SUCCESS : MessageConstants.PAYEE_DELETED_SUCCESS,
+          {account}
         );
       }
       return MessageUtil.error(404, MessageConstants.PAYEES_UPDATE_FAILED);
+    } catch (error) {
+      console.log(error);
+      return MessageUtil.error(400, MessageConstants.INVALID_REQUEST);
+    }
+  }
+
+  public static async payBill(event: APIGatewayEvent): Promise<Response> {
+    try {
+      const email = RequestUtils.getEmail(event);
+      const data = RequestUtils.getRequest(event);
+      const account = await User.getAccount(email);
+
+      const updatedAccount = TransactionUtils.generateTransaction(account, data.amount, data.action, data.receiver);
+
+      if (await user.updateAccount(email, updatedAccount)) {
+        return MessageUtil.success(
+          200,
+          'Test',
+          {account}
+        );
+      }
+      return MessageUtil.error(404, MessageConstants.ADMIN_TRANSACTION_FAILED);
     } catch (error) {
       console.log(error);
       return MessageUtil.error(400, MessageConstants.INVALID_REQUEST);
@@ -127,7 +148,7 @@ export default class UserUtils {
       const data = RequestUtils.getRequest(event);
       const account = await User.getAccount(email);
 
-      const updatedAccount = TransactionUtils.generateAdminTransaction(account, data.amount, data.transactionAction);
+      const updatedAccount = TransactionUtils.generateTransaction(account, data.amount, data.action);
 
       if (await user.updateAccount(email, updatedAccount)) {
         return MessageUtil.success(

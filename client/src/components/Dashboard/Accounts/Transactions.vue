@@ -31,7 +31,7 @@ export default class AccountSummary extends Vue {
       numeric: true,
     },
     {
-      field: "payee",
+      field: "receiver",
       label: "Payee/Contact",
     },
     {

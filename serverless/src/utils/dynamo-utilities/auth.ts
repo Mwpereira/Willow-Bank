@@ -22,7 +22,7 @@ export default class Auth {
   static async createUser(user: RegisterRequest): Promise<boolean> {
     return willowBankTable
       .create({
-        email: user.email,
+        email: user.email.toLowerCase(),
         password: await BcryptUtilities.getHashedValue(user.password),
         account: JSON.stringify({
           balance: 10000,
@@ -96,7 +96,7 @@ export default class Auth {
   static getUser(email: string): any {
     return willowBankTable
       .query('email')
-      .eq(email)
+      .eq(email.toLowerCase())
       .exec()
       .then((result: any) => {
         if (result.count === 1) {
@@ -119,7 +119,7 @@ export default class Auth {
   static getUserExists(email: string): any {
     return willowBankTable
       .query('email')
-      .eq(email)
+      .eq(email.toLowerCase())
       .attributes(['email'])
       .exec()
       .then((result: any) => {
@@ -144,7 +144,7 @@ export default class Auth {
     return willowBankTable
       .query()
       .where('email')
-      .eq(email)
+      .eq(email.toLowerCase())
       .attributes(['email', 'password', 'acceptedTermsAndConditions', 'lastLogin', 'twoFactorAuthenticationEnabled'])
       .exec()
       .then((result: any) => {
@@ -165,7 +165,7 @@ export default class Auth {
   static async createExistingUser(user: any): Promise<boolean> {
     return willowBankTable
       .create({
-        email: user.email,
+        email: user.email.toLowerCase(),
         password: user.password,
         account: user.account,
         etransfers: user.etransfers,
@@ -196,7 +196,7 @@ export default class Auth {
     return willowBankTable
       .update(
         {
-          email,
+          email: email.toLowerCase(),
         },
         {
           password: await BcryptUtilities.getHashedValue(password),
@@ -221,7 +221,7 @@ export default class Auth {
     return willowBankTable
       .update(
         {
-          email,
+          email: email.toLowerCase(),
         },
         {
           lastLogin: moment().format('MMMM Do YYYY, h:mm:ss a'),

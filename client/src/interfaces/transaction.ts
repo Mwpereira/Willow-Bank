@@ -1,8 +1,11 @@
+import {TransactionActions} from '@/enums/transaction-actions';
 import { TransactionTypes } from "@/enums/transaction-types";
 
 export interface Transaction {
-  id?: number;
-  type: TransactionTypes;
-  amount: number;
-  receiver: string;
+  id?: number,
+  receiver: string,
+  type: TransactionTypes,
+  action: TransactionActions,
+  amount: number | string,
+  date: string
 }
