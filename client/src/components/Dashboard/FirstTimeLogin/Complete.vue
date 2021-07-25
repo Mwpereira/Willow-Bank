@@ -34,12 +34,12 @@ import BuefyService from "@/services/buefy-service";
 @Component
 export default class Complete extends Vue {
   public async complete() {
-    BuefyService.startLoading();
-    if (await this.$store.dispatch("acceptedTermsAndConditions")) {
-      BuefyService.stopLoading();
-      new Promise((resolve) => setTimeout(resolve, 1000));
-      await WebsiteUtils.switchVue("dashboard");
-    }
+    this.$store.dispatch("acceptedTermsAndConditions").then((result)=> {
+      if (result){
+        new Promise((resolve) => setTimeout(resolve, 1000));
+        await WebsiteUtils.switchVue("dashboard");
+      }
+    });
   }
 }
 </script>

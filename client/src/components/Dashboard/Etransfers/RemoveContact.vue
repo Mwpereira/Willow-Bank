@@ -1,0 +1,94 @@
+<template>
+  <div id="RemoveContact" class="container">
+    <div class="section wb-section has-text-left">
+      <p class="title mb-6">Remove Contact</p>
+      <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
+        <form @submit.prevent="removePayee">
+          <b-field label="Name of Payee">
+            <b-autocomplete
+                v-model="name"
+                :data="filteredDataArray"
+                clearable
+                icon="search"
+                icon-pack="fas"
+                placeholder="e.g American Express"
+                @select="option => selected = option">
+              <template #empty>No results found</template>
+            </b-autocomplete>
+          </b-field>
+          <div class="columns is-vcentered">
+            <div class="column">
+              <button
+                  :disabled="invalid || !payees[name] || name === ''"
+                  class="button is-danger is-fullwidth has-text-weight-bold mt-5"
+                  type="submit"
+              >
+                Remove Contact
+              </button>
+            </div>
+            <div class="column">
+              <button
+                  v-on:click="switchPage('account/manageContact')"
+                  class="button is-light is-fullwidth has-text-weight-bold mt-5"
+              >
+                Manage Contact
+              </button>
+            </div>
+          </div>
+        </form>
+      </ValidationObserver>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import BInputWithValidation from '@/components/Common/Inputs/BInputWithValidation.vue';
+import {MessageAction} from '@/enums/message-action';
+import {Payee} from '@/interfaces/payee';
+import BuefyService from '@/services/buefy-service';
+import WebsiteUtils from '@/utils/website-utils';
+import {ValidationObserver} from 'vee-validate';
+import {Component, Vue} from 'vue-property-decorator';
+
+@Component({
+  components: {
+    BInputWithValidation,
+    ValidationObserver,
+  },
+})
+export default class RemoveContact extends Vue {
+  private name = '';
+  private selected = null;
+
+  get payees() {
+    return this.$store.getters.account.payees;
+  }
+
+  get filteredDataArray() {
+    return Object.keys(this.payees).filter((option) => {
+      return option
+          .toString()
+          .toLowerCase()
+          .indexOf(this.name.toLowerCase()) >= 0
+    })
+  }
+
+  public async removePayee() {
+    BuefyService.startLoading();
+
+    if (await this.$store.dispatch('updatePayees', {
+      name: this.payees[this.selected].name,
+      accountNumber: this.payees[this.selected].accountNumber,
+      messageAction: MessageAction.REMOVE
+    })) {
+      await WebsiteUtils.switchPage('account/payBills');
+    }
+
+    BuefyService.stopLoading();
+  }
+
+  public switchPage(page: string): void {
+    WebsiteUtils.switchPage(page);
+  }
+}
+</script>

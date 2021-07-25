@@ -1,5 +1,5 @@
 <template>
-  <div id="Etransfers" class="container">
+  <div id="SendEtransfer" class="container">
     <div class="section has-text-left">
       <p class="title mb-6">eTransfers</p>
     </div>
@@ -10,7 +10,9 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class Etransfers extends Vue {}
+export default class SendEtransfer extends Vue {
+  
+}
 </script>
 
 <style scoped></style>

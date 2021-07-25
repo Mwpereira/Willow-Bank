@@ -35,11 +35,17 @@ export default class WebsiteUtils {
       document.title = 'Dashboard Summary' + PropertiesConstants.titleSuffix;
     } else if (prefix === 'PayBills') {
       document.title = 'Pay Bills' + PropertiesConstants.titleSuffix;
-    } else if (prefix === 'AddPayee') {
+    } else if (prefix === 'ManagePayees') {
+      document.title = 'Manage Payees' + PropertiesConstants.titleSuffix;
+    } else if (prefix === 'AddContact.vue') {
       document.title = 'Add Payee' + PropertiesConstants.titleSuffix;
-    } else if (prefix === 'RemovePayee') {
+    } else if (prefix === 'SendEtransfer') {
+      document.title = 'Send eTransfer' + PropertiesConstants.titleSuffix;
+    } else if (prefix === 'ManageContacts') {
+      document.title = 'Manage Contacts' + PropertiesConstants.titleSuffix;
+    } else if (prefix === 'RemoveContact.vue') {
       document.title = 'Remove Payee' + PropertiesConstants.titleSuffix;
-    } else if (prefix === 'Etransfers') {
+    } else if (prefix === 'SendEtransfers.vue') {
       document.title = 'eTransfers' + PropertiesConstants.titleSuffix;
     } else if (prefix === 'DashboardSummary.vue') {
       document.title = 'Account Summary' + PropertiesConstants.titleSuffix;

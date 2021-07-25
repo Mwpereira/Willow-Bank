@@ -116,8 +116,11 @@ const store = new Vuex.Store({
         case '/dashboard/account/managePayees/remove':
           commit('setPage', 'RemovePayee');
           break;
-        case '/dashboard/etransfers':
-          commit('setPage', 'Etransfers');
+        case '/dashboard/account/etransfer/sendEtransfer':
+          commit('setPage', 'SendEtransfer');
+          break;
+        case '/dashboard/account/etransfer/manageContacts':
+          commit('setPage', 'ManageContacts');
           break;
         case '/dashboard/info':
           commit('setPage', 'Info');
@@ -126,6 +129,7 @@ const store = new Vuex.Store({
           commit('setPage', 'DashboardSummary');
           break;
       }
+      console.log(state.page)
       WebsiteUtils.updatePageTitle(state.page);
     },
     async getRefreshToken(): Promise<boolean> {

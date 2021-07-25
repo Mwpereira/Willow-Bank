@@ -9,11 +9,12 @@
 import AddPayee from '@/components/Dashboard/Accounts/AddPayee.vue';
 import RemovePayee from '@/components/Dashboard/Accounts/RemovePayee.vue';
 import DashboardSummary from '@/components/Dashboard/DashboardSummary.vue';
-import Etransfers from '@/components/Dashboard/Etransfers.vue';
 import Info from '@/components/Dashboard/Info.vue';
+import ManageContacts from '@/components/Dashboard/ManageContacts.vue';
 import ManagePayees from '@/components/Dashboard/ManagePayees.vue';
 import NavBar from '@/components/Dashboard/NavBar.vue';
 import PayBills from '@/components/Dashboard/PayBills.vue';
+import SendEtransfer from '@/components/Dashboard/SendEtransfer.vue';
 import Settings from '@/components/Dashboard/Settings.vue';
 import Summary from '@/components/Dashboard/Summary.vue';
 import WebsiteUtils from '@/utils/website-utils';
@@ -28,8 +29,9 @@ import {Component, Vue} from 'vue-property-decorator';
     AddPayee,
     RemovePayee,
     ManagePayees,
+    SendEtransfer,
+    ManageContacts,
     Settings,
-    Etransfers,
     Info,
   },
 })

@@ -7,14 +7,14 @@
         <button
             class="button is-primary is-fullwidth has-text-weight-bold mr-3 mt-5"
             type="submit"
-            v-on:click="switchPage('account/managePayees/add')"
+            v-on:click="switchPage('account/manageContacts/add')"
         >
           Add Contact
         </button>
         <button
             class="button is-primary is-fullwidth is-light has-text-weight-bold mt-5"
             type="submit"
-            v-on:click="switchPage('account/managePayees/remove')"
+            v-on:click="switchPage('account/manageContacts/remove')"
         >
           Remove Contact
         </button>
