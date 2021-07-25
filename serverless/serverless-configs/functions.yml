@@ -83,7 +83,7 @@ acceptedTermsAndConditions:
   description: 'Accepts Terms And Conditions'
   events:
     - http:
-        method: 'put'
+        method: 'post'
         path: 'user/acceptedTermsAndConditions'
         cors: true
         authorizer:

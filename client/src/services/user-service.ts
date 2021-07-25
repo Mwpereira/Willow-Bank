@@ -16,7 +16,7 @@ export default class UserService {
 
   public static async acceptedTermsAndConditions(): Promise<AxiosResponse> {
     return axios
-      .put(
+      .post(
         `${this.url}/user/acceptedTermsAndConditions`,
         JSON.stringify({acceptedTermsAndConditions: true})
       )
