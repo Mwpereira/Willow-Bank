@@ -26,15 +26,18 @@
 </template>
 
 <script lang="ts">
+import BuefyService from '@/services/buefy-service';
 import WebsiteUtils from '@/utils/website-utils';
+import Buefy from 'buefy';
 import {Component, Vue} from 'vue-property-decorator';
 
 @Component
 export default class Complete extends Vue {
   public async complete() {
+    BuefyService.startLoading();
     this.$store.dispatch('acceptedTermsAndConditions').then(async (result) => {
+      BuefyService.stopLoading();
       if (result) {
-        new Promise((resolve) => setTimeout(resolve, 1000));
         await WebsiteUtils.switchVue('dashboard');
       }
     });
