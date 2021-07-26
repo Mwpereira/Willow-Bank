@@ -50,10 +50,9 @@ export default class Dashboard extends Vue {
           await this.$store.dispatch('logout');
         } else {
           await this.$store.dispatch('getAccount');
-          new Promise((resolve) => setTimeout(resolve, 5000));
-          await this.$store.dispatch('getSettings');
         }
       });
+      await this.$store.dispatch('getSettings');
     }
   }
 }
