@@ -22,7 +22,7 @@ export default class AuthController {
    */
   static async verifyToken(event: any): Promise<any> {
     try {
-      const token: string = JwtUtils.getToken(
+      const token = JwtUtils.getToken(
         CookieUtilities.getCookie(event.headers)
       );
       const methodArn = event.methodArn;
@@ -31,7 +31,7 @@ export default class AuthController {
         return MessageUtil.error(404, MessageConstants.TOKEN_NOT_FOUND);
       }
 
-      const decoded: any = JwtUtils.verify(token);
+      const decoded: any = await JwtUtils.verify(token);
 
       if (decoded && decoded.sub) {
         return JwtUtils.generatePolicyResponse(
@@ -60,10 +60,10 @@ export default class AuthController {
    */
   static async refreshToken(event: APIGatewayEvent): Promise<Response> {
     try {
-      const user: any = JwtUtils.getDecodedToken(
+      const user = await JwtUtils.getDecodedToken(
         JwtUtils.getToken(CookieUtilities.getCookie(event.headers))
       );
-      const accessToken = JwtUtils.refreshJwt(user);
+      const accessToken = await JwtUtils.refreshJwt(user);
 
       return MessageUtil.successAuth(
         200,

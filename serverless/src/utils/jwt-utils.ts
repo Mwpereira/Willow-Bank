@@ -13,7 +13,7 @@ export default class JwtUtils {
    * @param authorized
    * @return JWT
    */
-  static generateJwt(userData: any, twoFactorAuthenticationEnabled: boolean, authorized: boolean): string {
+  static async generateJwt(userData: any, twoFactorAuthenticationEnabled: boolean, authorized: boolean): Promise<string> {
     return jwt.sign(
       {
         sub: userData.email.toLowerCase(),
@@ -32,13 +32,13 @@ export default class JwtUtils {
    * @param user
    * @return new JWT
    */
-  static refreshJwt(user: any): string {
-    return jwt.sign(
+  static refreshJwt(user: any): Promise<string> {
+    return new Promise((resolve) => { resolve(jwt.sign(
       {
         sub: user.sub.toLowerCase(),
       },
       process.env.APP_SECRET
-    );
+    ))});
   }
 
   /**
@@ -79,8 +79,10 @@ export default class JwtUtils {
    * @param token
    * @return decoded token
    */
-  static getDecodedToken(token: string): string | object {
-    return jwt.verify(token, process.env.APP_SECRET);
+  static async getDecodedToken(token: string): Promise<string | object> {
+    return new Promise((resolve) => {
+      resolve(jwt.verify(token, process.env.APP_SECRET));
+    });
   }
 
   /**
@@ -88,8 +90,10 @@ export default class JwtUtils {
    *
    * @param token
    */
-  static verify(token: string): string | object {
-    return jwt.verify(token, process.env.APP_SECRET);
+  static async verify(token: string): Promise<string | object> {
+    return new Promise((resolve) => {
+      resolve(jwt.verify(token, process.env.APP_SECRET));
+    });
   }
 
   /**
