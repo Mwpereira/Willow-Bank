@@ -6,13 +6,14 @@
         <form id="form" @submit.prevent="payBill()">
           <b-field label="Find a Payee">
             <b-autocomplete
-                v-model="name"
-                :data="filteredDataArray"
-                clearable
-                icon="search"
-                icon-pack="fas"
-                placeholder="e.g American Express"
-                @select="option => selected = option">
+              v-model="name"
+              :data="filteredDataArray"
+              clearable
+              icon="search"
+              icon-pack="fas"
+              placeholder="e.g American Express"
+              @select="(option) => (selected = option)"
+            >
               <template #empty>No results found</template>
               <template #footer>
                 <a @click="switchPage('account/managePayees/add')">
@@ -23,31 +24,31 @@
           </b-field>
           <b-field label="Amount">
             <BInputWithValidation
-                v-model="amount"
-                icon="money-bill"
-                icon-pack="fas"
-                rules="required|min_value:1|max_value:10000"
+              v-model="amount"
+              icon="money-bill"
+              icon-pack="fas"
+              rules="required|min_value:1|max_value:10000"
             >
             </BInputWithValidation>
           </b-field>
-<!--          <p>Payee: {{ this.amount }}</p>-->
-<!--          <p>Amount: {{ this.selected }}</p>-->
-<!--          <p>Account: Premium Savings Account</p>-->
-<!--          <p>Sender: {{ this.$store.getters.email }}</p>-->
+          <!--          <p>Payee: {{ this.amount }}</p>-->
+          <!--          <p>Amount: {{ this.selected }}</p>-->
+          <!--          <p>Account: Premium Savings Account</p>-->
+          <!--          <p>Sender: {{ this.$store.getters.email }}</p>-->
           <div class="columns is-vcentered">
             <div class="column">
               <button
-                  :disabled="invalid || !payees[name] || name === ''"
-                  class="button is-warning is-fullwidth has-text-weight-bold mt-5"
-                  type="submit"
+                :disabled="invalid || !payees[name] || name === ''"
+                class="button is-warning is-fullwidth has-text-weight-bold mt-5"
+                type="submit"
               >
                 Pay Bill
               </button>
             </div>
             <div class="column">
               <button
-                  v-on:click="switchPage('account/managePayees')"
-                  class="button is-light is-fullwidth has-text-weight-bold mt-5"
+                v-on:click="switchPage('account/managePayees')"
+                class="button is-light is-fullwidth has-text-weight-bold mt-5"
               >
                 Manage Payees
               </button>
@@ -60,13 +61,13 @@
 </template>
 
 <script lang="ts">
-import BInputWithValidation from '@/components/Common/Inputs/BInputWithValidation.vue';
-import {TransactionActions} from '@/enums/transaction-actions';
-import {TransactionTypes} from '@/enums/transaction-types';
-import BuefyService from '@/services/buefy-service';
-import WebsiteUtils from '@/utils/website-utils';
-import {ValidationObserver} from 'vee-validate';
-import {Component, Vue} from 'vue-property-decorator';
+import BInputWithValidation from "@/components/Common/Inputs/BInputWithValidation.vue";
+import { TransactionActions } from "@/enums/transaction-actions";
+import { TransactionTypes } from "@/enums/transaction-types";
+import BuefyService from "@/services/buefy-service";
+import WebsiteUtils from "@/utils/website-utils";
+import { ValidationObserver } from "vee-validate";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({
   components: {
@@ -76,7 +77,7 @@ import {Component, Vue} from 'vue-property-decorator';
 })
 export default class PayBills extends Vue {
   private amount!: string;
-  private name = '';
+  private name = "";
   private selected = null;
 
   get payees() {
@@ -85,23 +86,24 @@ export default class PayBills extends Vue {
 
   get filteredDataArray() {
     return Object.keys(this.$store.getters.account.payees).filter((option) => {
-      return option
-          .toString()
-          .toLowerCase()
-          .indexOf(this.name.toLowerCase()) >= 0
-    })
+      return (
+        option.toString().toLowerCase().indexOf(this.name.toLowerCase()) >= 0
+      );
+    });
   }
 
   public async payBill(): Promise<void> {
     BuefyService.startLoading();
 
-    if (await this.$store.dispatch('payBill', {
-      amount: parseFloat(this.amount),
-      receiver: this.name,
-      type: TransactionTypes.BILL,
-      action: TransactionActions.WITHDRAW
-    })) {
-      await WebsiteUtils.switchPage('dashboard/view')
+    if (
+      await this.$store.dispatch("payBill", {
+        amount: parseFloat(this.amount),
+        receiver: this.name,
+        type: TransactionTypes.BILL,
+        action: TransactionActions.WITHDRAW,
+      })
+    ) {
+      await WebsiteUtils.switchPage("dashboard/view");
     }
 
     BuefyService.stopLoading();

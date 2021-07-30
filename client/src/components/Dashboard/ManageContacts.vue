@@ -5,16 +5,21 @@
       <p class="mb-3 is-size-5">Please choose one of the following:</p>
       <div class="field is-grouped">
         <button
-            class="button is-primary is-fullwidth has-text-weight-bold mr-3 mt-5"
-            type="submit"
-            v-on:click="switchPage('etransfer/manageContacts/add')"
+          class="button is-primary is-fullwidth has-text-weight-bold mr-3 mt-5"
+          type="submit"
+          v-on:click="switchPage('etransfer/manageContacts/add')"
         >
           Add Contact
         </button>
         <button
-            class="button is-primary is-fullwidth is-light has-text-weight-bold mt-5"
-            type="submit"
-            v-on:click="switchPage('etransfer/manageContacts/remove')"
+          class="
+            button
+            is-primary is-fullwidth is-light
+            has-text-weight-bold
+            mt-5
+          "
+          type="submit"
+          v-on:click="switchPage('etransfer/manageContacts/remove')"
         >
           Remove Contact
         </button>
@@ -24,9 +29,9 @@
 </template>
 
 <script lang="ts">
-import BuefyService from '@/services/buefy-service';
-import WebsiteUtils from '@/utils/website-utils';
-import {Component, Vue} from 'vue-property-decorator';
+import BuefyService from "@/services/buefy-service";
+import WebsiteUtils from "@/utils/website-utils";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class ManageContacts extends Vue {
@@ -40,6 +45,4 @@ export default class ManageContacts extends Vue {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

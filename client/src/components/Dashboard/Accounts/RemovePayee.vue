@@ -6,30 +6,31 @@
         <form @submit.prevent="removePayee">
           <b-field label="Name of Payee">
             <b-autocomplete
-                v-model="name"
-                :data="filteredDataArray"
-                clearable
-                icon="search"
-                icon-pack="fas"
-                placeholder="e.g American Express"
-                @select="option => selected = option">
+              v-model="name"
+              :data="filteredDataArray"
+              clearable
+              icon="search"
+              icon-pack="fas"
+              placeholder="e.g American Express"
+              @select="(option) => (selected = option)"
+            >
               <template #empty>No results found</template>
             </b-autocomplete>
           </b-field>
           <div class="columns is-vcentered">
             <div class="column">
               <button
-                  :disabled="invalid || !payees[name] || name === ''"
-                  class="button is-danger is-fullwidth has-text-weight-bold mt-5"
-                  type="submit"
+                :disabled="invalid || !payees[name] || name === ''"
+                class="button is-danger is-fullwidth has-text-weight-bold mt-5"
+                type="submit"
               >
                 Remove Payee
               </button>
             </div>
             <div class="column">
               <button
-                  v-on:click="switchPage('account/managePayees')"
-                  class="button is-light is-fullwidth has-text-weight-bold mt-5"
+                v-on:click="switchPage('account/managePayees')"
+                class="button is-light is-fullwidth has-text-weight-bold mt-5"
               >
                 Manage Payees
               </button>
@@ -42,13 +43,13 @@
 </template>
 
 <script lang="ts">
-import BInputWithValidation from '@/components/Common/Inputs/BInputWithValidation.vue';
-import {MessageAction} from '@/enums/message-action';
-import {Payee} from '@/interfaces/payee';
-import BuefyService from '@/services/buefy-service';
-import WebsiteUtils from '@/utils/website-utils';
-import {ValidationObserver} from 'vee-validate';
-import {Component, Vue} from 'vue-property-decorator';
+import BInputWithValidation from "@/components/Common/Inputs/BInputWithValidation.vue";
+import { MessageAction } from "@/enums/message-action";
+import { Payee } from "@/interfaces/payee";
+import BuefyService from "@/services/buefy-service";
+import WebsiteUtils from "@/utils/website-utils";
+import { ValidationObserver } from "vee-validate";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({
   components: {
@@ -57,7 +58,7 @@ import {Component, Vue} from 'vue-property-decorator';
   },
 })
 export default class RemovePayee extends Vue {
-  private name = '';
+  private name = "";
   private selected = null;
 
   get payees() {
@@ -66,22 +67,23 @@ export default class RemovePayee extends Vue {
 
   get filteredDataArray() {
     return Object.keys(this.payees).filter((option) => {
-      return option
-          .toString()
-          .toLowerCase()
-          .indexOf(this.name.toLowerCase()) >= 0
-    })
+      return (
+        option.toString().toLowerCase().indexOf(this.name.toLowerCase()) >= 0
+      );
+    });
   }
 
   public async removePayee() {
     BuefyService.startLoading();
 
-    if (await this.$store.dispatch('updatePayees', {
-      name: this.payees[this.selected].name,
-      accountNumber: this.payees[this.selected].accountNumber,
-      messageAction: MessageAction.REMOVE
-    })) {
-      await WebsiteUtils.switchPage('account/payBills');
+    if (
+      await this.$store.dispatch("updatePayees", {
+        name: this.payees[this.selected].name,
+        accountNumber: this.payees[this.selected].accountNumber,
+        messageAction: MessageAction.REMOVE,
+      })
+    ) {
+      await WebsiteUtils.switchPage("account/payBills");
     }
 
     BuefyService.stopLoading();

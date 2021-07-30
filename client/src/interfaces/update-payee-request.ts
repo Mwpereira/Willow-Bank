@@ -1,5 +1,5 @@
 export interface UpdatePayeeRequest {
-  messageAction: string,
-  name: string,
-  accountNumber: number
+  messageAction: string;
+  name: string;
+  email: number;
 }

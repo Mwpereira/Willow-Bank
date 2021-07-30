@@ -1,16 +1,16 @@
-import {AdminTransaction} from '@/interfaces/admin-transaction';
-import {Settings} from '@/interfaces/settings';
-import {Transaction} from '@/interfaces/transaction';
-import {UpdatePayeeRequest} from '@/interfaces/update-payee-request';
-import ResponseUtils from '@/utils/response-utils';
-import axios, {AxiosResponse} from 'axios';
-import {EtransferTransaction} from '../../../serverless/src/interfaces/etransfer-transaction';
+import { AdminTransaction } from "@/interfaces/admin-transaction";
+import { Settings } from "@/interfaces/settings";
+import { Transaction } from "@/interfaces/transaction";
+import { UpdatePayeeRequest } from "@/interfaces/update-payee-request";
+import ResponseUtils from "@/utils/response-utils";
+import axios, { AxiosResponse } from "axios";
+import { EtransferTransaction } from "../../../serverless/src/interfaces/etransfer-transaction";
 
 axios.defaults.withCredentials = true;
 
 export default class UserService {
   private static readonly url: any =
-    process.env.VUE_APP_MODE === 'PRODUCTION'
+    process.env.VUE_APP_MODE === "PRODUCTION"
       ? `https://${process.env.VUE_APP_API}`
       : `http://${process.env.VUE_APP_API_LOCAL}`;
 
@@ -18,7 +18,7 @@ export default class UserService {
     return axios
       .post(
         `${this.url}/user/acceptedTermsAndConditions`,
-        JSON.stringify({acceptedTermsAndConditions: true})
+        JSON.stringify({ acceptedTermsAndConditions: true })
       )
       .then((response: AxiosResponse) => {
         return response;

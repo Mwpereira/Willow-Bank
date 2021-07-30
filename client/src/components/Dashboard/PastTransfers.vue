@@ -15,10 +15,10 @@
             <b>Latest e-Transfer:</b>
             {{
               etransfer.transactions[etransfer.transactions.length - 1]
-                  ? etransfer.transactions[
-                  etransfer.transactions.length - 1
-                      ].date.split(",")[0]
-                  : "N/A"
+                ? etransfer.transactions[
+                    etransfer.transactions.length - 1
+                  ].date.split(",")[0]
+                : "N/A"
             }}
           </p>
         </div>
@@ -33,17 +33,17 @@
           </div>
         </div>
       </div>
-      <Transactions/>
+      <Transactions />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Transactions from '@/components/Dashboard/Etransfers/Transactions.vue';
-import {Component, Vue} from 'vue-property-decorator';
+import Transactions from "@/components/Dashboard/Etransfers/Transactions.vue";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({
-  components: {Transactions},
+  components: { Transactions },
 })
 export default class PastTransfers extends Vue {
   get account() {

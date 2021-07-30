@@ -5,16 +5,21 @@
       <p class="mb-3 is-size-5">Please choose one of the following:</p>
       <div class="field is-grouped">
         <button
-            class="button is-primary is-fullwidth has-text-weight-bold mr-3 mt-5"
-            type="submit"
-            v-on:click="switchPage('account/managePayees/add')"
+          class="button is-primary is-fullwidth has-text-weight-bold mr-3 mt-5"
+          type="submit"
+          v-on:click="switchPage('account/managePayees/add')"
         >
           Add Payee
         </button>
         <button
-            class="button is-primary is-fullwidth is-light has-text-weight-bold mt-5"
-            type="submit"
-            v-on:click="switchPage('account/managePayees/remove')"
+          class="
+            button
+            is-primary is-fullwidth is-light
+            has-text-weight-bold
+            mt-5
+          "
+          type="submit"
+          v-on:click="switchPage('account/managePayees/remove')"
         >
           Remove Payee
         </button>
@@ -24,8 +29,8 @@
 </template>
 
 <script lang="ts">
-import WebsiteUtils from '@/utils/website-utils';
-import {Component, Vue} from 'vue-property-decorator';
+import WebsiteUtils from "@/utils/website-utils";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class ManagePayees extends Vue {
@@ -35,6 +40,4 @@ export default class ManagePayees extends Vue {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

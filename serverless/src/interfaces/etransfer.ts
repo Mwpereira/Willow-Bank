@@ -1,6 +1,6 @@
 import {EtransferTransaction} from './etransfer-transaction';
 
 export interface Etransfer {
-  transactions: EtransferTransaction[],
-  contacts: object
+  transactions: EtransferTransaction[];
+  contacts: object;
 }

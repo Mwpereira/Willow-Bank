@@ -22,8 +22,8 @@
 
 <script lang="ts">
 import Admin from "@/components/Dashboard/Settings/Admin.vue";
-import BuefyService from '@/services/buefy-service';
-import WebsiteUtils from '@/utils/website-utils';
+import BuefyService from "@/services/buefy-service";
+import WebsiteUtils from "@/utils/website-utils";
 import { Component, Vue } from "vue-property-decorator";
 import UserData from "@/components/Dashboard/Settings/UserData.vue";
 import TwoFactorAuthentication from "@/components/Dashboard/Settings/TwoFactorAuthentication.vue";
