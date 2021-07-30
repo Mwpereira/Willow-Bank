@@ -64,6 +64,16 @@ export default class WebsiteUtils {
     }
   }
 
+  public static async checkAccount() {
+    if (store.getters.account === null) {
+      BuefyService.startLoading();
+
+      await store.dispatch("getAccount");
+
+      BuefyService.stopLoading();
+    }
+  }
+
   public static async checkEtransfer() {
     if (store.getters.etransfer === null) {
       BuefyService.startLoading();

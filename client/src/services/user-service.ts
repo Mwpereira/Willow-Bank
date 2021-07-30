@@ -64,7 +64,7 @@ export default class UserService {
   public static async updateSettings(
     settings: Settings
   ): Promise<AxiosResponse> {
-    return new axios.put(`${this.url}/user/settings`, settings)
+    return axios.put(`${this.url}/user/settings`, settings)
       .then((response: AxiosResponse) => {
         return response;
       })

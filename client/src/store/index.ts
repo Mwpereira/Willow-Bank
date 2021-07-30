@@ -164,7 +164,7 @@ const store = new Vuex.Store({
 
       commit("setSettings", response.data.settings);
     },
-    async login({ commit }, user: LoginRequest): Promise<void> {
+    async login({ commit, dispatch }, user: LoginRequest): Promise<void> {
       response = await AuthService.login(user);
       if (ResponseUtils.successAuthProcessor(response)) {
         const data = response.data;
@@ -187,6 +187,8 @@ const store = new Vuex.Store({
           await WebsiteUtils.switchVue("firstTimeLogin");
         }
       }
+
+      await Promise.all([dispatch('getAccount'), dispatch('getSettings'), dispatch('getEtransferData')])
     },
     async logout(): Promise<void> {
       await AuthService.logout();

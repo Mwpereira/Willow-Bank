@@ -1,7 +1,7 @@
 <template>
   <div id="UserData" class="">
     <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
-      <form @submit.prevent="save({ firstName, lastName, country })">
+      <form @submit.prevent="save(country)">
         <b-field class="mb-5" label="First Name"
           ><p class="mt-2">{{ settings ? settings.firstName : "" }}</p></b-field
         >
@@ -59,10 +59,14 @@ export default class UserData extends Vue {
     return this.$store.getters.settings;
   }
 
-  public async save(settings: Settings): Promise<void> {
+  public async save(country: string): Promise<void> {
     BuefyService.startLoading();
 
-    await this.$store.dispatch("saveSettings", settings);
+    await this.$store.dispatch("saveSettings", {
+      firstName: this.settings.firstName,
+      lastName: this.settings.lastName,
+      country: this.country,
+    });
 
     BuefyService.stopLoading();
   }
