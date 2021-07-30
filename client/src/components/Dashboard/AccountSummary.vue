@@ -1,5 +1,5 @@
 <template>
-  <div id="Summary" class="container">
+  <div id="AccountSummary" class="container">
     <div class="section has-text-left">
       <p class="title mb-6">Account Summary</p>
       <div class="columns">
@@ -25,7 +25,7 @@
         <div class="column">
           <div class="card mb-6">
             <div class="card-header p-6">
-              <span>
+              <span class="mr-3">
                 <i class="fas fa-coins"></i>
               </span>
               <p class="ml-3">Premium Savings Account</p>
@@ -45,7 +45,7 @@ import { Component, Vue } from "vue-property-decorator";
 @Component({
   components: { Transactions },
 })
-export default class Summary extends Vue {
+export default class AccountSummary extends Vue {
   get account() {
     return this.$store.getters.account;
   }

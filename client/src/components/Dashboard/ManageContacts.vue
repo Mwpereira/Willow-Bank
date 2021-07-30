@@ -7,14 +7,14 @@
         <button
             class="button is-primary is-fullwidth has-text-weight-bold mr-3 mt-5"
             type="submit"
-            v-on:click="switchPage('account/manageContacts/add')"
+            v-on:click="switchPage('etransfer/manageContacts/add')"
         >
           Add Contact
         </button>
         <button
             class="button is-primary is-fullwidth is-light has-text-weight-bold mt-5"
             type="submit"
-            v-on:click="switchPage('account/manageContacts/remove')"
+            v-on:click="switchPage('etransfer/manageContacts/remove')"
         >
           Remove Contact
         </button>
@@ -24,6 +24,7 @@
 </template>
 
 <script lang="ts">
+import BuefyService from '@/services/buefy-service';
 import WebsiteUtils from '@/utils/website-utils';
 import {Component, Vue} from 'vue-property-decorator';
 
@@ -31,6 +32,10 @@ import {Component, Vue} from 'vue-property-decorator';
 export default class ManageContacts extends Vue {
   public switchPage(page: string): void {
     WebsiteUtils.switchPage(page);
+  }
+
+  async created(): Promise<void> {
+    WebsiteUtils.checkEtransfer();
   }
 }
 </script>

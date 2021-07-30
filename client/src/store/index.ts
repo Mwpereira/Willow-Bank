@@ -4,6 +4,7 @@ import {LoginRequest} from '@/interfaces/login-request';
 import {RegisterRequest} from '@/interfaces/register-request';
 import {Settings} from '@/interfaces/settings';
 import {Transaction} from '@/interfaces/transaction';
+import {UpdateContactRequest} from '@/interfaces/update-contact-request';
 import {UpdatePayeeRequest} from '@/interfaces/update-payee-request';
 import AuthService from '@/services/auth-service';
 import BuefyService from '@/services/buefy-service';
@@ -14,6 +15,8 @@ import {AxiosResponse} from 'axios';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
+import {Etransfer} from '../../../serverless/src/interfaces/etransfer';
+import {EtransferTransaction} from '../../../serverless/src/interfaces/etransfer-transaction';
 
 Vue.use(Vuex);
 
@@ -24,12 +27,10 @@ const store = new Vuex.Store({
   state: {
     acceptedTermsAndConditions: null,
     account: null,
-    country: null,
     email: null,
-    firstName: null,
+    etransfer: null,
     isLoggedIn: false,
     lastLogin: null,
-    lastName: null,
     page: 'DashboardSummary',
     settings: null,
     twoFactorAuthenticationEnabled: null,
@@ -41,7 +42,9 @@ const store = new Vuex.Store({
     auth_logout(state) {
       state.account = null;
       state.acceptedTermsAndConditions = null;
+      state.etransfer = null;
       state.email = null;
+      state.etransfer = null;
       state.isLoggedIn = false;
       state.lastLogin = null;
       state.page = 'DashboardSummary';
@@ -56,6 +59,9 @@ const store = new Vuex.Store({
     },
     setEmail(state, email: string) {
       state.email = email;
+    },
+    setEtransfer(state, etransfer: Etransfer) {
+      state.etransfer = etransfer;
     },
     setLastLogin(state, lastLogin: string) {
       state.lastLogin = lastLogin;
@@ -99,13 +105,18 @@ const store = new Vuex.Store({
 
       commit('setAccount', response.data.account);
     },
+    async getEtransferData({commit}): Promise<void> {
+      response = await UserService.getEtransferData();
+
+      commit('setEtransfer', response.data.etransfer);
+    },
     getPage({commit, state}, path: string): void {
       switch (path) {
         case '/dashboard/user/settings':
           commit('setPage', 'Settings');
           break;
         case '/dashboard/account/summary':
-          commit('setPage', 'Summary');
+          commit('setPage', 'AccountSummary');
           break;
         case '/dashboard/account/payBills':
           commit('setPage', 'PayBills');
@@ -119,11 +130,20 @@ const store = new Vuex.Store({
         case '/dashboard/account/managePayees/remove':
           commit('setPage', 'RemovePayee');
           break;
-        case '/dashboard/account/etransfer/sendEtransfer':
+        case '/dashboard/etransfer/transfers':
+          commit('setPage', 'PastTransfers');
+          break;
+        case '/dashboard/etransfer/sendEtransfer':
           commit('setPage', 'SendEtransfer');
           break;
-        case '/dashboard/account/etransfer/manageContacts':
+        case '/dashboard/etransfer/manageContacts':
           commit('setPage', 'ManageContacts');
+          break;
+        case '/dashboard/etransfer/manageContacts/add':
+          commit('setPage', 'AddContact');
+          break;
+        case '/dashboard/etransfer/manageContacts/remove':
+          commit('setPage', 'RemoveContact');
           break;
         case '/dashboard/info':
           commit('setPage', 'Info');
@@ -132,7 +152,6 @@ const store = new Vuex.Store({
           commit('setPage', 'DashboardSummary');
           break;
       }
-      console.log(state.page)
       WebsiteUtils.updatePageTitle(state.page);
     },
     async getRefreshToken(): Promise<boolean> {
@@ -208,6 +227,20 @@ const store = new Vuex.Store({
         response.data.twoFactorAuthenticationEnabled
       );
     },
+    async sendEtransfer(
+      {commit},
+      transaction: EtransferTransaction
+    ): Promise<boolean> {
+      response = await UserService.sendEtransfer(transaction);
+
+      if (ResponseUtils.successProcessor(response)) {
+        commit('setAccount', response.data.account);
+        commit('setEtransfer', response.data.etransfer);
+        BuefyService.successToast(response.data.message);
+        return true;
+      }
+      return false;
+    },
     async sendTransaction(
       {commit},
       transaction: AdminTransaction
@@ -216,6 +249,16 @@ const store = new Vuex.Store({
 
       if (ResponseUtils.successProcessor(response)) {
         commit('setAccount', response.data.account);
+        BuefyService.successToast(response.data.message);
+        return true;
+      }
+      return false;
+    },
+    async updateContacts({commit}, updateContactRequest: UpdateContactRequest): Promise<boolean> {
+      response = await UserService.updateContacts(updateContactRequest);
+
+      if (ResponseUtils.successProcessor(response)) {
+        commit('setEtransfer', response.data.etransfer);
         BuefyService.successToast(response.data.message);
         return true;
       }
@@ -246,12 +289,10 @@ const store = new Vuex.Store({
   getters: {
     acceptedTermsAndConditions: (state) => state.acceptedTermsAndConditions,
     account: (state) => state.account,
-    country: (state) => state.country,
     email: (state) => state.email,
-    firstName: (state) => state.firstName,
+    etransfer: (state) => state.etransfer,
     isLoggedIn: (state) => state.isLoggedIn,
     lastLogin: (state) => state.lastLogin,
-    lastName: (state) => state.lastName,
     page: (state) => state.page,
     settings: (state) => state.settings,
     twoFactorAuthenticationEnabled: (state) =>

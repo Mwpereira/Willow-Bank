@@ -9,7 +9,7 @@
       <a href="https://ko-fi.com/michaelpereira" target="_blank">
         <b-button class="is-warning has-text-weight-bold mt-5 my-2">
           <span class="mr-3">
-            <i class="fas fa-mug-hot"></i>
+            <i class="fas fa-coffee"></i>
           </span>
           Buy me a coffee
         </b-button>

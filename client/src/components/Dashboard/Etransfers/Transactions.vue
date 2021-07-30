@@ -1,9 +1,9 @@
 <template>
   <div>
-    <p class="has-text-weight-bold is-size-5 mb-5">Transactions</p>
+    <p class="has-text-weight-bold is-size-5 mb-5">Transfers</p>
     <b-table
       :columns="columns"
-      :data="account.transactions"
+      :data="etransfer.transactions"
       :paginated="true"
       :pagination-simple="false"
       :pagination-rounded="false"
@@ -22,7 +22,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class AccountSummary extends Vue {
+export default class Transactions extends Vue {
   private columns = [
     {
       field: "id",
@@ -31,8 +31,12 @@ export default class AccountSummary extends Vue {
       numeric: true,
     },
     {
-      field: "receiver",
-      label: "Payee/Contact",
+      field: "name",
+      label: "Contact Name",
+    },
+    {
+      field: "email",
+      label: "Contact Email",
     },
     {
       field: "action",
@@ -52,8 +56,8 @@ export default class AccountSummary extends Vue {
     },
   ];
 
-  get account() {
-    return this.$store.getters.account;
+  get etransfer() {
+    return this.$store.getters.etransfer;
   }
 }
 </script>

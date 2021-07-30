@@ -19,11 +19,15 @@
         >
       </b-navbar-dropdown>
       <b-navbar-dropdown label="eTransfer">
-        <b-navbar-item v-on:click="switchPage('account/etransfer/sendEtransfer')"
+        <b-navbar-item v-on:click="switchPage('etransfer/transfers')"
+        >Past Transfers
+        </b-navbar-item
+        >
+        <b-navbar-item v-on:click="switchPage('etransfer/sendEtransfer')"
         >Send eTransfer
         </b-navbar-item
         >
-        <b-navbar-item v-on:click="switchPage('account/etransfer/manageContacts')"
+        <b-navbar-item v-on:click="switchPage('etransfer/manageContacts')"
         >Manage Contacts
         </b-navbar-item
         >

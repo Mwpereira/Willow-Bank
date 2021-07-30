@@ -3,10 +3,10 @@
     <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
       <form @submit.prevent="save({ firstName, lastName, country })">
         <b-field class="mb-5" label="First Name"
-          ><p class="mt-2">{{ firstName }}</p></b-field
+          ><p class="mt-2">{{ settings.firstName }}</p></b-field
         >
         <b-field class="mb-5" label="Last Name"
-          ><p class="mt-2">{{ lastName }}</p></b-field
+          ><p class="mt-2">{{ settings.lastName }}</p></b-field
         >
         <b-field class="mb-5" label="Country">
           <b-select
@@ -53,8 +53,6 @@ import BuefyService from "@/services/buefy-service";
   },
 })
 export default class UserData extends Vue {
-  private firstName!: string;
-  private lastName!: string;
   private country = "Canada";
 
   get settings(): string {
@@ -70,8 +68,6 @@ export default class UserData extends Vue {
   }
 
   created(): void {
-    this.firstName = this.$store.getters.settings.firstName;
-    this.lastName = this.$store.getters.settings.lastName;
     this.country = this.$store.getters.settings.country;
   }
 }

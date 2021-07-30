@@ -28,15 +28,17 @@ export default class Auth {
           balance: 10000,
           transactions: [{
             id: 1,
-            payee: 'Willow Bank',
+            receiver: 'Willow Bank',
+            action: 'Admin',
             type: 'Deposit',
             amount: '10,000',
             date: moment().format('MMMM Do YYYY, h:mm:ss a')
           }],
           payees: {}
         }),
-        etransfers: JSON.stringify({
+        etransfer: JSON.stringify({
           contacts: {},
+          transactions: []
         }),
         settings: JSON.stringify({
           firstName: user.firstName,
@@ -168,7 +170,7 @@ export default class Auth {
         email: user.email.toLowerCase(),
         password: user.password,
         account: user.account,
-        etransfers: user.etransfers,
+        etransfer: user.etransfer,
         settings: user.settings,
         twoFactorAuthentication: user.twoFactorAuthentication,
         twoFactorAuthenticationEnabled: user.twoFactorAuthenticationEnabled,

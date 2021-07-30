@@ -1,6 +1,6 @@
 <template>
   <div id="PayBills" class="container">
-    <div class="section has-text-left">
+    <div class="section wb-section has-text-left">
       <p class="title mb-6">Pay Bills</p>
       <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
         <form id="form" @submit.prevent="payBill()">
@@ -30,6 +30,10 @@
             >
             </BInputWithValidation>
           </b-field>
+<!--          <p>Payee: {{ this.amount }}</p>-->
+<!--          <p>Amount: {{ this.selected }}</p>-->
+<!--          <p>Account: Premium Savings Account</p>-->
+<!--          <p>Sender: {{ this.$store.getters.email }}</p>-->
           <div class="columns is-vcentered">
             <div class="column">
               <button
@@ -108,9 +112,3 @@ export default class PayBills extends Vue {
   }
 }
 </script>
-
-<style scoped>
-#form {
-  max-width: 650px;
-}
-</style>

@@ -63,6 +63,16 @@ export abstract class MessageConstants {
   public static readonly PAYEE_DELETED_SUCCESS: string = 'Payee Removed';
 
   /**
+   * Success message for adding a Contact
+   */
+  public static readonly CONTACT_ADDED_SUCCESS: string = 'Contact Added';
+
+  /**
+   * Success message for deleting a Contact
+   */
+  public static readonly CONTACT_DELETED_SUCCESS: string = 'Contact Removed';
+
+  /**
    * Success message for updating User's Email
    */
   public static readonly EMAIL_UPDATED_SUCCESS: string = 'Email Updated';
@@ -153,6 +163,11 @@ export abstract class MessageConstants {
    * Error message for updating Payees
    */
   public static readonly PAYEES_UPDATE_FAILED: string = 'Payees Failed to Update';
+
+  /**
+   * Error message for updating Contacts
+   */
+  public static readonly CONTACTS_UPDATE_FAILED: string = 'Contacts Failed to Update';
 
   /**
    * Error message for updating User's Email

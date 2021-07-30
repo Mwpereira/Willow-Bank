@@ -1,5 +1,6 @@
 import PropertiesConstants from '@/constants/properties-constants';
 import router from '@/router';
+import BuefyService from '@/services/buefy-service';
 import store from '@/store';
 
 export default class WebsiteUtils {
@@ -37,17 +38,19 @@ export default class WebsiteUtils {
       document.title = 'Pay Bills' + PropertiesConstants.titleSuffix;
     } else if (prefix === 'ManagePayees') {
       document.title = 'Manage Payees' + PropertiesConstants.titleSuffix;
-    } else if (prefix === 'AddContact.vue') {
+    } else if (prefix === 'AddPayee') {
       document.title = 'Add Payee' + PropertiesConstants.titleSuffix;
+    }  else if (prefix === 'PastTransfers') {
+      document.title = 'Past Transfers' + PropertiesConstants.titleSuffix;
     } else if (prefix === 'SendEtransfer') {
-      document.title = 'Send eTransfer' + PropertiesConstants.titleSuffix;
+      document.title = 'Send e-Transfer' + PropertiesConstants.titleSuffix;
     } else if (prefix === 'ManageContacts') {
       document.title = 'Manage Contacts' + PropertiesConstants.titleSuffix;
-    } else if (prefix === 'RemoveContact.vue') {
-      document.title = 'Remove Payee' + PropertiesConstants.titleSuffix;
-    } else if (prefix === 'SendEtransfers.vue') {
-      document.title = 'eTransfers' + PropertiesConstants.titleSuffix;
-    } else if (prefix === 'DashboardSummary.vue') {
+    } else if (prefix === 'AddContact') {
+      document.title = 'Add Contact' + PropertiesConstants.titleSuffix;
+    } else if (prefix === 'RemoveContact') {
+      document.title = 'Remove Contact' + PropertiesConstants.titleSuffix;
+    } else if (prefix === 'AccountSummary') {
       document.title = 'Account Summary' + PropertiesConstants.titleSuffix;
     } else {
       const title =
@@ -58,6 +61,26 @@ export default class WebsiteUtils {
       if (document.title !== title) {
         document.title = title;
       }
+    }
+  }
+
+  public static async checkEtransfer() {
+    if (store.getters.etransfer === null) {
+      BuefyService.startLoading();
+
+      await store.dispatch('getEtransferData');
+
+      BuefyService.stopLoading();
+    }
+  }
+
+  public static async checkSettings() {
+    if (store.getters.settings === null) {
+      BuefyService.startLoading();
+
+      await store.dispatch('getSettings');
+
+      BuefyService.stopLoading();
     }
   }
 }

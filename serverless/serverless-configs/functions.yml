@@ -120,6 +120,20 @@ getSettings:
           resultTtlInSeconds: 10
           indentitySource: method.request.header.Cookie
 
+getEtransferData:
+  handler: 'src/handlers/user-handler.getEtransferData'
+  description: "Gets User's e-transfer data"
+  events:
+    - http:
+        method: 'get'
+        path: 'user/etransfer'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
+
 payBills:
   handler: 'src/handlers/user-handler.payBill'
   description: "Pay Bill"
@@ -134,6 +148,34 @@ payBills:
           resultTtlInSeconds: 10
           indentitySource: method.request.header.Cookie
 
+sendEtransfer:
+  handler: 'src/handlers/user-handler.sendEtransfer'
+  description: "Sends e-Transfer"
+  events:
+    - http:
+        method: 'post'
+        path: 'user/etransfer/send'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
+
+sendAdminTransaction:
+  handler: 'src/handlers/user-handler.sendAdminTransaction'
+  description: "Deposits/Withdraws money from User Account"
+  events:
+    - http:
+        method: 'post'
+        path: 'user/sendAdminTransaction'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
+
 updatePayees:
   handler: 'src/handlers/user-handler.updatePayees'
   description: "Updates Payees"
@@ -141,6 +183,20 @@ updatePayees:
     - http:
         method: 'put'
         path: 'user/account/updatePayees'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
+
+updateContacts:
+  handler: 'src/handlers/user-handler.updateContacts'
+  description: "Updates Payees"
+  events:
+    - http:
+        method: 'put'
+        path: 'user/etransfer/updateContacts'
         cors: true
         authorizer:
           name: verifyToken
@@ -197,20 +253,6 @@ updateTwoFactorAuthenticationEnabled:
     - http:
         method: 'put'
         path: 'auth/updateTFAState'
-        cors: true
-        authorizer:
-          name: verifyToken
-          type: request
-          resultTtlInSeconds: 10
-          indentitySource: method.request.header.Cookie
-
-sendAdminTransaction:
-  handler: 'src/handlers/user-handler.sendAdminTransaction'
-  description: "Deposits/Withdraws money from User Account"
-  events:
-    - http:
-        method: 'post'
-        path: 'user/sendAdminTransaction'
         cors: true
         authorizer:
           name: verifyToken

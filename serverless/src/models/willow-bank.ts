@@ -13,7 +13,7 @@ export const WillowBankSchema = new DynamoDB.Schema({
         type: String,
         required: true,
     },
-    etransfers:{
+    etransfer:{
         type: String,
         required: true,
     },

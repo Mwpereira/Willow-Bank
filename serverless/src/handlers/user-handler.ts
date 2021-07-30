@@ -13,6 +13,10 @@ export const getSettings: Handler = async (event: APIGatewayEvent) => {
   return await UserUtils.getSettings(event);
 }
 
+export const getEtransferData: Handler = async (event: APIGatewayEvent) => {
+  return await UserUtils.getEtransferData(event);
+}
+
 export const updateSettings: Handler = async (event: APIGatewayEvent) => {
   return await UserUtils.updateSettings(event);
 }
@@ -21,8 +25,16 @@ export const updatePayees: Handler = async (event: APIGatewayEvent) => {
   return await UserUtils.updatePayees(event);
 }
 
+export const updateContacts: Handler = async (event: APIGatewayEvent) => {
+  return await UserUtils.updateContacts(event);
+}
+
 export const payBill: Handler = async (event: APIGatewayEvent) => {
   return await UserUtils.payBill(event);
+}
+
+export const sendEtransfer: Handler = async (event: APIGatewayEvent) => {
+  return await UserUtils.sendEtransfer(event);
 }
 
 export const sendAdminTransaction: Handler = async (event: APIGatewayEvent) => {

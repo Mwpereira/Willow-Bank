@@ -22,6 +22,8 @@
 
 <script lang="ts">
 import Admin from "@/components/Dashboard/Settings/Admin.vue";
+import BuefyService from '@/services/buefy-service';
+import WebsiteUtils from '@/utils/website-utils';
 import { Component, Vue } from "vue-property-decorator";
 import UserData from "@/components/Dashboard/Settings/UserData.vue";
 import TwoFactorAuthentication from "@/components/Dashboard/Settings/TwoFactorAuthentication.vue";
@@ -30,7 +32,11 @@ import ChangeCredentials from "@/components/Dashboard/Settings/ChangeCredentials
 @Component({
   components: { Admin, TwoFactorAuthentication, ChangeCredentials, UserData },
 })
-export default class Settings extends Vue {}
+export default class Settings extends Vue {
+  async created(): Promise<void> {
+    await WebsiteUtils.checkSettings();
+  }
+}
 </script>
 
 <style scoped>

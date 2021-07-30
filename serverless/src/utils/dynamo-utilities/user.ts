@@ -1,5 +1,6 @@
 import * as dynamoDB from 'dynamoose';
 import {Account} from '../../interfaces/account';
+import {Etransfer} from '../../interfaces/etransfer';
 import {Settings} from '../../interfaces/settings';
 import {WillowBankSchema} from '../../models/willow-bank';
 
@@ -75,6 +76,22 @@ export default class User {
       });
   }
 
+  public static getEtransferData(email: string): Promise<Etransfer> {
+    return willowBankTable
+      .query()
+      .where('email')
+      .eq(email.toLowerCase())
+      .attributes(['etransfer'])
+      .exec()
+      .then((result: any) => {
+        return JSON.parse(result[0].etransfer);
+      })
+      .catch((error) => {
+        console.log(error);
+        throw error;
+      });
+  }
+
   public static updateTwoFactorAuthentication(email: string, data: object): Promise<boolean> {
     return willowBankTable
       .update({
@@ -116,6 +133,23 @@ export default class User {
         },
         {
           account: JSON.stringify(data),
+        })
+      .then(() => {
+        return true;
+      })
+      .catch((error) => {
+        console.log(error);
+        throw error;
+      });
+  }
+
+  public static updateEtransferData(email: string, data: object): Promise<boolean> {
+    return willowBankTable
+      .update({
+          email: email.toLowerCase(),
+        },
+        {
+          etransfer: JSON.stringify(data),
         })
       .then(() => {
         return true;

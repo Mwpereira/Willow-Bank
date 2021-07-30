@@ -2,5 +2,5 @@ import { TransactionActions } from "../../../serverless/src/enums/transaction-ac
 
 export interface AdminTransaction {
   amount: number;
-  transactionAction: TransactionActions;
+  action: TransactionActions;
 }

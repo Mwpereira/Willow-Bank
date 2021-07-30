@@ -3,11 +3,11 @@
     <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
       <form
           id="form"
-          @submit.prevent="sendTransaction({ amount, transactionAction })"
+          @submit.prevent="sendTransaction({ amount, action })"
       >
         <b-field class="mb-5" label="Transaction">
           <b-select
-              v-model="transactionAction"
+              v-model="action"
               icon="shapes"
               icon-pack="fas"
               placeholder="Transaction Action"
@@ -61,7 +61,7 @@ import {Vue} from 'vue-property-decorator';
 })
 export default class Admin extends Vue {
   private amount!: string;
-  private transactionAction = TransactionActions.DEPOSIT;
+  private action = TransactionActions.DEPOSIT;
 
   public async sendTransaction(transaction: AdminTransaction): Promise<void> {
     BuefyService.startLoading();
