@@ -29,9 +29,8 @@
 </template>
 
 <script lang="ts">
-import BuefyService from "@/services/buefy-service";
-import WebsiteUtils from "@/utils/website-utils";
-import { Component, Vue } from "vue-property-decorator";
+import WebsiteUtils from '@/utils/website-utils';
+import {Component, Vue} from 'vue-property-decorator';
 
 @Component
 export default class ManageContacts extends Vue {
@@ -40,7 +39,7 @@ export default class ManageContacts extends Vue {
   }
 
   async created(): Promise<void> {
-    WebsiteUtils.checkEtransfer();
+    await WebsiteUtils.checkEtransfer();
   }
 }
 </script>

@@ -71,6 +71,10 @@ export default class AddContact extends Vue {
   private name = "";
   private email = "";
 
+  async created(): Promise<void> {
+    await WebsiteUtils.checkEtransfer();
+  }
+
   public async addContact(contact: Contact) {
     BuefyService.startLoading();
 

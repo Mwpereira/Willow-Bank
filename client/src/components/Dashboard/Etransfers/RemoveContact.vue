@@ -60,6 +60,10 @@ export default class RemoveContact extends Vue {
   private name = "";
   private selected = null;
 
+  async created(): Promise<void> {
+    await WebsiteUtils.checkEtransfer();
+  }
+
   get contacts() {
     return this.$store.getters.etransfer.contacts;
   }

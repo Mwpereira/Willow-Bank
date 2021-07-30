@@ -104,8 +104,6 @@ const store = new Vuex.Store({
       response = await UserService.getAccount();
 
       commit("setAccount", response.data.account);
-
-      await WebsiteUtils.checkEtransfer();
     },
     async getEtransferData({ commit }): Promise<void> {
       response = await UserService.getEtransferData();
