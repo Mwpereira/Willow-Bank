@@ -1,42 +1,42 @@
 import {APIGatewayEvent, Handler} from 'aws-lambda';
-import UserUtils from '../utils/user-utils';
+import UserController from '../controllers/user-controller';
 
 export const acceptedTermsAndConditions: Handler = async (event: APIGatewayEvent) => {
-  return await UserUtils.acceptedTermsAndConditions(event);
+  return await UserController.acceptedTermsAndConditions(event);
 }
 
 export const getAccount: Handler = async (event: APIGatewayEvent) => {
-  return await UserUtils.getAccount(event);
+  return await UserController.getAccount(event);
 }
 
 export const getSettings: Handler = async (event: APIGatewayEvent) => {
-  return await UserUtils.getSettings(event);
+  return await UserController.getSettings(event);
 }
 
 export const getEtransferData: Handler = async (event: APIGatewayEvent) => {
-  return await UserUtils.getEtransferData(event);
+  return await UserController.getEtransferData(event);
 }
 
 export const updateSettings: Handler = async (event: APIGatewayEvent) => {
-  return await UserUtils.updateSettings(event);
+  return await UserController.updateSettings(event);
 }
 
 export const updatePayees: Handler = async (event: APIGatewayEvent) => {
-  return await UserUtils.updatePayees(event);
+  return await UserController.updatePayees(event);
 }
 
 export const updateContacts: Handler = async (event: APIGatewayEvent) => {
-  return await UserUtils.updateContacts(event);
+  return await UserController.updateContacts(event);
 }
 
 export const payBill: Handler = async (event: APIGatewayEvent) => {
-  return await UserUtils.payBill(event);
+  return await UserController.payBill(event);
 }
 
 export const sendEtransfer: Handler = async (event: APIGatewayEvent) => {
-  return await UserUtils.sendEtransfer(event);
+  return await UserController.sendEtransfer(event);
 }
 
 export const sendAdminTransaction: Handler = async (event: APIGatewayEvent) => {
-  return await UserUtils.sendAdminTransaction(event);
+  return await UserController.sendAdminTransaction(event);
 }

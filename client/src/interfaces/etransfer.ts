@@ -1,4 +1,4 @@
-import {EtransferTransaction} from './etransfer-transaction';
+import { EtransferTransaction } from "./etransfer-transaction";
 
 export interface Etransfer {
   transactions: EtransferTransaction[];

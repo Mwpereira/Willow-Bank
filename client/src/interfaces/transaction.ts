@@ -1,6 +1,6 @@
-import {Payee} from '@/interfaces/payee';
-import {TransactionActions} from '@/enums/transaction-actions';
-import {TransactionTypes} from '@/enums/transaction-types';
+import { Payee } from "@/interfaces/payee";
+import { TransactionActions } from "@/enums/transaction-actions";
+import { TransactionTypes } from "@/enums/transaction-types";
 
 export interface Transaction {
   id: number;

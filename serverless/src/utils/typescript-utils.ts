@@ -8,14 +8,4 @@ export default class TypescriptUtils {
   public static checkString(payload: string): boolean {
     return typeof payload === 'string';
   }
-
-  // /**
-  //  * Checks if payload is a number
-  //  *
-  //  * @param payload
-  //  * @return assertion
-  //  */
-  // public static checkNumber(payload: number): boolean {
-  //     return typeof payload === 'number';
-  // }
 }

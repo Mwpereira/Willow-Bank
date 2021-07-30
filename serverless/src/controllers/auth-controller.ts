@@ -1,22 +1,20 @@
 import {APIGatewayEvent, SQSEvent} from 'aws-lambda';
 import {MessageConstants} from '../constants/message-constants';
-import {LoginRequest} from '../interfaces/login-request';
-import {RegisterRequest} from '../interfaces/register-request';
 import {Response} from '../interfaces/response';
-import BcryptUtils from './bcrypt-utils';
-import CookieUtilities from './cookie-utils';
-import Auth from './dynamo-utilities/auth';
-import user from './dynamo-utilities/user';
-import User from './dynamo-utilities/user';
-import JwtUtils from './jwt-utils';
-import PayloadValidatorUtils from './payload-validator-utils';
-import RequestUtils from './request-utils';
-import MessageUtil from './response-utils';
+import BcryptUtils from '../utils/bcrypt-utils';
+import CookieUtilities from '../utils/cookie-utils';
+import Auth from '../utils/dynamo-utilities/auth';
+import user from '../utils/dynamo-utilities/user';
+import User from '../utils/dynamo-utilities/user';
+import JwtUtils from '../utils/jwt-utils';
+import PayloadValidatorUtils from '../utils/payload-validator-utils';
+import RequestUtils from '../utils/request-utils';
+import MessageUtil from '../utils/response-utils';
 
 /**
  * Authentication methods + Lambda Authorizer
  */
-export default class AuthUtilities {
+export default class AuthController {
   /**
    * Lambda Authorizer
    *
@@ -149,8 +147,7 @@ export default class AuthUtilities {
    */
   static async register(event: APIGatewayEvent): Promise<Response> {
     try {
-      // Get's user object from APIGatewayEvent
-      const user: RegisterRequest = PayloadValidatorUtils.validateRegisterRequest(
+      const user = PayloadValidatorUtils.validateRegisterRequest(
         RequestUtils.getRequest(event)
       );
 
@@ -176,12 +173,10 @@ export default class AuthUtilities {
    */
   static async login(event: APIGatewayEvent): Promise<Response> {
     try {
-      // Get's user object from APIGatewayEvent
-      const user: LoginRequest = PayloadValidatorUtils.validateLoginRequest(
+      const user = PayloadValidatorUtils.validateLoginRequest(
         RequestUtils.getRequest(event)
       );
 
-      // Retrieves user data
       const userData = await Auth.getUserData(
         user.email
       );
@@ -227,7 +222,7 @@ export default class AuthUtilities {
    */
   static async logout(): Promise<Response> {
     try {
-      const accessToken = await JwtUtils.expireJwt();
+      const accessToken = JwtUtils.expireJwt();
 
       return MessageUtil.successAuth(
         200,
@@ -241,6 +236,11 @@ export default class AuthUtilities {
     }
   }
 
+  /**
+   * Updates TFA for User
+   *
+   * @param event - SQSEvent
+   */
   public static async updateTwoFactorAuthentication(event: SQSEvent): Promise<string> {
     try {
       for (const record of event.Records) {
@@ -262,6 +262,11 @@ export default class AuthUtilities {
     }
   }
 
+  /**
+   * Updates TFA for User
+   *
+   * @param event - SQSEvent
+   */
   public static async updateTwoFactorAuthenticationEnabled(event: SQSEvent): Promise<Response> {
     try {
       const email = RequestUtils.getEmail(event);

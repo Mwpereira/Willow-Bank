@@ -269,17 +269,3 @@ updateTwoFactorAuthentication:
     - sqs:
         arn: ${self:custom.variables.updateTwoFactorAuthenticationSQS.arn}
         batchSize: 1
-
-#
-#sendMoney:
-#  description: "Sends Money"
-#  events:
-#    - http:
-#        method: 'post'
-#        path: 'user/account/sendMoney'
-#        cors: true
-#        authorizer:
-#          name: verifyToken
-#          type: request
-#          resultTtlInSeconds: 10
-#          indentitySource: method.request.header.Cookie

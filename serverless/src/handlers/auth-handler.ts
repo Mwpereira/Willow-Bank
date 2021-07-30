@@ -1,39 +1,39 @@
 import {APIGatewayEvent, Handler, SQSEvent} from 'aws-lambda';
-import AuthUtils from '../utils/auth-utils';
+import AuthController from '../controllers/auth-controller';
 
 export const verifyToken: Handler = async (event) => {
-  return await AuthUtils.verifyToken(event);
+  return await AuthController.verifyToken(event);
 }
 
 export const refreshToken: Handler = async (event: APIGatewayEvent) => {
-  return await AuthUtils.refreshToken(event);
+  return await AuthController.refreshToken(event);
 }
 
 export const register: Handler = async (event: APIGatewayEvent) => {
-  return await AuthUtils.register(event);
+  return await AuthController.register(event);
 }
 
 export const login: Handler = async (event: APIGatewayEvent) => {
-  return await AuthUtils.login(event);
+  return await AuthController.login(event);
 }
 
 export const logout: Handler = async () => {
-  return await AuthUtils.logout();
+  return await AuthController.logout();
 }
 
 export const updateEmail: Handler = async (event: APIGatewayEvent) => {
-  return await AuthUtils.updateEmail(event);
+  return await AuthController.updateEmail(event);
 }
 
 export const changePassword: Handler = async (event: APIGatewayEvent) => {
-  return await AuthUtils.changePassword(event);
+  return await AuthController.changePassword(event);
 }
 
 export const updateTwoFactorAuthentication: Handler = async (event: SQSEvent) => {
-  return await AuthUtils.updateTwoFactorAuthentication(event);
+  return await AuthController.updateTwoFactorAuthentication(event);
 }
 
 export const updateTwoFactorAuthenticationEnabled: Handler = async (event: SQSEvent) => {
-  return await AuthUtils.updateTwoFactorAuthenticationEnabled(event);
+  return await AuthController.updateTwoFactorAuthenticationEnabled(event);
 }
 

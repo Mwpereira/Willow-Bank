@@ -3,10 +3,10 @@
     <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
       <form @submit.prevent="save({ firstName, lastName, country })">
         <b-field class="mb-5" label="First Name"
-          ><p class="mt-2">{{ settings ? settings.firstName : '' }}</p></b-field
+          ><p class="mt-2">{{ settings ? settings.firstName : "" }}</p></b-field
         >
         <b-field class="mb-5" label="Last Name"
-          ><p class="mt-2">{{ settings ? settings.lastName : '' }}</p></b-field
+          ><p class="mt-2">{{ settings ? settings.lastName : "" }}</p></b-field
         >
         <b-field class="mb-5" label="Country">
           <b-select

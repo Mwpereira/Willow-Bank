@@ -6,17 +6,22 @@ import {TransactionTypes} from '../enums/transaction-types';
 import {Contact} from '../interfaces/contact';
 import {Payee} from '../interfaces/payee';
 import {Response} from '../interfaces/response';
-import User from './dynamo-utilities/user';
-import user from './dynamo-utilities/user';
-import EtransferUtils from './etransfer-utils';
-import RequestUtils from './request-utils';
-import MessageUtil from './response-utils';
-import TransactionUtils from './transaction-utils';
+import User from '../utils/dynamo-utilities/user';
+import user from '../utils/dynamo-utilities/user';
+import EtransferUtils from '../utils/etransfer-utils';
+import RequestUtils from '../utils/request-utils';
+import MessageUtil from '../utils/response-utils';
+import TransactionUtils from '../utils/transaction-utils';
 
 /**
  * User Utilities
  */
-export default class UserUtils {
+export default class UserController {
+  /**
+   * Accepts the Terms and Conditions for a User
+   *
+   * @param event - APIGatewayEvent
+   */
   public static async acceptedTermsAndConditions(event: APIGatewayEvent): Promise<Response> {
     try {
       const email = RequestUtils.getEmail(event);
@@ -34,6 +39,11 @@ export default class UserUtils {
     }
   }
 
+  /**
+   * Accepts the Terms and Conditions for a User
+   *
+   * @param event - APIGatewayEvent
+   */
   public static async getAccount(event: APIGatewayEvent): Promise<Response> {
     try {
       const email = RequestUtils.getEmail(event);
@@ -53,6 +63,11 @@ export default class UserUtils {
     }
   }
 
+  /**
+   * Gets User's Settings
+   *
+   * @param event - APIGatewayEvent
+   */
   public static async getSettings(event: APIGatewayEvent): Promise<Response> {
     try {
       const email = RequestUtils.getEmail(event);
@@ -72,6 +87,11 @@ export default class UserUtils {
     }
   }
 
+  /**
+   * Updates User's Settings
+   *
+   * @param event - APIGatewayEvent
+   */
   public static async updateSettings(event: APIGatewayEvent): Promise<Response> {
     try {
       const email = RequestUtils.getEmail(event);
@@ -92,6 +112,11 @@ export default class UserUtils {
     }
   }
 
+  /**
+   * Gets User's e-Transfer Data
+   *
+   * @param event - APIGatewayEvent
+   */
   public static async getEtransferData(event: APIGatewayEvent): Promise<Response> {
     try {
       const email = RequestUtils.getEmail(event);
@@ -111,6 +136,11 @@ export default class UserUtils {
     }
   }
 
+  /**
+   * Updates User's Payees
+   *
+   * @param event - APIGatewayEvent
+   */
   public static async updatePayees(event: APIGatewayEvent): Promise<Response> {
     try {
       const email = RequestUtils.getEmail(event);
@@ -142,6 +172,11 @@ export default class UserUtils {
     }
   }
 
+  /**
+   * Updates User's Contacts
+   *
+   * @param event - APIGatewayEvent
+   */
   public static async updateContacts(event: APIGatewayEvent): Promise<Response> {
     try {
       const email = RequestUtils.getEmail(event);
@@ -173,6 +208,11 @@ export default class UserUtils {
     }
   }
 
+  /**
+   * Pay Bill
+   *
+   * @param event - APIGatewayEvent
+   */
   public static async payBill(event: APIGatewayEvent): Promise<Response> {
     try {
       const email = RequestUtils.getEmail(event);
@@ -195,6 +235,11 @@ export default class UserUtils {
     }
   }
 
+  /**
+   * Send e-Transfer
+   *
+   * @param event - APIGatewayEvent
+   */
   public static async sendEtransfer(event: APIGatewayEvent): Promise<Response> {
     try {
       const email = RequestUtils.getEmail(event);
@@ -222,6 +267,11 @@ export default class UserUtils {
     }
   }
 
+  /**
+   * Send admin transaction
+   *
+   * @param event - APIGatewayEvent
+   */
   public static async sendAdminTransaction(event: APIGatewayEvent): Promise<Response> {
     try {
       const email = RequestUtils.getEmail(event);

@@ -29,8 +29,8 @@
 </template>
 
 <script lang="ts">
-import WebsiteUtils from '@/utils/website-utils';
-import {Component, Vue} from 'vue-property-decorator';
+import WebsiteUtils from "@/utils/website-utils";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class ManageContacts extends Vue {

@@ -40,7 +40,7 @@
 
 <script lang="ts">
 import Transactions from "@/components/Dashboard/Etransfers/Transactions.vue";
-import WebsiteUtils from '@/utils/website-utils';
+import WebsiteUtils from "@/utils/website-utils";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component({
