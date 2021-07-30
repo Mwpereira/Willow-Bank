@@ -188,7 +188,7 @@ const store = new Vuex.Store({
         }
       }
 
-      await Promise.all([dispatch('getAccount'), dispatch('getSettings'), dispatch('getEtransferData')])
+      await Promise.all([await dispatch('getAccount'), await dispatch('getSettings'), await dispatch('getEtransferData')])
     },
     async logout(): Promise<void> {
       await AuthService.logout();
