@@ -3,8 +3,8 @@ import {TransactionTypes} from '../enums/transaction-types';
 
 export interface EtransferTransaction {
   id: number;
-  name: string,
-  email: string,
+  name: string;
+  email: string;
   action: TransactionActions;
   type: TransactionTypes;
   amount: string;
