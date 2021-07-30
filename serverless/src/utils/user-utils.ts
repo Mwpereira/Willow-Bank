@@ -178,9 +178,9 @@ export default class UserUtils {
       const email = RequestUtils.getEmail(event);
       const data = RequestUtils.getRequest(event);
       const account = await User.getAccount(email);
-
+      console.log(data)
       const updatedAccount = TransactionUtils.generateTransaction(account, data.amount, data.action, TransactionTypes.BILL, data.receiver);
-
+      console.log(data.receiver)
       if (await user.updateAccount(email, updatedAccount)) {
         return MessageUtil.success(
           200,

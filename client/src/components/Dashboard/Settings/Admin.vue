@@ -57,7 +57,7 @@ import { Vue } from "vue-property-decorator";
   },
 })
 export default class Admin extends Vue {
-  private amount!: string;
+  private amount = "";
   private action = TransactionActions.DEPOSIT;
 
   public async sendTransaction(transaction: AdminTransaction): Promise<void> {

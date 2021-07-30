@@ -1,6 +1,6 @@
 <template>
   <div id="ChangePassword" class="">
-    <p class="mb-4"><b>Current Email:</b> {{ email }}</p>
+    <p class="mb-4"><b>Current Email:</b> {{ email ? email : '' }}</p>
     <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
       <form @submit.prevent="updateEmail(newEmail)">
         <b-field label="Email">

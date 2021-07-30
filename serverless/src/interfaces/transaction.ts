@@ -1,4 +1,4 @@
-import {TransactionActions} from '../../../client/src/enums/transaction-actions';
+import {TransactionActions} from '../enums/transaction-actions';
 import {TransactionTypes} from '../enums/transaction-types';
 
 export interface Transaction {

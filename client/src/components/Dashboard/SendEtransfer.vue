@@ -77,7 +77,7 @@ import { Component, Vue } from "vue-property-decorator";
   },
 })
 export default class SendEtransfer extends Vue {
-  private amount!: string;
+  private amount = "";
   private name = "";
   private selected = null;
 

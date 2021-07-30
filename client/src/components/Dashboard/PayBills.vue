@@ -76,7 +76,7 @@ import { Component, Vue } from "vue-property-decorator";
   },
 })
 export default class PayBills extends Vue {
-  private amount!: string;
+  private amount = "";
   private name = "";
   private selected = null;
 
@@ -98,7 +98,7 @@ export default class PayBills extends Vue {
     if (
       await this.$store.dispatch("payBill", {
         amount: parseFloat(this.amount),
-        receiver: this.name,
+        receiver: this.payees[this.name],
         type: TransactionTypes.BILL,
         action: TransactionActions.WITHDRAW,
       })
