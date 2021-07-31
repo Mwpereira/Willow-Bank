@@ -15,7 +15,7 @@ export default class UserService {
       : `http://${process.env.VUE_APP_API_LOCAL}`;
 
   public static async acceptedTermsAndConditions(): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .post(
         `${this.url}/user/acceptedTermsAndConditions`,
         JSON.stringify({ acceptedTermsAndConditions: true })
@@ -29,7 +29,7 @@ export default class UserService {
   }
 
   public static async getAccount(): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .get(`${this.url}/user/account`)
       .then((response: AxiosResponse) => {
         return response;
@@ -40,7 +40,7 @@ export default class UserService {
   }
 
   public static async getSettings(): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .get(`${this.url}/user/settings`)
       .then((response: AxiosResponse) => {
         return response;
@@ -51,7 +51,7 @@ export default class UserService {
   }
 
   public static async getEtransferData(): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .get(`${this.url}/user/etransfer`)
       .then((response: AxiosResponse) => {
         return response;
@@ -64,7 +64,7 @@ export default class UserService {
   public static async updateSettings(
     settings: Settings
   ): Promise<AxiosResponse> {
-    return axios.put(`${this.url}/user/settings`, settings)
+    return await axios.put(`${this.url}/user/settings`, settings)
       .then((response: AxiosResponse) => {
         return response;
       })
@@ -76,7 +76,7 @@ export default class UserService {
   public static async updatePayees(
     payee: UpdatePayeeRequest
   ): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .put(`${this.url}/user/account/updatePayees`, payee)
       .then((response: AxiosResponse) => {
         return response;
@@ -89,7 +89,7 @@ export default class UserService {
   public static async updateContacts(
     payee: UpdatePayeeRequest
   ): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .put(`${this.url}/user/etransfer/updateContacts`, payee)
       .then((response: AxiosResponse) => {
         return response;
@@ -102,7 +102,7 @@ export default class UserService {
   public static async payBill(
     transaction: Transaction
   ): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .post(`${this.url}/user/account/payBill`, transaction)
       .then((response: AxiosResponse) => {
         return response;
@@ -115,7 +115,7 @@ export default class UserService {
   public static async sendEtransfer(
     transaction: EtransferTransaction
   ): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .post(`${this.url}/user/etransfer/send`, transaction)
       .then((response: AxiosResponse) => {
         return response;
@@ -128,7 +128,7 @@ export default class UserService {
   public static async sendAdminTransaction(
     transaction: AdminTransaction
   ): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .post(`${this.url}/user/sendAdminTransaction`, transaction)
       .then((response: AxiosResponse) => {
         return response;

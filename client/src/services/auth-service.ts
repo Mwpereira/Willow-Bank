@@ -27,7 +27,7 @@ export default class AuthService {
   public static async register(
     request: RegisterRequest
   ): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .post(`${this.url}/auth/register`, JSON.stringify(request))
       .then((response: AxiosResponse) => {
         return response;
@@ -38,7 +38,7 @@ export default class AuthService {
   }
 
   public static async login(request: LoginRequest): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .post(`${this.url}/auth/login`, JSON.stringify(request))
       .then((response: AxiosResponse) => {
         return response;
@@ -88,7 +88,7 @@ export default class AuthService {
   public static async updateTwoFactorAuthenticationEnabled(
     twoFactorAuthenticationEnabled: any
   ): Promise<AxiosResponse> {
-    return axios
+    return await axios
       .put(`${this.url}/auth/updateTFAState`, twoFactorAuthenticationEnabled)
       .then((response: AxiosResponse) => {
         return response;
