@@ -285,6 +285,28 @@ export default class AuthController {
       return MessageUtil.error(400, MessageConstants.INVALID_REQUEST);
     }
   }
+
+  /**
+   * Deletes User
+   *
+   * @param event - APIGatewayEvent
+   */
+  public static async deleteUser(event: APIGatewayEvent): Promise<Response> {
+    try {
+      const email = RequestUtils.getEmail(event);
+
+      if (await Auth.deleteUser(email)) {
+        return MessageUtil.success(
+          200,
+          'DELETE USER',
+        );
+      }
+      return MessageUtil.error(404, MessageConstants.ACCOUNT_GET_FAILED);
+    } catch (error) {
+      console.log(error);
+      return MessageUtil.error(400, MessageConstants.INVALID_REQUEST);
+    }
+  }
 }
 
 

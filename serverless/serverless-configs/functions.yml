@@ -77,6 +77,20 @@ changePassword:
           resultTtlInSeconds: 10
           indentitySource: method.request.header.Cookie
 
+deleteUser:
+  handler: 'src/handlers/auth-handler.deleteUser'
+  description: "Deletes User"
+  events:
+    - http:
+        method: 'post'
+        path: 'auth/deleteUser'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 10
+          indentitySource: method.request.header.Cookie
+
 #User
 acceptedTermsAndConditions:
   handler: 'src/handlers/user-handler.acceptedTermsAndConditions'

@@ -6,7 +6,7 @@
       <p class="my-3">Front end: <b>Buefy/Bulma + Vue.js + TS</b></p>
       <p class="my-3">Back end: <b>AWS Serverless + TS</b></p>
       <p class="my-3">Created By: <b>Michael Pereira</b></p>
-      <a href="https://ko-fi.com/michaelpereira" target="_blank">
+      <a href="https://ko-fi.com/michaelpereira" target="_blank" rel="noopener">
         <b-button class="is-warning has-text-weight-bold mt-5 my-2">
           <span class="mr-3">
             <i class="fas fa-coffee"></i>
@@ -15,7 +15,7 @@
         </b-button>
       </a>
       <br />
-      <a href="https://github.com/mwpereira/" target="_blank">
+      <a href="https://github.com/mwpereira/" target="_blank" rel="noopener">
         <b-button class="is-github has-text-weight-bold my-2 has-text-white">
           <span class="mr-3">
             <i class="fab fa-github"></i>
@@ -24,7 +24,7 @@
         </b-button>
       </a>
       <br />
-      <a href="https://www.linkedin.com/in/michael-pereira-07/" target="_blank">
+      <a href="https://www.linkedin.com/in/michael-pereira-07/" target="_blank" rel="noopener">
         <b-button class="is-linkedin has-text-weight-bold my-2 has-text-white">
           <span class="mr-3">
             <i class="fab fa-linkedin-in"></i>
@@ -32,7 +32,7 @@
           LinkedIn
         </b-button>
       </a>
-      <p class="my-6 is-italic">Found a bug? <a>Post Here</a></p>
+      <p class="my-6 is-italic">Found a bug? <a href="https://github.com/Mwpereira/Willow-Bank/issues" target="_blank" rel="noopener">Post Here</a></p>
     </div>
   </div>
 </template>

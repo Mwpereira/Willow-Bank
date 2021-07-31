@@ -61,6 +61,17 @@ export default class AuthService {
       });
   }
 
+  public static async deleteUser(): Promise<AxiosResponse> {
+    return axios
+      .post(`${this.url}/auth/deleteUser`)
+      .then((response: AxiosResponse) => {
+        return response;
+      })
+      .catch((error) => {
+        return ResponseUtils.errorProcessor(error.response);
+      });
+  }
+
   public static async updateEmail(email: string): Promise<AxiosResponse> {
     return axios
       .put(`${this.url}/auth/updateEmail`, JSON.stringify({newEmail: email}))

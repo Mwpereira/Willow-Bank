@@ -3,7 +3,7 @@
     <div class="section wb-section has-text-left">
       <p class="title mb-6">Remove Contact</p>
       <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
-        <form @submit.prevent="removeContact">
+        <form @submit.prevent="confirmationDeleteContact">
           <b-field label="Name of Payee">
             <b-autocomplete
               v-model="name"
@@ -24,7 +24,7 @@
                 class="button is-danger is-fullwidth has-text-weight-bold mt-5"
                 type="submit"
               >
-                Remove Contact
+                Remove
               </button>
             </div>
             <div class="column">
@@ -66,6 +66,17 @@ export default class RemoveContact extends Vue {
 
   get contacts() {
     return this.$store.getters.etransfer.contacts;
+  }
+
+  public confirmationDeleteContact() {
+    this.$buefy.dialog.confirm({
+      title: 'Deleting Contact',
+      message: 'Are you sure you want to <b>delete</b> this contact? This action cannot be undone.',
+      confirmText: 'Delete Contact',
+      type: 'is-danger',
+      hasIcon: true,
+      onConfirm: async () => await this.removeContact()
+    })
   }
 
   get filteredDataArray() {

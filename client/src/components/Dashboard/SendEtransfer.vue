@@ -42,7 +42,7 @@
                 class="button is-warning is-fullwidth has-text-weight-bold mt-5"
                 type="submit"
               >
-                Send e-Transfer
+                Send
               </button>
             </div>
             <div class="column">

@@ -37,3 +37,7 @@ export const updateTwoFactorAuthenticationEnabled: Handler = async (event: SQSEv
   return await AuthController.updateTwoFactorAuthenticationEnabled(event);
 }
 
+export const deleteUser: Handler = async (event: APIGatewayEvent) => {
+  return await AuthController.deleteUser(event);
+}
+

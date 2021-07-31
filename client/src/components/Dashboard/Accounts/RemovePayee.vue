@@ -3,7 +3,7 @@
     <div class="section wb-section has-text-left">
       <p class="title mb-6">Remove Payee</p>
       <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
-        <form @submit.prevent="removePayee">
+        <form @submit.prevent="confirmationDeletePayee">
           <b-field label="Name of Payee">
             <b-autocomplete
               v-model="name"
@@ -24,7 +24,7 @@
                 class="button is-danger is-fullwidth has-text-weight-bold mt-5"
                 type="submit"
               >
-                Remove Payee
+                Remove
               </button>
             </div>
             <div class="column">
@@ -71,6 +71,17 @@ export default class RemovePayee extends Vue {
         option.toString().toLowerCase().indexOf(this.name.toLowerCase()) >= 0
       );
     });
+  }
+
+  public confirmationDeletePayee() {
+    this.$buefy.dialog.confirm({
+      title: 'Deleting Payee',
+      message: 'Are you sure you want to <b>delete</b> this payee? This action cannot be undone.',
+      confirmText: 'Delete Payee',
+      type: 'is-danger',
+      hasIcon: true,
+      onConfirm: async () => await this.removePayee()
+    })
   }
 
   public async removePayee() {

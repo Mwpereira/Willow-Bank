@@ -33,7 +33,7 @@
                 class="button is-primary is-fullwidth has-text-weight-bold mt-5"
                 type="submit"
               >
-                Add Contact
+                Add
               </button>
             </div>
             <div class="column">
