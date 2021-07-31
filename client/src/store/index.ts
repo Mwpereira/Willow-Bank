@@ -1,29 +1,29 @@
-import { Account } from "@/interfaces/account";
-import { AdminTransaction } from "@/interfaces/admin-transaction";
-import { LoginRequest } from "@/interfaces/login-request";
-import { RegisterRequest } from "@/interfaces/register-request";
-import { Settings } from "@/interfaces/settings";
-import { Transaction } from "@/interfaces/transaction";
-import { UpdateContactRequest } from "@/interfaces/update-contact-request";
-import { UpdatePayeeRequest } from "@/interfaces/update-payee-request";
-import AuthService from "@/services/auth-service";
-import BuefyService from "@/services/buefy-service";
-import UserService from "@/services/user-service";
-import ResponseUtils from "@/utils/response-utils";
-import WebsiteUtils from "@/utils/website-utils";
-import { AxiosResponse } from "axios";
-import Vue from "vue";
-import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
-import { Etransfer } from "../../../serverless/src/interfaces/etransfer";
-import { EtransferTransaction } from "../../../serverless/src/interfaces/etransfer-transaction";
+import {Account} from '@/interfaces/account';
+import {AdminTransaction} from '@/interfaces/admin-transaction';
+import {LoginRequest} from '@/interfaces/login-request';
+import {RegisterRequest} from '@/interfaces/register-request';
+import {Settings} from '@/interfaces/settings';
+import {Transaction} from '@/interfaces/transaction';
+import {UpdateContactRequest} from '@/interfaces/update-contact-request';
+import {UpdatePayeeRequest} from '@/interfaces/update-payee-request';
+import AuthService from '@/services/auth-service';
+import BuefyService from '@/services/buefy-service';
+import UserService from '@/services/user-service';
+import ResponseUtils from '@/utils/response-utils';
+import WebsiteUtils from '@/utils/website-utils';
+import {AxiosResponse} from 'axios';
+import Vue from 'vue';
+import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
+import {Etransfer} from '../../../serverless/src/interfaces/etransfer';
+import {EtransferTransaction} from '../../../serverless/src/interfaces/etransfer-transaction';
 
 Vue.use(Vuex);
 
 let response: AxiosResponse;
 
 const store = new Vuex.Store({
-  plugins: [createPersistedState({ storage: window.sessionStorage })],
+  plugins: [createPersistedState({storage: window.sessionStorage})],
   state: {
     acceptedTermsAndConditions: null,
     account: null,
@@ -31,7 +31,7 @@ const store = new Vuex.Store({
     etransfer: null,
     isLoggedIn: false,
     lastLogin: null,
-    page: "DashboardSummary",
+    page: 'DashboardSummary',
     settings: null,
     twoFactorAuthenticationEnabled: null,
   },
@@ -47,7 +47,7 @@ const store = new Vuex.Store({
       state.etransfer = null;
       state.isLoggedIn = false;
       state.lastLogin = null;
-      state.page = "DashboardSummary";
+      state.page = 'DashboardSummary';
       state.settings = null;
       state.twoFactorAuthenticationEnabled = null;
     },
@@ -77,12 +77,12 @@ const store = new Vuex.Store({
     },
   },
   actions: {
-    async acceptedTermsAndConditions({ commit }): Promise<boolean> {
+    async acceptedTermsAndConditions({commit}): Promise<boolean> {
       response = await UserService.acceptedTermsAndConditions();
 
       if (ResponseUtils.successProcessor(response)) {
         commit(
-          "setAcceptedTermsAndConditions",
+          'setAcceptedTermsAndConditions',
           response.data.acceptedTermsAndConditions
         );
         BuefyService.successToast(response.data.message);
@@ -90,7 +90,7 @@ const store = new Vuex.Store({
       }
       return false;
     },
-    async changePassword({ commit }, passwords: object): Promise<boolean> {
+    async changePassword({commit}, passwords: object): Promise<boolean> {
       response = await AuthService.changePassword(passwords);
 
       if (ResponseUtils.successProcessor(response)) {
@@ -100,60 +100,60 @@ const store = new Vuex.Store({
 
       return false;
     },
-    async getAccount({ commit }): Promise<AxiosResponse> {
-      response = await UserService.getAccount();
-
-      commit("setAccount", response.data.account);
-
-      return response;
+    async getAccount({commit}): Promise<boolean> {
+      return new Promise(async (resolve) => {
+        response = await UserService.getAccount();
+        commit('setAccount', response.data.account);
+        resolve(response !== null);
+      });
     },
-    async getEtransferData({ commit }): Promise<AxiosResponse> {
-      response = await UserService.getEtransferData();
-
-      commit("setEtransfer", response.data.etransfer);
-
-      return response;
+    async getEtransferData({commit}): Promise<boolean> {
+      return new Promise(async (resolve) => {
+        response = await UserService.getEtransferData();
+        commit('setEtransfer', response.data.etransfer);
+        resolve(response !== null);
+      });
     },
-    getPage({ commit, state }, path: string): void {
+    getPage({commit, state}, path: string): void {
       switch (path) {
-        case "/dashboard/user/settings":
-          commit("setPage", "Settings");
+        case '/dashboard/user/settings':
+          commit('setPage', 'Settings');
           break;
-        case "/dashboard/account/summary":
-          commit("setPage", "AccountSummary");
+        case '/dashboard/account/summary':
+          commit('setPage', 'AccountSummary');
           break;
-        case "/dashboard/account/payBills":
-          commit("setPage", "PayBills");
+        case '/dashboard/account/payBills':
+          commit('setPage', 'PayBills');
           break;
-        case "/dashboard/account/managePayees":
-          commit("setPage", "ManagePayees");
+        case '/dashboard/account/managePayees':
+          commit('setPage', 'ManagePayees');
           break;
-        case "/dashboard/account/managePayees/add":
-          commit("setPage", "AddPayee");
+        case '/dashboard/account/managePayees/add':
+          commit('setPage', 'AddPayee');
           break;
-        case "/dashboard/account/managePayees/remove":
-          commit("setPage", "RemovePayee");
+        case '/dashboard/account/managePayees/remove':
+          commit('setPage', 'RemovePayee');
           break;
-        case "/dashboard/etransfer/transfers":
-          commit("setPage", "PastTransfers");
+        case '/dashboard/etransfer/transfers':
+          commit('setPage', 'PastTransfers');
           break;
-        case "/dashboard/etransfer/sendEtransfer":
-          commit("setPage", "SendEtransfer");
+        case '/dashboard/etransfer/sendEtransfer':
+          commit('setPage', 'SendEtransfer');
           break;
-        case "/dashboard/etransfer/manageContacts":
-          commit("setPage", "ManageContacts");
+        case '/dashboard/etransfer/manageContacts':
+          commit('setPage', 'ManageContacts');
           break;
-        case "/dashboard/etransfer/manageContacts/add":
-          commit("setPage", "AddContact");
+        case '/dashboard/etransfer/manageContacts/add':
+          commit('setPage', 'AddContact');
           break;
-        case "/dashboard/etransfer/manageContacts/remove":
-          commit("setPage", "RemoveContact");
+        case '/dashboard/etransfer/manageContacts/remove':
+          commit('setPage', 'RemoveContact');
           break;
-        case "/dashboard/info":
-          commit("setPage", "Info");
+        case '/dashboard/info':
+          commit('setPage', 'Info');
           break;
-        case "/dashboard/view":
-          commit("setPage", "DashboardSummary");
+        case '/dashboard/view':
+          commit('setPage', 'DashboardSummary');
           break;
       }
       WebsiteUtils.updatePageTitle(state.page);
@@ -163,65 +163,65 @@ const store = new Vuex.Store({
         await AuthService.getRefreshToken()
       );
     },
-    async getSettings({ commit }): Promise<AxiosResponse> {
-      response = await UserService.getSettings();
-
-      commit("setSettings", response.data.settings);
-
-      return response;
+    async getSettings({commit}): Promise<boolean> {
+      return new Promise(async (resolve) => {
+        response = await UserService.getSettings();
+        commit('setSettings', response.data.settings);
+        resolve(response !== null);
+      });
     },
-    async login({ commit }, user: LoginRequest): Promise<void> {
+    async login({commit}, user: LoginRequest): Promise<void> {
       response = await AuthService.login(user);
       if (ResponseUtils.successAuthProcessor(response)) {
         const data = response.data;
 
-        commit("auth_success");
+        commit('auth_success');
         commit(
-          "setTwoFactorAuthenticationEnabled",
+          'setTwoFactorAuthenticationEnabled',
           data.twoFactorAuthenticationEnabled
         );
         commit(
-          "setAcceptedTermsAndConditions",
+          'setAcceptedTermsAndConditions',
           data.acceptedTermsAndConditions
         );
-        commit("setEmail", data.email);
-        commit("setLastLogin", data.lastLogin);
+        commit('setEmail', data.email);
+        commit('setLastLogin', data.lastLogin);
 
         if (data.acceptedTermsAndConditions) {
-          await WebsiteUtils.switchVue("dashboard");
+          await WebsiteUtils.switchVue('dashboard');
         } else {
-          await WebsiteUtils.switchVue("firstTimeLogin");
+          await WebsiteUtils.switchVue('firstTimeLogin');
         }
       }
     },
     async logout(): Promise<void> {
       await AuthService.logout();
     },
-    async register({ commit }, user: RegisterRequest): Promise<boolean> {
+    async register({commit}, user: RegisterRequest): Promise<boolean> {
       return ResponseUtils.successAuthProcessor(
         await AuthService.register(user)
       );
     },
-    async payBill({ commit }, transaction: Transaction): Promise<boolean> {
+    async payBill({commit}, transaction: Transaction): Promise<boolean> {
       response = await UserService.payBill(transaction);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setAccount", response.data.account);
+        commit('setAccount', response.data.account);
         BuefyService.successToast(response.data.message);
         return true;
       }
       return false;
     },
-    async saveSettings({ commit }, settings: Settings): Promise<void> {
+    async saveSettings({commit}, settings: Settings): Promise<void> {
       response = await UserService.updateSettings(settings);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setSettings", response.data.settings);
+        commit('setSettings', response.data.settings);
         BuefyService.successToast(response.data.message);
       }
     },
     async saveTwoFactorAuthenticationEnabled(
-      { commit },
+      {commit},
       enabled: boolean
     ): Promise<void> {
       response = await AuthService.updateTwoFactorAuthenticationEnabled({
@@ -229,68 +229,68 @@ const store = new Vuex.Store({
       });
 
       commit(
-        "setTwoFactorAuthenticationEnabled",
+        'setTwoFactorAuthenticationEnabled',
         response.data.twoFactorAuthenticationEnabled
       );
     },
     async sendEtransfer(
-      { commit },
+      {commit},
       transaction: EtransferTransaction
     ): Promise<boolean> {
       response = await UserService.sendEtransfer(transaction);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setAccount", response.data.account);
-        commit("setEtransfer", response.data.etransfer);
+        commit('setAccount', response.data.account);
+        commit('setEtransfer', response.data.etransfer);
         BuefyService.successToast(response.data.message);
         return true;
       }
       return false;
     },
     async sendTransaction(
-      { commit },
+      {commit},
       transaction: AdminTransaction
     ): Promise<boolean> {
       response = await UserService.sendAdminTransaction(transaction);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setAccount", response.data.account);
+        commit('setAccount', response.data.account);
         BuefyService.successToast(response.data.message);
         return true;
       }
       return false;
     },
     async updateContacts(
-      { commit },
+      {commit},
       updateContactRequest: UpdateContactRequest
     ): Promise<boolean> {
       response = await UserService.updateContacts(updateContactRequest);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setEtransfer", response.data.etransfer);
+        commit('setEtransfer', response.data.etransfer);
         BuefyService.successToast(response.data.message);
         return true;
       }
       return false;
     },
-    async updateEmail({ commit }, email: string): Promise<boolean> {
+    async updateEmail({commit}, email: string): Promise<boolean> {
       response = await AuthService.updateEmail(email);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setEmail", response.data.newEmail);
+        commit('setEmail', response.data.newEmail);
         BuefyService.successToast(response.data.message);
         return true;
       }
       return false;
     },
     async updatePayees(
-      { commit },
+      {commit},
       updatePayeesRequest: UpdatePayeeRequest
     ): Promise<boolean> {
       response = await UserService.updatePayees(updatePayeesRequest);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setAccount", response.data.account);
+        commit('setAccount', response.data.account);
         BuefyService.successToast(response.data.message);
         return true;
       }
