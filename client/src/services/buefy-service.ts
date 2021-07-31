@@ -26,12 +26,12 @@ export default class BuefyService {
   }
 
   public static startLoading() {
-    // this.loadingComponent = buefy.LoadingProgrammatic.open({
-    //   container: null,
-    // });
+    this.loadingComponent = buefy.LoadingProgrammatic.open({
+      container: null,
+    });
   }
 
   public static stopLoading() {
-    // this.loadingComponent.close();
+    this.loadingComponent.close();
   }
 }
