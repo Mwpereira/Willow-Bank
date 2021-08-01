@@ -4,7 +4,7 @@
       <p class="title mb-6">Remove Contact</p>
       <ValidationObserver ref="observer" v-slot="{ invalid, validate }">
         <form @submit.prevent="confirmationDeleteContact">
-          <b-field label="Name of Payee">
+          <b-field label="Name of Contact">
             <b-autocomplete
               v-model="name"
               :data="filteredDataArray"

@@ -27,7 +27,7 @@
               v-model="amount"
               icon="money-bill"
               icon-pack="fas"
-              rules="required|min_value:1|max_value:10000"
+              rules="required|min_value:1|max_et_value:3000"
             >
             </BInputWithValidation>
           </b-field>

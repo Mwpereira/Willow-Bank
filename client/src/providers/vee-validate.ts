@@ -54,3 +54,8 @@ extend("max_an_value", {
   ...max_value,
   message: "Exceeds account number length",
 });
+
+extend("max_et_value", {
+  ...max_value,
+  message: "Cannot be more than $3,000",
+});

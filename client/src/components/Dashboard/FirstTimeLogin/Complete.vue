@@ -8,7 +8,9 @@
         <p class="my-2 py-1">Account Type: <b>Premium</b></p>
         <p class="my-2 py-1">Initial Investment: <b>$10,000</b></p>
         <p class="my-2 py-1">Interest Rate: <b>7%</b></p>
-        <b-button class="mt-2 is-primary is-size-6" v-on:click="complete()"
+        <p class="my-2 py-1">Max Deposit/Withdraw Limit: <b>$10,000</b></p>
+        <p class="my-2 py-1">Max e-Transfer Limit: <b>$3,000</b></p>
+        <b-button class="mt-3 is-primary is-size-6" v-on:click="complete()"
           >Complete & Continue
         </b-button>
       </div>
