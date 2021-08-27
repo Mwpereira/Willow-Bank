@@ -6,24 +6,24 @@
       </b-navbar-item>
       <b-navbar-dropdown label="Account">
         <b-navbar-item v-on:click="switchPage('account/summary')"
-          >Summary
+        >Summary
         </b-navbar-item>
         <b-navbar-item v-on:click="switchPage('account/payBills')"
-          >Pay Bills
+        >Pay Bills
         </b-navbar-item>
         <b-navbar-item v-on:click="switchPage('account/managePayees')"
-          >Manage Payees
+        >Manage Payees
         </b-navbar-item>
       </b-navbar-dropdown>
       <b-navbar-dropdown label="eTransfer">
-        <b-navbar-item v-on:click="switchPage('etransfer/transfers')"
-          >Past Transfers
+        <b-navbar-item v-on:click="checkEtransfer('etransfer/transfers')"
+        >Past Transfers
         </b-navbar-item>
-        <b-navbar-item v-on:click="switchPage('etransfer/sendEtransfer')"
-          >Send eTransfer
+        <b-navbar-item v-on:click="checkEtransfer('etransfer/sendEtransfer')"
+        >Send eTransfer
         </b-navbar-item>
-        <b-navbar-item v-on:click="switchPage('etransfer/manageContacts')"
-          >Manage Contacts
+        <b-navbar-item v-on:click="checkEtransfer('etransfer/manageContacts')"
+        >Manage Contacts
         </b-navbar-item>
       </b-navbar-dropdown>
       <b-navbar-item v-on:click="switchPage('info')">Info</b-navbar-item>
@@ -33,9 +33,9 @@
       <b-navbar-item tag="div">
         <div class="buttons">
           <a
-            class="button is-warning"
-            rel="noopener"
-            v-on:click="switchPage('user/settings')"
+              class="button is-warning"
+              rel="noopener"
+              v-on:click="checkSettings('user/settings')"
           >
             <strong>Settings</strong>
           </a>
@@ -49,11 +49,11 @@
 </template>
 
 <script lang="ts">
-import AuthService from "@/services/auth-service";
-import BuefyService from "@/services/buefy-service";
-import WebsiteUtils from "@/utils/website-utils";
-import Component from "vue-class-component";
-import { Vue } from "vue-property-decorator";
+import AuthService from '@/services/auth-service';
+import BuefyService from '@/services/buefy-service';
+import WebsiteUtils from '@/utils/website-utils';
+import Component from 'vue-class-component';
+import {Vue} from 'vue-property-decorator';
 
 @Component
 export default class NavBar extends Vue {
@@ -63,7 +63,19 @@ export default class NavBar extends Vue {
 
   public logout(): void {
     AuthService.logout();
-    BuefyService.successToast("Signed Out");
+    BuefyService.successToast('Signed Out');
+  }
+
+  public async checkEtransfer(page: string): void {
+    await WebsiteUtils.checkEtransfer();
+
+    this.switchPage(page)
+  }
+
+  public async checkSettings(page: string): void {
+    await WebsiteUtils.checkSettings();
+
+    this.switchPage(page)
   }
 }
 </script>
