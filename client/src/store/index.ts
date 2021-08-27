@@ -85,10 +85,10 @@ const store = new Vuex.Store({
 
         commit(
           "setAcceptedTermsAndConditions",
-          response.acceptedTermsAndConditions
+          data.acceptedTermsAndConditions
         );
 
-        BuefyService.successToast(response.message);
+        BuefyService.successToast(data.message);
         return true;
       }
       return false;
