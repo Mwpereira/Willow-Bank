@@ -1,5 +1,5 @@
-import {PolicyDocument} from 'aws-lambda';
-import * as jwt from 'jsonwebtoken';
+import {PolicyDocument} from "aws-lambda";
+import * as jwt from "jsonwebtoken";
 
 /**
  * Helper methods for JWT
@@ -60,11 +60,11 @@ export default class JwtUtils {
    * @return access token
    */
   static getToken(cookie: string): string | null {
-    const tokens = cookie.replace(' ', '').split(';');
+    const tokens = cookie.replace(" ", "").split(";");
     let accessToken: string = null;
 
     for (const token of tokens) {
-      if (token.includes('accessToken')) {
+      if (token.includes("accessToken")) {
         accessToken = token.substr(12);
         break;
       }
@@ -126,10 +126,10 @@ export default class JwtUtils {
     }
 
     return {
-      Version: '2012-10-17',
+      Version: "2012-10-17",
       Statement: [
         {
-          Action: 'execute-api:Invoke',
+          Action: "execute-api:Invoke",
           Effect: effect,
           Resource: methodArn,
         },

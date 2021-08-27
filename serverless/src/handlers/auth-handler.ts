@@ -1,5 +1,5 @@
-import {APIGatewayEvent, Handler, SQSEvent} from 'aws-lambda';
-import AuthController from '../controllers/auth-controller';
+import {APIGatewayEvent, Handler, SQSEvent} from "aws-lambda";
+import AuthController from "../controllers/auth-controller";
 
 export const verifyToken: Handler = async (event) => {
   return await AuthController.verifyToken(event);

@@ -7,7 +7,7 @@ import Buefy from "buefy";
 import "./providers/vee-validate";
 
 import "buefy/dist/buefy.css";
-import "./assets/sass/bulma.scss";
+import "@/assets/scss/bulma.scss";
 
 Vue.use(Buefy);
 

@@ -1,7 +1,7 @@
-import {responseHeader} from '../constants/header-constants';
-import {AccessToken} from '../interfaces/access-token';
-import {Response} from '../interfaces/response';
-import CookieUtilities from './cookie-utils';
+import {responseHeader} from "../constants/header-constants";
+import {AccessToken} from "../interfaces/access-token";
+import {Response} from "../interfaces/response";
+import CookieUtilities from "./cookie-utils";
 
 /**
  * Creates Response for API calls
@@ -40,7 +40,7 @@ export class Result {
       expires: new Date(Date.now() + minute * 60 * 1000),
     };
 
-    result.headers['Set-Cookie'] = new CookieUtilities(
+    result.headers["Set-Cookie"] = new CookieUtilities(
       payload
     ).generateCookie();
 
@@ -51,7 +51,7 @@ export class Result {
 export default class MessageUtil {
   static success(
     statusCode: number,
-    message = 'Success',
+    message = "Success",
     data?: object
   ): Response {
     return new Result(statusCode, message, data).response();

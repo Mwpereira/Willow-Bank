@@ -6,6 +6,6 @@ export default class TypescriptUtils {
    * @return boolean
    */
   public static checkString(payload: string): boolean {
-    return typeof payload === 'string';
+    return typeof payload === "string";
   }
 }

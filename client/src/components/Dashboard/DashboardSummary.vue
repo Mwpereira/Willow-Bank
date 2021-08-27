@@ -6,13 +6,13 @@
         <div class="columns">
           <div class="column">
             <p class="is-size-1 has-text-primary">
-              ${{ account ? account.balance.toLocaleString() : "" }}
+              ${{ account ? account.balance.toLocaleString() : "0" }}
             </p>
             <p class="has-text-weight-bold">Premium Savings Account Balance</p>
           </div>
           <div class="column">
             <p class="is-size-1">
-              {{ account ? Object.keys(account.transactions).length : "" }}
+              {{ account ? Object.keys(account.transactions).length : "0" }}
             </p>
             <p class="has-text-weight-bold">Number of Transactions</p>
           </div>
@@ -23,7 +23,7 @@
         <div class="columns">
           <div class="column">
             <p class="is-size-3 mb-2">
-              {{ lastLogin ? lastLogin.split(",")[0] : "" }}
+              {{ lastLogin ? lastLogin.split(",")[0] : "N/A" }}
             </p>
             <p class="has-text-weight-bold">Last Login</p>
           </div>

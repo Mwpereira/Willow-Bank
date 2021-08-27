@@ -2,7 +2,7 @@
   <div id="Auth">
     <p
       id="backButton"
-      class="has-text-weight-bold has-text-left is-size-5 pt-5 pl-6"
+      class="has-text-weight-bold has-text-left is-size-5 pt-5 pl-5"
       v-on:click="$router.push('/')"
     >
       <i class="fas fa-angle-left mr-1"></i>

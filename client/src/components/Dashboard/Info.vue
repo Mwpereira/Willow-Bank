@@ -24,7 +24,11 @@
         </b-button>
       </a>
       <br />
-      <a href="https://www.linkedin.com/in/michael-pereira-07/" target="_blank" rel="noopener">
+      <a
+        href="https://www.linkedin.com/in/michael-pereira-07/"
+        target="_blank"
+        rel="noopener"
+      >
         <b-button class="is-linkedin has-text-weight-bold my-2 has-text-white">
           <span class="mr-3">
             <i class="fab fa-linkedin-in"></i>
@@ -32,7 +36,15 @@
           LinkedIn
         </b-button>
       </a>
-      <p class="my-6 is-italic">Found a bug? <a href="https://github.com/Mwpereira/Willow-Bank/issues" target="_blank" rel="noopener">Post Here</a></p>
+      <p class="my-6 is-italic">
+        Found a bug?
+        <a
+          href="https://github.com/Mwpereira/Willow-Bank/issues"
+          target="_blank"
+          rel="noopener"
+          >Post Here</a
+        >
+      </p>
     </div>
   </div>
 </template>

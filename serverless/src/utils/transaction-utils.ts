@@ -1,20 +1,20 @@
-import moment from 'moment';
-import {TransactionActions} from '../enums/transaction-actions';
-import {TransactionTypes} from '../enums/transaction-types';
-import {Account} from '../interfaces/account';
-import {Contact} from '../interfaces/contact';
-import {Payee} from '../interfaces/payee';
-import {Transaction} from '../interfaces/transaction';
+import moment from "moment";
+import {TransactionActions} from "../enums/transaction-actions";
+import {TransactionTypes} from "../enums/transaction-types";
+import {Account} from "../interfaces/account";
+import {Contact} from "../interfaces/contact";
+import {Payee} from "../interfaces/payee";
+import {Transaction} from "../interfaces/transaction";
 
 export default class TransactionUtils {
   public static getTransaction(account: Account, amount: number, transactionAction: TransactionActions, transactionType: TransactionTypes, receiver?: Payee | Contact): Transaction {
     return {
       id: account.transactions.length + 1,
-      receiver: receiver ? receiver.name : 'Willow Bank',
+      receiver: receiver ? receiver.name : "Willow Bank",
       action: transactionAction,
       type: transactionType,
       amount: `$${amount.toLocaleString()}`,
-      date: moment().format('MMMM Do YYYY, h:mm:ss a')
+      date: moment().format("MMMM Do YYYY, h:mm:ss a")
     } as Transaction;
   }
 

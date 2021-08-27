@@ -1,4 +1,4 @@
 export enum TransactionActions {
-  DEPOSIT = ('Deposit'),
-  WITHDRAW = ('Withdraw'),
+  DEPOSIT = ("Deposit"),
+  WITHDRAW = ("Withdraw"),
 }

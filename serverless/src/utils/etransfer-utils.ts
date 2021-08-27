@@ -1,9 +1,9 @@
-import moment from 'moment';
-import {TransactionActions} from '../enums/transaction-actions';
-import {TransactionTypes} from '../enums/transaction-types';
-import {Contact} from '../interfaces/contact';
-import {Etransfer} from '../interfaces/etransfer';
-import {EtransferTransaction} from '../interfaces/etransfer-transaction';
+import moment from "moment";
+import {TransactionActions} from "../enums/transaction-actions";
+import {TransactionTypes} from "../enums/transaction-types";
+import {Contact} from "../interfaces/contact";
+import {Etransfer} from "../interfaces/etransfer";
+import {EtransferTransaction} from "../interfaces/etransfer-transaction";
 
 export default class EtransferUtils {
   public static getEtransferTransaction(etransfer: Etransfer, amount: number, receiver: Contact): EtransferTransaction {
@@ -14,7 +14,7 @@ export default class EtransferUtils {
       action: TransactionActions.WITHDRAW,
       type: TransactionTypes.ETRANSFER,
       amount: `$${amount.toLocaleString()}`,
-      date: moment().format('MMMM Do YYYY, h:mm:ss a')
+      date: moment().format("MMMM Do YYYY, h:mm:ss a")
     } as EtransferTransaction;
   }
 

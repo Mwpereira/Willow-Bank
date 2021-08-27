@@ -1,12 +1,12 @@
-import {SQS} from 'aws-sdk';
-import * as dynamoDB from 'dynamoose';
-import moment from 'moment';
-import {RegisterRequest} from '../../interfaces/register-request';
-import {WillowBankSchema} from '../../models/willow-bank';
-import BcryptUtilities from '../bcrypt-utils';
-import {SqsUtils} from '../sqs-utils';
+import {SQS} from "aws-sdk";
+import * as dynamoDB from "dynamoose";
+import moment from "moment";
+import {RegisterRequest} from "../../interfaces/register-request";
+import {WillowBankSchema} from "../../models/willow-bank";
+import BcryptUtilities from "../bcrypt-utils";
+import {SqsUtils} from "../sqs-utils";
 
-const willowBankTable: any = dynamoDB.model('willowBank', WillowBankSchema);
+const willowBankTable: any = dynamoDB.model("willowBank", WillowBankSchema);
 const sqs: SQS = new SQS();
 
 /**
@@ -28,11 +28,11 @@ export default class Auth {
           balance: 10000,
           transactions: [{
             id: 1,
-            receiver: 'Willow Bank',
-            action: 'Admin',
-            type: 'Deposit',
-            amount: '10,000',
-            date: moment().format('MMMM Do YYYY, h:mm:ss a')
+            receiver: "Willow Bank",
+            action: "Admin",
+            type: "Deposit",
+            amount: "10,000",
+            date: moment().format("MMMM Do YYYY, h:mm:ss a")
           }],
           payees: {}
         }),
@@ -45,21 +45,21 @@ export default class Auth {
           lastName: user.lastName,
           country: user.country
         }),
-        twoFactorAuthentication: '',
+        twoFactorAuthentication: "",
         twoFactorAuthenticationEnabled: false,
         acceptedTermsAndConditions: false,
-        lastLogin: moment().format('MMMM Do YYYY, h:mm:ss a'),
-        createdAt: moment().format('MMMM Do YYYY, h:mm:ss a'),
+        lastLogin: moment().format("MMMM Do YYYY, h:mm:ss a"),
+        createdAt: moment().format("MMMM Do YYYY, h:mm:ss a"),
       })
       .then(async () => {
         const sqsParams = SqsUtils.sqsParams();
         sqsParams.MessageBody = JSON.stringify({
-          'email': user.email,
+          "email": user.email,
           twoFactorAuthentication: {
-            'securityQuestionOne': user.twoFactorAuthentication.securityQuestionOne,
-            'securityAnswerOne': user.twoFactorAuthentication.securityAnswerOne,
-            'securityQuestionTwo': user.twoFactorAuthentication.securityQuestionOne,
-            'securityAnswerTwo': user.twoFactorAuthentication.securityAnswerTwo,
+            "securityQuestionOne": user.twoFactorAuthentication.securityQuestionOne,
+            "securityAnswerOne": user.twoFactorAuthentication.securityAnswerOne,
+            "securityQuestionTwo": user.twoFactorAuthentication.securityQuestionOne,
+            "securityAnswerTwo": user.twoFactorAuthentication.securityAnswerTwo,
           }
         });
         await sqs.sendMessage(sqsParams).promise();
@@ -97,7 +97,7 @@ export default class Auth {
    */
   static getUser(email: string): any {
     return willowBankTable
-      .query('email')
+      .query("email")
       .eq(email.toLowerCase())
       .exec()
       .then((result: any) => {
@@ -120,9 +120,9 @@ export default class Auth {
    */
   static getUserExists(email: string): any {
     return willowBankTable
-      .query('email')
+      .query("email")
       .eq(email.toLowerCase())
-      .attributes(['email'])
+      .attributes(["email"])
       .exec()
       .then((result: any) => {
         if (result.count === 1) {
@@ -145,9 +145,9 @@ export default class Auth {
   static getUserData(email: string): any {
     return willowBankTable
       .query()
-      .where('email')
+      .where("email")
       .eq(email.toLowerCase())
-      .attributes(['email', 'password', 'acceptedTermsAndConditions', 'lastLogin', 'twoFactorAuthenticationEnabled'])
+      .attributes(["email", "password", "acceptedTermsAndConditions", "lastLogin", "twoFactorAuthenticationEnabled"])
       .exec()
       .then((result: any) => {
         return result[0];
@@ -226,7 +226,7 @@ export default class Auth {
           email: email.toLowerCase(),
         },
         {
-          lastLogin: moment().format('MMMM Do YYYY, h:mm:ss a'),
+          lastLogin: moment().format("MMMM Do YYYY, h:mm:ss a"),
         }
       )
       .then(() => {

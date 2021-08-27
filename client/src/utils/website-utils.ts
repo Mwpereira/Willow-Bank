@@ -20,7 +20,7 @@ export default class WebsiteUtils {
    */
   public static async switchPage(page: string): Promise<void> {
     if (page === "dashboard/view") {
-      await store.dispatch("getPage", `/dashboard/view`);
+      await store.dispatch("getPage", "/dashboard/view");
     } else {
       await store.dispatch("getPage", `/dashboard/${page}`);
     }

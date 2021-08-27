@@ -3,4 +3,3 @@
  *
  * @author Michael W. Pereira
  */
-require('dotenv').config();

@@ -2,26 +2,20 @@
   <div id="app">
     <router-view />
     <div v-if="showNotification">
-      <b-notification
-        id="notification"
-        type="is-info"
-        aria-close-label="Close notification"
-      >
-        Our site uses cookies to provide you the best service and experience. We
-        store these cookies with advanced encryption to ensure the strongest
-        security and protection.
-      </b-notification>
+      <Cookies />
     </div>
     <Footer />
   </div>
 </template>
 
 <script lang="ts">
+import Cookies from "@/components/Common/Cookies.vue";
 import { Component, Vue } from "vue-property-decorator";
 import Footer from "@/components/Common/Footer.vue";
 
 @Component({
   components: {
+    Cookies,
     Footer,
   },
 })

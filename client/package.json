@@ -9,16 +9,16 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lint:fix": "vue-cli-service lint --fix"
   },
   "dependencies": {
-    "@types/axios": "^0.14.0",
     "@types/js-cookie": "^2.2.6",
-    "axios": "^0.21.1",
     "buefy": "^0.9.8",
     "bulma": "^0.9.3",
     "core-js": "^3.9.0",
     "js-cookie": "^2.2.1",
+    "ky": "^0.28.5",
     "register-service-worker": "^1.7.1",
     "ts-node": "^9.1.1",
     "uuid": "^8.3.2",

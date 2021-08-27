@@ -1,4 +1,4 @@
-import * as DynamoDB from 'dynamoose';
+import * as DynamoDB from "dynamoose";
 
 export const WillowBankSchema = new DynamoDB.Schema({
     email: {

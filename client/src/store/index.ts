@@ -11,7 +11,6 @@ import BuefyService from "@/services/buefy-service";
 import UserService from "@/services/user-service";
 import ResponseUtils from "@/utils/response-utils";
 import WebsiteUtils from "@/utils/website-utils";
-import { AxiosResponse } from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
@@ -20,7 +19,8 @@ import { EtransferTransaction } from "../../../serverless/src/interfaces/etransf
 
 Vue.use(Vuex);
 
-let response: AxiosResponse;
+let response: any;
+let data: any;
 
 const store = new Vuex.Store({
   plugins: [createPersistedState({ storage: window.sessionStorage })],
@@ -81,20 +81,23 @@ const store = new Vuex.Store({
       response = await UserService.acceptedTermsAndConditions();
 
       if (ResponseUtils.successProcessor(response)) {
+        data = await response.json();
+
         commit(
           "setAcceptedTermsAndConditions",
-          response.data.acceptedTermsAndConditions
+          response.acceptedTermsAndConditions
         );
-        BuefyService.successToast(response.data.message);
+
+        BuefyService.successToast(response.message);
         return true;
       }
       return false;
     },
     async changePassword({ commit }, passwords: object): Promise<boolean> {
-      response = await AuthService.changePassword(passwords);
+      response =  await AuthService.changePassword(passwords);
 
       if (ResponseUtils.successProcessor(response)) {
-        BuefyService.successToast(response.data.message);
+        BuefyService.successToast(await response.json().message);
         return true;
       }
 
@@ -103,24 +106,24 @@ const store = new Vuex.Store({
     async deleteUser(): Promise<boolean> {
       response = await AuthService.deleteUser();
 
-      store.commit('auth_logout');
-      await WebsiteUtils.switchVue('login');
+      store.commit("auth_logout");
+      await WebsiteUtils.switchVue("login");
 
       if (ResponseUtils.successProcessor(response)) {
-        BuefyService.successToast(response.data.message);
+        BuefyService.successToast(await response.json().message);
         return true;
       }
       return false;
     },
     async getAccount({ commit }): Promise<void> {
-      response = await UserService.getAccount();
+      response = await (await UserService.getAccount()).json();
 
-      commit("setAccount", response.data.account);
+      commit("setAccount", await response.account);
     },
     async getEtransferData({ commit }): Promise<void> {
-      response = await UserService.getEtransferData();
+      response = await (await UserService.getEtransferData()).json();
 
-      commit("setEtransfer", response.data.etransfer);
+      commit("setEtransfer", await response.etransfer);
     },
     getPage({ commit, state }, path: string): void {
       switch (path) {
@@ -172,14 +175,15 @@ const store = new Vuex.Store({
       );
     },
     async getSettings({ commit }): Promise<void> {
-      response = await UserService.getSettings();
+      response = await (await UserService.getSettings()).json();
 
-      commit("setSettings", response.data.settings);
+      commit("setSettings", response.settings);
     },
     async login({ commit }, user: LoginRequest): Promise<void> {
       response = await AuthService.login(user);
+
       if (ResponseUtils.successAuthProcessor(response)) {
-        const data = response.data;
+        data = await response.json();
 
         commit("auth_success");
         commit(
@@ -212,8 +216,10 @@ const store = new Vuex.Store({
       response = await UserService.payBill(transaction);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setAccount", response.data.account);
-        BuefyService.successToast(response.data.message);
+        data = await response.json();
+
+        commit("setAccount", data.account);
+        BuefyService.successToast(data.message);
         return true;
       }
       return false;
@@ -222,8 +228,10 @@ const store = new Vuex.Store({
       response = await UserService.updateSettings(settings);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setSettings", response.data.settings);
-        BuefyService.successToast(response.data.message);
+        data = await response.json();
+
+        commit("setSettings", data.settings);
+        BuefyService.successToast(data.message);
       }
     },
     async saveTwoFactorAuthenticationEnabled(
@@ -236,7 +244,7 @@ const store = new Vuex.Store({
 
       commit(
         "setTwoFactorAuthenticationEnabled",
-        response.data.twoFactorAuthenticationEnabled
+        response.json().twoFactorAuthenticationEnabled
       );
     },
     async sendEtransfer(
@@ -246,9 +254,11 @@ const store = new Vuex.Store({
       response = await UserService.sendEtransfer(transaction);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setAccount", response.data.account);
-        commit("setEtransfer", response.data.etransfer);
-        BuefyService.successToast(response.data.message);
+        data = await response.json();
+
+        commit("setAccount", data.account);
+        commit("setEtransfer", data.etransfer);
+        BuefyService.successToast(data.message);
         return true;
       }
       return false;
@@ -260,8 +270,10 @@ const store = new Vuex.Store({
       response = await UserService.sendAdminTransaction(transaction);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setAccount", response.data.account);
-        BuefyService.successToast(response.data.message);
+        data = await response.json();
+
+        commit("setAccount", response.json().account);
+        BuefyService.successToast(response.json().message);
         return true;
       }
       return false;
@@ -273,8 +285,10 @@ const store = new Vuex.Store({
       response = await UserService.updateContacts(updateContactRequest);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setEtransfer", response.data.etransfer);
-        BuefyService.successToast(response.data.message);
+        data = await response.json();
+
+        commit("setEtransfer", data.etransfer);
+        BuefyService.successToast(data.message);
         return true;
       }
       return false;
@@ -283,8 +297,10 @@ const store = new Vuex.Store({
       response = await AuthService.updateEmail(email);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setEmail", response.data.newEmail);
-        BuefyService.successToast(response.data.message);
+        data = await response.json();
+
+        commit("setEmail", data.newEmail);
+        BuefyService.successToast(data.message);
         return true;
       }
       return false;
@@ -296,8 +312,10 @@ const store = new Vuex.Store({
       response = await UserService.updatePayees(updatePayeesRequest);
 
       if (ResponseUtils.successProcessor(response)) {
-        commit("setAccount", response.data.account);
-        BuefyService.successToast(response.data.message);
+        data = await response.json();
+
+        commit("setAccount", data.account);
+        BuefyService.successToast(data.message);
         return true;
       }
       return false;

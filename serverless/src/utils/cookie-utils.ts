@@ -1,6 +1,6 @@
-import {AccessToken} from '../interfaces/access-token';
+import {AccessToken} from "../interfaces/access-token";
 
-const cookie = require('cookie');
+const cookie = require("cookie");
 
 /**
  * Contains methods for creating/retrieving cookies
@@ -8,8 +8,8 @@ const cookie = require('cookie');
 export default class CookieUtilities {
   private readonly cookie: string;
   private readonly expires: Date;
-  private readonly path = '/';
-  private readonly sameSite = 'NONE';
+  private readonly path = "/";
+  private readonly sameSite = "NONE";
   private readonly secure = true;
   private readonly httpOnly = true;
 
@@ -38,11 +38,11 @@ export default class CookieUtilities {
    * @return JWT cookie buffer
    */
   generateCookie(): Buffer {
-    return cookie.serialize('accessToken', this.cookie, {
+    return cookie.serialize("accessToken", this.cookie, {
       expires: this.expires,
       path: this.path,
-      sameSite: process.env.SERVER_MODE === 'PRODUCTION' ? this.sameSite : null,
-      secure: process.env.SERVER_MODE === 'PRODUCTION' ? this.secure : null,
+      sameSite: process.env.SERVER_MODE === "PRODUCTION" ? this.sameSite : null,
+      secure: process.env.SERVER_MODE === "PRODUCTION" ? this.secure : null,
       httpOnly: this.httpOnly,
     });
   }

@@ -1,11 +1,12 @@
+import {options} from '@/constants/ky-constants';
 import {LoginRequest} from '@/interfaces/login-request';
 import {RegisterRequest} from '@/interfaces/register-request';
 import store from '@/store';
+import {createRequest} from '@/utils/request-utils';
 import ResponseUtils from '@/utils/response-utils';
 import WebsiteUtils from '@/utils/website-utils';
-import axios, {AxiosResponse} from 'axios';
 
-axios.defaults.withCredentials = true;
+const ky = options;
 
 export default class AuthService {
   private static readonly url: any =
@@ -13,37 +14,27 @@ export default class AuthService {
       ? `https://${process.env.VUE_APP_API}`
       : `http://${process.env.VUE_APP_API_LOCAL}`;
 
-  public static async getRefreshToken(): Promise<AxiosResponse> {
-    return axios
+  public static async getRefreshToken(): Promise<any> {
+    return ky
       .get(`${this.url}/auth/refreshToken`)
-      .then((response: AxiosResponse) => {
-        return response;
-      })
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
   }
 
-  public static async register(
-    request: RegisterRequest
-  ): Promise<AxiosResponse> {
-    return axios
-      .post(`${this.url}/auth/register`, JSON.stringify(request))
-      .then((response: AxiosResponse) => {
-        return response;
-      })
+  public static async register(request: RegisterRequest): Promise<any> {
+    return ky
+      .post(`${this.url}/auth/register`, createRequest(request))
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
   }
 
-  public static async login(request: LoginRequest): Promise<AxiosResponse> {
-    return axios
-      .post(`${this.url}/auth/login`, JSON.stringify(request))
-      .then((response: AxiosResponse) => {
-        return response;
-      })
+  public static async login(request: LoginRequest): Promise<object> {
+    return ky
+      .post(`${this.url}/auth/login`, createRequest(request))
       .catch((error) => {
+        console.log(error)
         return ResponseUtils.errorProcessor(error.response);
       });
   }
@@ -51,46 +42,34 @@ export default class AuthService {
   public static async logout(): Promise<void> {
     store.commit('auth_logout');
     await WebsiteUtils.switchVue('login');
-    axios
-      .get(`${this.url}/auth/logout`)
-      .then((response: AxiosResponse) => {
-        return response;
-      })
+    ky.get(`${this.url}/auth/logout`)
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
   }
 
-  public static async deleteUser(): Promise<AxiosResponse> {
-    return axios
+  public static async deleteUser(): Promise<any> {
+    return ky
       .post(`${this.url}/auth/deleteUser`)
-      .then((response: AxiosResponse) => {
-        return response;
-      })
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
   }
 
-  public static async updateEmail(email: string): Promise<AxiosResponse> {
-    return axios
-      .put(`${this.url}/auth/updateEmail`, JSON.stringify({newEmail: email}))
-      .then((response: AxiosResponse) => {
-        return response;
-      })
+  public static async updateEmail(email: string): Promise<any> {
+    return ky
+      .put(`${this.url}/auth/updateEmail`, {json: {newEmail: email}})
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
   }
 
-  public static async changePassword(
-    passwords: object
-  ): Promise<AxiosResponse> {
-    return axios
-      .put(`${this.url}/auth/changePassword`, JSON.stringify(passwords))
-      .then((response: AxiosResponse) => {
-        return response;
-      })
+  public static async changePassword(passwords: object): Promise<any> {
+    return ky
+      .put(
+        `${this.url}/auth/changePassword`,
+        createRequest({passwords: passwords})
+      )
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
@@ -98,12 +77,12 @@ export default class AuthService {
 
   public static async updateTwoFactorAuthenticationEnabled(
     twoFactorAuthenticationEnabled: any
-  ): Promise<AxiosResponse> {
-    return axios
-      .put(`${this.url}/auth/updateTFAState`, twoFactorAuthenticationEnabled)
-      .then((response: AxiosResponse) => {
-        return response;
-      })
+  ): Promise<any> {
+    return ky
+      .put(
+        `${this.url}/auth/updateTFAState`,
+        createRequest(twoFactorAuthenticationEnabled)
+      )
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });

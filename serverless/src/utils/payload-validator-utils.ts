@@ -1,9 +1,9 @@
-import assert from 'assert';
-import * as uuid from 'uuid';
-import * as validator from 'validator';
-import {LoginRequest} from '../interfaces/login-request';
-import {RegisterRequest} from '../interfaces/register-request';
-import TypescriptUtils from './typescript-utils';
+import assert from "assert";
+import * as uuid from "uuid";
+import * as validator from "validator";
+import {LoginRequest} from "../interfaces/login-request";
+import {RegisterRequest} from "../interfaces/register-request";
+import TypescriptUtils from "./typescript-utils";
 
 /**
  * Validates Payloads

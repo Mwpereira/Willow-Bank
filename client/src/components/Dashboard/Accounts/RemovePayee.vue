@@ -75,13 +75,14 @@ export default class RemovePayee extends Vue {
 
   public confirmationDeletePayee() {
     this.$buefy.dialog.confirm({
-      title: 'Deleting Payee',
-      message: 'Are you sure you want to <b>delete</b> this payee? This action cannot be undone.',
-      confirmText: 'Delete Payee',
-      type: 'is-danger',
+      title: "Deleting Payee",
+      message:
+        "Are you sure you want to <b>delete</b> this payee? This action cannot be undone.",
+      confirmText: "Delete Payee",
+      type: "is-danger",
       hasIcon: true,
-      onConfirm: async () => await this.removePayee()
-    })
+      onConfirm: async () => await this.removePayee(),
+    });
   }
 
   public async removePayee() {

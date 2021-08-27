@@ -70,13 +70,14 @@ export default class RemoveContact extends Vue {
 
   public confirmationDeleteContact() {
     this.$buefy.dialog.confirm({
-      title: 'Deleting Contact',
-      message: 'Are you sure you want to <b>delete</b> this contact? This action cannot be undone.',
-      confirmText: 'Delete Contact',
-      type: 'is-danger',
+      title: "Deleting Contact",
+      message:
+        "Are you sure you want to <b>delete</b> this contact? This action cannot be undone.",
+      confirmText: "Delete Contact",
+      type: "is-danger",
       hasIcon: true,
-      onConfirm: async () => await this.removeContact()
-    })
+      onConfirm: async () => await this.removeContact(),
+    });
   }
 
   get filteredDataArray() {

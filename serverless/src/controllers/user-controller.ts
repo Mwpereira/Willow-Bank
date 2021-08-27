@@ -1,17 +1,17 @@
-import {APIGatewayEvent} from 'aws-lambda';
-import {MessageConstants} from '../constants/message-constants';
-import {MessageAction} from '../enums/message-action';
-import {TransactionActions} from '../enums/transaction-actions';
-import {TransactionTypes} from '../enums/transaction-types';
-import {Contact} from '../interfaces/contact';
-import {Payee} from '../interfaces/payee';
-import {Response} from '../interfaces/response';
-import User from '../utils/dynamo-utilities/user';
-import user from '../utils/dynamo-utilities/user';
-import EtransferUtils from '../utils/etransfer-utils';
-import RequestUtils from '../utils/request-utils';
-import MessageUtil from '../utils/response-utils';
-import TransactionUtils from '../utils/transaction-utils';
+import {APIGatewayEvent} from "aws-lambda";
+import {MessageConstants} from "../constants/message-constants";
+import {MessageAction} from "../enums/message-action";
+import {TransactionActions} from "../enums/transaction-actions";
+import {TransactionTypes} from "../enums/transaction-types";
+import {Contact} from "../interfaces/contact";
+import {Payee} from "../interfaces/payee";
+import {Response} from "../interfaces/response";
+import User from "../utils/dynamo-utilities/user";
+import user from "../utils/dynamo-utilities/user";
+import EtransferUtils from "../utils/etransfer-utils";
+import RequestUtils from "../utils/request-utils";
+import MessageUtil from "../utils/response-utils";
+import TransactionUtils from "../utils/transaction-utils";
 
 /**
  * User Utilities
@@ -224,7 +224,7 @@ export default class UserController {
       if (await user.updateAccount(email, updatedAccount)) {
         return MessageUtil.success(
           200,
-          'Test',
+          "Test",
           {account: updatedAccount}
         );
       }
@@ -255,7 +255,7 @@ export default class UserController {
         if (await user.updateAccount(email, updatedAccount) && await user.updateEtransferData(email, updatedEtransfer)) {
           return MessageUtil.success(
             200,
-            'Test',
+            "Test",
             {account: updatedAccount, etransfer: updatedEtransfer}
           );
         }

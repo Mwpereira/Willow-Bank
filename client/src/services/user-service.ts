@@ -1,112 +1,81 @@
-import {AdminTransaction} from '@/interfaces/admin-transaction';
-import {Settings} from '@/interfaces/settings';
-import {Transaction} from '@/interfaces/transaction';
-import {UpdatePayeeRequest} from '@/interfaces/update-payee-request';
-import ResponseUtils from '@/utils/response-utils';
-import axios, {AxiosResponse} from 'axios';
-import {EtransferTransaction} from '../../../serverless/src/interfaces/etransfer-transaction';
+import {options} from '@/constants/ky-constants';
+import { AdminTransaction } from "@/interfaces/admin-transaction";
+import { Settings } from "@/interfaces/settings";
+import { Transaction } from "@/interfaces/transaction";
+import { UpdatePayeeRequest } from "@/interfaces/update-payee-request";
+import { createRequest } from "@/utils/request-utils";
+import ResponseUtils from "@/utils/response-utils";
+import { EtransferTransaction } from "../../../serverless/src/interfaces/etransfer-transaction";
 
-axios.defaults.withCredentials = true;
+const ky = options;
 
 export default class UserService {
   private static readonly url: any =
-    process.env.VUE_APP_MODE === 'PRODUCTION'
+    process.env.VUE_APP_MODE === "PRODUCTION"
       ? `https://${process.env.VUE_APP_API}`
       : `http://${process.env.VUE_APP_API_LOCAL}`;
 
-  public static async acceptedTermsAndConditions(): Promise<AxiosResponse> {
-    return axios
+  public static async acceptedTermsAndConditions(): Promise<any> {
+    return ky
       .post(
         `${this.url}/user/acceptedTermsAndConditions`,
-        JSON.stringify({acceptedTermsAndConditions: true})
+        createRequest({ acceptedTermsAndConditions: true })
       )
-      .then((response: AxiosResponse) => {
-        return response;
-      })
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
   }
 
-  public static async getAccount(): Promise<AxiosResponse> {
-    return axios
+  public static async getAccount(): Promise<any> {
+    return ky
       .get(`${this.url}/user/account`)
-      .then((response: AxiosResponse) => {
-        return response;
-      })
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
   }
 
-  public static async getSettings(): Promise<AxiosResponse> {
-    return axios
+  public static async getSettings(): Promise<any> {
+    return ky
       .get(`${this.url}/user/settings`)
-      .then((response: AxiosResponse) => {
-        return response;
-      })
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
   }
 
-  public static async getEtransferData(): Promise<AxiosResponse> {
-    return axios
+  public static async getEtransferData(): Promise<any> {
+    return ky
       .get(`${this.url}/user/etransfer`)
-      .then((response: AxiosResponse) => {
-        return response;
-      })
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
   }
 
-  public static async updateSettings(
-    settings: Settings
-  ): Promise<AxiosResponse> {
-    return axios.put(`${this.url}/user/settings`, settings)
-      .then((response: AxiosResponse) => {
-        return response;
-      })
+  public static async updateSettings(settings: Settings): Promise<any> {
+    return ky(`${this.url}/user/settings`, createRequest(settings))
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
   }
 
-  public static async updatePayees(
-    payee: UpdatePayeeRequest
-  ): Promise<AxiosResponse> {
-    return axios
-      .put(`${this.url}/user/account/updatePayees`, payee)
-      .then((response: AxiosResponse) => {
-        return response;
-      })
+  public static async updatePayees(payee: UpdatePayeeRequest): Promise<any> {
+    return ky
+      .put(`${this.url}/user/account/updatePayees`, createRequest(payee))
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
   }
 
-  public static async updateContacts(
-    payee: UpdatePayeeRequest
-  ): Promise<AxiosResponse> {
-    return axios
-      .put(`${this.url}/user/etransfer/updateContacts`, payee)
-      .then((response: AxiosResponse) => {
-        return response;
-      })
+  public static async updateContacts(payee: UpdatePayeeRequest): Promise<any> {
+    return ky
+      .put(`${this.url}/user/etransfer/updateContacts`, createRequest(payee))
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
   }
 
-  public static async payBill(
-    transaction: Transaction
-  ): Promise<AxiosResponse> {
-    return axios
-      .post(`${this.url}/user/account/payBill`, transaction)
-      .then((response: AxiosResponse) => {
-        return response;
-      })
+  public static async payBill(transaction: Transaction): Promise<any> {
+    return ky
+      .post(`${this.url}/user/account/payBill`, createRequest(transaction))
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
@@ -114,12 +83,9 @@ export default class UserService {
 
   public static async sendEtransfer(
     transaction: EtransferTransaction
-  ): Promise<AxiosResponse> {
-    return axios
-      .post(`${this.url}/user/etransfer/send`, transaction)
-      .then((response: AxiosResponse) => {
-        return response;
-      })
+  ): Promise<any> {
+    return ky
+      .post(`${this.url}/user/etransfer/send`, createRequest(transaction))
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });
@@ -127,12 +93,9 @@ export default class UserService {
 
   public static async sendAdminTransaction(
     transaction: AdminTransaction
-  ): Promise<AxiosResponse> {
-    return axios
-      .post(`${this.url}/user/sendAdminTransaction`, transaction)
-      .then((response: AxiosResponse) => {
-        return response;
-      })
+  ): Promise<any> {
+    return ky
+      .post(`${this.url}/user/sendAdminTransaction`, createRequest(transaction))
       .catch((error) => {
         return ResponseUtils.errorProcessor(error.response);
       });

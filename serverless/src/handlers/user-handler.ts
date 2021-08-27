@@ -1,5 +1,5 @@
-import {APIGatewayEvent, Handler} from 'aws-lambda';
-import UserController from '../controllers/user-controller';
+import {APIGatewayEvent, Handler} from "aws-lambda";
+import UserController from "../controllers/user-controller";
 
 export const acceptedTermsAndConditions: Handler = async (event: APIGatewayEvent) => {
   return await UserController.acceptedTermsAndConditions(event);

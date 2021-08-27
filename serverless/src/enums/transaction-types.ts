@@ -1,5 +1,5 @@
 export enum TransactionTypes {
-  BILL = ('Bill'),
-  ETRANSFER = ('e-Transfer'),
-  ADMIN = ('Admin'),
+  BILL = ("Bill"),
+  ETRANSFER = ("e-Transfer"),
+  ADMIN = ("Admin"),
 }

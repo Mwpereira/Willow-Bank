@@ -8,7 +8,7 @@ export class SqsUtils {
   public static sqsParams(): any {
     return {
       QueueUrl: process.env.TFA_QUEUE_URL,
-      MessageBody: '',
+      MessageBody: "",
     }
   }
 }

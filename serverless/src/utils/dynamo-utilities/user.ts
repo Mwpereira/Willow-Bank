@@ -1,10 +1,10 @@
-import * as dynamoDB from 'dynamoose';
-import {Account} from '../../interfaces/account';
-import {Etransfer} from '../../interfaces/etransfer';
-import {Settings} from '../../interfaces/settings';
-import {WillowBankSchema} from '../../models/willow-bank';
+import * as dynamoDB from "dynamoose";
+import {Account} from "../../interfaces/account";
+import {Etransfer} from "../../interfaces/etransfer";
+import {Settings} from "../../interfaces/settings";
+import {WillowBankSchema} from "../../models/willow-bank";
 
-const willowBankTable: any = dynamoDB.model('willowBank', WillowBankSchema);
+const willowBankTable: any = dynamoDB.model("willowBank", WillowBankSchema);
 
 /**
  * Modifies DynamoDB Table
@@ -30,9 +30,9 @@ export default class User {
   public static getAccount(email: string): Promise<Account> {
     return willowBankTable
       .query()
-      .where('email')
+      .where("email")
       .eq(email.toLowerCase())
-      .attributes(['account'])
+      .attributes(["account"])
       .exec()
       .then((result: any) => {
         return JSON.parse(result[0].account);
@@ -46,9 +46,9 @@ export default class User {
   public static getSettings(email: string): Promise<Settings> {
     return willowBankTable
       .query()
-      .where('email')
+      .where("email")
       .eq(email.toLowerCase())
-      .attributes(['settings'])
+      .attributes(["settings"])
       .exec()
       .then((result: any) => {
         return JSON.parse(result[0].settings);
@@ -79,9 +79,9 @@ export default class User {
   public static getEtransferData(email: string): Promise<Etransfer> {
     return willowBankTable
       .query()
-      .where('email')
+      .where("email")
       .eq(email.toLowerCase())
-      .attributes(['etransfer'])
+      .attributes(["etransfer"])
       .exec()
       .then((result: any) => {
         return JSON.parse(result[0].etransfer);

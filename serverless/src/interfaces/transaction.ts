@@ -1,5 +1,5 @@
-import {TransactionActions} from '../enums/transaction-actions';
-import {TransactionTypes} from '../enums/transaction-types';
+import {TransactionActions} from "../enums/transaction-actions";
+import {TransactionTypes} from "../enums/transaction-types";
 
 export interface Transaction {
   id: number;

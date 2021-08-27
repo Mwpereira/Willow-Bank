@@ -1,15 +1,15 @@
-import {APIGatewayEvent, SQSEvent} from 'aws-lambda';
-import {MessageConstants} from '../constants/message-constants';
-import {Response} from '../interfaces/response';
-import BcryptUtils from '../utils/bcrypt-utils';
-import CookieUtilities from '../utils/cookie-utils';
-import Auth from '../utils/dynamo-utilities/auth';
-import user from '../utils/dynamo-utilities/user';
-import User from '../utils/dynamo-utilities/user';
-import JwtUtils from '../utils/jwt-utils';
-import PayloadValidatorUtils from '../utils/payload-validator-utils';
-import RequestUtils from '../utils/request-utils';
-import MessageUtil from '../utils/response-utils';
+import {APIGatewayEvent, SQSEvent} from "aws-lambda";
+import {MessageConstants} from "../constants/message-constants";
+import {Response} from "../interfaces/response";
+import BcryptUtils from "../utils/bcrypt-utils";
+import CookieUtilities from "../utils/cookie-utils";
+import Auth from "../utils/dynamo-utilities/auth";
+import user from "../utils/dynamo-utilities/user";
+import User from "../utils/dynamo-utilities/user";
+import JwtUtils from "../utils/jwt-utils";
+import PayloadValidatorUtils from "../utils/payload-validator-utils";
+import RequestUtils from "../utils/request-utils";
+import MessageUtil from "../utils/response-utils";
 
 /**
  * Authentication methods + Lambda Authorizer
@@ -36,14 +36,14 @@ export default class AuthController {
       if (decoded && decoded.sub) {
         return JwtUtils.generatePolicyResponse(
           decoded.sub,
-          'Allow',
+          "Allow",
           methodArn
         );
       } else {
-        console.log('Deny: ' + decoded)
+        console.log("Deny: " + decoded)
         return JwtUtils.generatePolicyResponse(
           decoded.sub,
-          'Deny',
+          "Deny",
           methodArn
         );
       }
@@ -194,7 +194,7 @@ export default class AuthController {
 
           if (await Auth.updateLastLogin(user.email)) {
             return MessageUtil.successAuth(
-              302,
+              200,
               MessageConstants.USER_AUTHORIZED,
               accessToken,
               false,
@@ -298,7 +298,7 @@ export default class AuthController {
       if (await Auth.deleteUser(email)) {
         return MessageUtil.success(
           200,
-          'DELETE USER',
+          "DELETE USER",
         );
       }
       return MessageUtil.error(404, MessageConstants.ACCOUNT_GET_FAILED);

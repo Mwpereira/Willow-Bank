@@ -1,14 +1,11 @@
-import { AxiosResponse } from "axios";
-import BuefyService from "@/services/buefy-service";
 import AuthService from "@/services/auth-service";
+import BuefyService from "@/services/buefy-service";
 
 /**
  * Response Utilities for Client
  */
 export default class ResponseUtils {
-  public static async errorProcessor(
-    response: AxiosResponse
-  ): Promise<AxiosResponse> {
+  public static async errorProcessor(response: any): Promise<any> {
     if (response === undefined) {
       await this.checkInvalidTokenError();
       BuefyService.dangerToast("Expired Token");
@@ -44,12 +41,12 @@ export default class ResponseUtils {
     return response;
   }
 
-  public static successProcessor(response: AxiosResponse): boolean {
+  public static successProcessor(response: any): boolean {
     return response.status === 200;
   }
 
-  public static successAuthProcessor(response: AxiosResponse): boolean {
-    if (response.status === 302) {
+  public static successAuthProcessor(response: any): boolean {
+    if (response.status === 302 || response.status === 200) {
       BuefyService.successToast("Signed In");
       return true;
     }

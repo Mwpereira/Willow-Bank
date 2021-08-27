@@ -1,4 +1,4 @@
-import PayloadValidatorUtils from './payload-validator-utils';
+import PayloadValidatorUtils from "./payload-validator-utils";
 
 export default class RequestUtils {
   /**
