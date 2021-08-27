@@ -66,13 +66,13 @@ export default class NavBar extends Vue {
     BuefyService.successToast('Signed Out');
   }
 
-  public async checkEtransfer(page: string): void {
+  public async checkEtransfer(page: string): Promise<void> {
     await WebsiteUtils.checkEtransfer();
 
     this.switchPage(page)
   }
 
-  public async checkSettings(page: string): void {
+  public async checkSettings(page: string): Promise<void> {
     await WebsiteUtils.checkSettings();
 
     this.switchPage(page)
