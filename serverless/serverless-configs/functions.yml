@@ -14,7 +14,7 @@ refreshToken:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 30
           indentitySource: method.request.header.Cookie
 
 #Auth
@@ -37,7 +37,7 @@ login:
         method: 'post'
         path: 'auth/login'
         cors: true
-        resultTtlInSeconds: 10
+        resultTtlInSeconds: 5
 
 logout:
   handler: 'src/handlers/auth-handler.logout'
@@ -47,7 +47,7 @@ logout:
         method: 'get'
         path: 'auth/logout'
         cors: true
-        resultTtlInSeconds: 10
+        resultTtlInSeconds: 5
 
 updateEmail:
   handler: 'src/handlers/auth-handler.updateEmail'
@@ -60,7 +60,7 @@ updateEmail:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 changePassword:
@@ -74,7 +74,7 @@ changePassword:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 deleteUser:
@@ -88,7 +88,7 @@ deleteUser:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 #User
@@ -103,7 +103,7 @@ acceptedTermsAndConditions:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 getAccount:
@@ -117,7 +117,7 @@ getAccount:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 getSettings:
@@ -131,7 +131,7 @@ getSettings:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 getEtransferData:
@@ -145,7 +145,7 @@ getEtransferData:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 payBills:
@@ -159,7 +159,7 @@ payBills:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 sendEtransfer:
@@ -173,7 +173,7 @@ sendEtransfer:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 sendAdminTransaction:
@@ -187,7 +187,7 @@ sendAdminTransaction:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 updatePayees:
@@ -201,7 +201,7 @@ updatePayees:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 updateContacts:
@@ -215,7 +215,7 @@ updateContacts:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 updateSettings:
@@ -229,7 +229,7 @@ updateSettings:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 updateCredentials:
@@ -243,7 +243,7 @@ updateCredentials:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 updateTwoFactorAuthenticationSettings:
@@ -257,7 +257,7 @@ updateTwoFactorAuthenticationSettings:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 updateTwoFactorAuthenticationEnabled:
@@ -271,7 +271,7 @@ updateTwoFactorAuthenticationEnabled:
         authorizer:
           name: verifyToken
           type: request
-          resultTtlInSeconds: 10
+          resultTtlInSeconds: 5
           indentitySource: method.request.header.Cookie
 
 #SQS

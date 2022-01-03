@@ -38,6 +38,7 @@
 </template>
 
 <script lang="ts">
+import WebsiteUtils from "@/utils/website-utils";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
@@ -48,6 +49,12 @@ export default class DashboardSummary extends Vue {
 
   get lastLogin() {
     return this.$store.getters.lastLogin;
+  }
+
+  async created(): Promise<void> {
+    await WebsiteUtils.updatePageTitle(
+      this.$router.currentRoute.path.substr(1)
+    );
   }
 }
 </script>

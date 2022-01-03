@@ -8,7 +8,7 @@
       :pagination-simple="false"
       :pagination-rounded="false"
       paginationPosition="bottom"
-      per-page="5"
+      per-page="4"
       current-page.sync="1"
       aria-next-label="Next page"
       aria-previous-label="Previous page"

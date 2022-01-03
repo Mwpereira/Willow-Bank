@@ -94,7 +94,7 @@ const store = new Vuex.Store({
       return false;
     },
     async changePassword({ commit }, passwords: object): Promise<boolean> {
-      response =  await AuthService.changePassword(passwords);
+      response = await AuthService.changePassword(passwords);
 
       if (ResponseUtils.successProcessor(response)) {
         BuefyService.successToast(await response.json().message);

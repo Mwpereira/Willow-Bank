@@ -1,6 +1,5 @@
 # Willow Bank
 
-
 ## 📐 Project Setup
 
 ```
@@ -12,13 +11,6 @@ npm install
 ## 🖥 Developing
 
 ### Client
-
-Develop using a Desktop Application _(Recommended)_
-
-```
-npm run electron:serve
-```
-
 Develop using a Web Browser Build
 
 ```
@@ -52,16 +44,18 @@ serverless offline
 ### Dependencies
 
 -   _Buefy_ - for using UI components for Vue.js based on Bulma
--   _ChartJS_ - for creating and presenting data in a modern chart
 -   _axios_ - for the promise based HTTP client to handle requests
+
+## 🏗️ Architecture
 
 ### Figma
 
 Link to [Figma Design](https://www.figma.com/file/fygsMgOzkKq5MHs2Hvjma5/WillowBank?node-id=0%3A1)
 
-### Gallery
+## 📷 Gallery
 
 <img src="/dist/screenshots/home.PNG" width="750x50">
 <img src="/dist/screenshots/login.PNG" width="750x50">
+<img src="/dist/screenshots/register.PNG" width="750x50">
 <img src="/dist/screenshots/dashboard.PNG" width="750x50">
 <img src="/dist/screenshots/accounts.PNG" width="750x50">

@@ -1,4 +1,4 @@
-import {options} from '@/constants/ky-constants';
+import { options } from "@/constants/ky-constants";
 import { AdminTransaction } from "@/interfaces/admin-transaction";
 import { Settings } from "@/interfaces/settings";
 import { Transaction } from "@/interfaces/transaction";
@@ -8,7 +8,6 @@ import ResponseUtils from "@/utils/response-utils";
 import { EtransferTransaction } from "../../../serverless/src/interfaces/etransfer-transaction";
 
 const ky = options;
-
 export default class UserService {
   private static readonly url: any =
     process.env.VUE_APP_MODE === "PRODUCTION"
@@ -27,34 +26,29 @@ export default class UserService {
   }
 
   public static async getAccount(): Promise<any> {
-    return ky
-      .get(`${this.url}/user/account`)
-      .catch((error) => {
-        return ResponseUtils.errorProcessor(error.response);
-      });
+    return ky.get(`${this.url}/user/account`).catch((error) => {
+      return ResponseUtils.errorProcessor(error.response);
+    });
   }
 
   public static async getSettings(): Promise<any> {
-    return ky
-      .get(`${this.url}/user/settings`)
-      .catch((error) => {
-        return ResponseUtils.errorProcessor(error.response);
-      });
+    return ky.get(`${this.url}/user/settings`).catch((error) => {
+      return ResponseUtils.errorProcessor(error.response);
+    });
   }
 
   public static async getEtransferData(): Promise<any> {
-    return ky
-      .get(`${this.url}/user/etransfer`)
-      .catch((error) => {
-        return ResponseUtils.errorProcessor(error.response);
-      });
+    return ky.get(`${this.url}/user/etransfer`).catch((error) => {
+      return ResponseUtils.errorProcessor(error.response);
+    });
   }
 
   public static async updateSettings(settings: Settings): Promise<any> {
-    return ky(`${this.url}/user/settings`, createRequest(settings))
-      .catch((error) => {
+    return ky(`${this.url}/user/settings`, createRequest(settings)).catch(
+      (error) => {
         return ResponseUtils.errorProcessor(error.response);
-      });
+      }
+    );
   }
 
   public static async updatePayees(payee: UpdatePayeeRequest): Promise<any> {

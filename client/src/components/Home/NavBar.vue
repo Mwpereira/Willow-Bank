@@ -1,5 +1,5 @@
 <template>
-  <b-navbar>
+  <b-navbar class="box">
     <template #start>
       <b-navbar-item tag="router-link" :to="{ path: '/' }">
         Home
@@ -18,7 +18,7 @@
       <b-navbar-item tag="div">
         <div class="buttons">
           <a class="button is-primary" href="/register  " rel="noopener">
-            <strong>Sign up</strong>
+            Sign up
           </a>
           <a class="button is-light" href="/login" rel="noopener"> Log in </a>
         </div>

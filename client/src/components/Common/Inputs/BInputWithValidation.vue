@@ -10,13 +10,8 @@
       :type="{ 'is-danger': errors[0], 'is-success': valid }"
       :message="errors"
       style="margin-bottom: 12px"
-      :auto-id="fieldAutoId"
     >
-      <b-input
-        v-model="innerValue"
-        v-bind="$attrs"
-        :auto-id="inputAutoId"
-      ></b-input>
+      <b-input v-model="innerValue" v-bind="$attrs"></b-input>
     </b-field>
   </ValidationProvider>
 </template>

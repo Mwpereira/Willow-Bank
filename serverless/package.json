@@ -6,7 +6,7 @@
   "license": "ISC",
   "moduleResolution": "module",
   "scripts": {
-    "start": "serverless offline",
+    "start": "serverless offline --httpPort 3001",
     "deploy": "serverless deploy",
     "remove": "serverless remove",
     "lint": "tslint src/**/*.ts{,x} --fix"

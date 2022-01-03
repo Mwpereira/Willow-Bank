@@ -42,6 +42,6 @@ export default class Settings extends Vue {
 <style scoped>
 #tabs {
   max-width: 650px;
-  min-height: 575px;
+  min-height: 450px;
 }
 </style>

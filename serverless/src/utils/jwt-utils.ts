@@ -60,11 +60,11 @@ export default class JwtUtils {
    * @return access token
    */
   static getToken(cookie: string): string | null {
-    const tokens = cookie.split(';');
+    const tokens = cookie.split(";");
     let accessToken: string = null;
 
     for (const token of tokens) {
-      if (token.includes('accessToken')) {
+      if (token.includes("accessToken")) {
         accessToken = token.trim().substr(12);
         break;
       }
