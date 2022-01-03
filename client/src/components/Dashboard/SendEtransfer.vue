@@ -31,10 +31,6 @@
             >
             </BInputWithValidation>
           </b-field>
-          <!--          <p>Payee: {{ this.amount }}</p>-->
-          <!--          <p>Amount: {{ this.selected }}</p>-->
-          <!--          <p>Account: Premium Savings Account</p>-->
-          <!--          <p>Sender: {{ this.$store.getters.email }}</p>-->
           <div class="columns is-vcentered">
             <div class="column">
               <button

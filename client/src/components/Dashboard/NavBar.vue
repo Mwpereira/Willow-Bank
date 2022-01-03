@@ -82,6 +82,6 @@ export default class NavBar extends Vue {
 
 <style scoped>
 .navbar-item {
-  font-weight: 500;
+  font-weight: bold;
 }
 </style>
