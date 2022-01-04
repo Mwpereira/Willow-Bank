@@ -1,5 +1,7 @@
 # Willow Bank
 
+⚠️ Project Incomplete. Revamp of Willow Bank coming soon!
+
 ## 📐 Project Setup
 
 ```
@@ -54,8 +56,33 @@ Link to [Figma Design](https://www.figma.com/file/fygsMgOzkKq5MHs2Hvjma5/WillowB
 
 ## 📷 Gallery
 
-<img src="/dist/screenshots/home.PNG" width="750x50">
-<img src="/dist/screenshots/login.PNG" width="750x50">
-<img src="/dist/screenshots/register.PNG" width="750x50">
-<img src="/dist/screenshots/dashboard.PNG" width="750x50">
+
+<details>
+<summary> 
+Home Page
+<br/><br/>
+<img src="/dist/screenshots/home.png" width="750x50">
+</summary>
+<ul>
+<li>
+<img src="/dist/screenshots/benefits.png" width="750x50">
+</li>
+<li>
+<img src="/dist/screenshots/savings.png" width="750x50">
+</li>
+<li>
+<img src="/dist/screenshots/goals.png" width="750x50">
+</li>
+<li>
+<img src="/dist/screenshots/contact.png" width="750x50">
+</li>
+</ul>
+</details>
+
+<p>Auth</p>
+<img src="/dist/screenshots/login.png" width="750x50">
+<img src="/dist/screenshots/register.png" width="750x50">
+
+<p>Dashboard</p>
+<img src="/dist/screenshots/dashboard.png" width="750x50">
 <img src="/dist/screenshots/accounts.PNG" width="750x50">

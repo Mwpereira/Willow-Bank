@@ -12,7 +12,7 @@
             icon-pack="fas"
             placeolder="Email"
             rules="required|email"
-            type="email"
+            type="username"
           />
         </b-field>
         <b-field class="mb-5" label="Password">
