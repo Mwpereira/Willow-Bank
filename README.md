@@ -1,6 +1,6 @@
 # Willow Bank
 
-⚠️ Project Incomplete. Revamp of Willow Bank coming soon!
+⚠️ Functionality works as expected, although project is incomplete. Revamp of Willow Bank coming soon!
 
 ## 📐 Project Setup
 

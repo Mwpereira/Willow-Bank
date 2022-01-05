@@ -5,7 +5,7 @@
       <p class="mb-3 is-size-5">Please choose one of the following:</p>
       <div class="field is-grouped">
         <button
-          class="button is-primary is-fullwidth  mr-3 mt-5"
+          class="button is-primary is-fullwidth mr-3 mt-5"
           type="submit"
           v-on:click="switchPage('account/managePayees/add')"
         >
