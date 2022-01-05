@@ -8,7 +8,7 @@
           icon-pack="fas"
           placeolder="Email"
           rules="required|email"
-          type="email"
+          type="username"
         >
         </BInputWithValidation>
       </b-field>

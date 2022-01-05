@@ -81,8 +81,18 @@ Home Page
 
 <p>Auth</p>
 <img src="/dist/screenshots/login.png" width="750x50">
-<img src="/dist/screenshots/register.png" width="750x50">
+<img src="/dist/screenshots/info.png" width="750x50">
+<img src="/dist/screenshots/settings.png" width="750x50">
 
 <p>Dashboard</p>
 <img src="/dist/screenshots/dashboard.png" width="750x50">
-<img src="/dist/screenshots/accounts.PNG" width="750x50">
+
+<p>Accounts</p>
+<img src="/dist/screenshots/accountSummary.png" width="750x50">
+<img src="/dist/screenshots/payee.png" width="750x50">
+<img src="/dist/screenshots/payBills.png" width="750x50">
+
+<p>eTransfers</p>
+<img src="/dist/screenshots/pastEtransfers.png" width="750x50">
+<img src="/dist/screenshots/contacts.png" width="750x50">
+<img src="/dist/screenshots/etransfer.png" width="750x50">
