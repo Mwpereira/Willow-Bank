@@ -81,11 +81,12 @@ Home Page
 
 <p>Auth</p>
 <img src="/dist/screenshots/login.png" width="750x50">
-<img src="/dist/screenshots/info.png" width="750x50">
-<img src="/dist/screenshots/settings.png" width="750x50">
+<img src="/dist/screenshots/register.png" width="750x50">
 
 <p>Dashboard</p>
 <img src="/dist/screenshots/dashboard.png" width="750x50">
+<img src="/dist/screenshots/info.png" width="750x50">
+<img src="/dist/screenshots/settings.png" width="750x50">
 
 <p>Accounts</p>
 <img src="/dist/screenshots/accountSummary.png" width="750x50">
