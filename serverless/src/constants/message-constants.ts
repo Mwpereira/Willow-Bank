@@ -93,6 +93,16 @@ export abstract class MessageConstants {
   public static readonly ADMIN_WITHDRAW_SUCCESS: string = "Money Withdrawn";
 
   /**
+   * Success message for a payee to be paid
+   */
+  public static readonly PAY_PAYEE_SUCCESS: string = "Payee Paid";
+
+  /**
+   * Success message for a contact to be paid
+   */
+  public static readonly PAY_CONTACT_SUCCESS: string = "Contact Paid";
+
+  /**
    * Error message for Email already in use
    */
   public static readonly EMAIL_TAKEN: string = "Email Already Taken";

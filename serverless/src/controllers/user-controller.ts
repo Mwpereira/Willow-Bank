@@ -224,7 +224,7 @@ export default class UserController {
       if (await user.updateAccount(email, updatedAccount)) {
         return MessageUtil.success(
           200,
-          "Test",
+          MessageConstants.PAY_PAYEE_SUCCESS,
           {account: updatedAccount}
         );
       }
@@ -255,7 +255,7 @@ export default class UserController {
         if (await user.updateAccount(email, updatedAccount) && await user.updateEtransferData(email, updatedEtransfer)) {
           return MessageUtil.success(
             200,
-            "Test",
+            MessageConstants.PAY_CONTACT_SUCCESS,
             {account: updatedAccount, etransfer: updatedEtransfer}
           );
         }
