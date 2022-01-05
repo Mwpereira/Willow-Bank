@@ -1,0 +1,31 @@
+service: willowBank
+
+frameworkVersion: '2'
+
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-dotenv-plugin # Load .env as environment variables
+
+custom:
+  webpack:
+    webpackConfig: './webpack.config.js'
+    includeModules:
+      forceExclude:
+        -aws-sdk
+  variables: ${file(serverless-configs/custom.yml)}
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  iamRoleStatements: ${file(serverless-configs/iamrolestatements.yml)}
+
+
+functions: ${file(serverless-configs/functions.yml)}
+resources: ${file(serverless-configs/resources.yml)}
+

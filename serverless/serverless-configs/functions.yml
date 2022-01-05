@@ -1,0 +1,285 @@
+#Authorizer
+verifyToken:
+  handler: 'src/handlers/auth-handler.verifyToken'
+  description: 'Verifies JWT'
+
+refreshToken:
+  handler: 'src/handlers/auth-handler.refreshToken'
+  description: "Refreshes JWT Token"
+  events:
+    - http:
+        method: 'get'
+        path: 'auth/refreshToken'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 30
+          indentitySource: method.request.header.Cookie
+
+#Auth
+register:
+  handler: 'src/handlers/auth-handler.register'
+  description: 'Creates New User'
+  timeout: 20
+  events:
+    - http:
+        method: 'post'
+        path: 'auth/register'
+        cors: true
+        resultTtlInSeconds: 20
+
+login:
+  handler: 'src/handlers/auth-handler.login'
+  description: 'Authorizes User'
+  events:
+    - http:
+        method: 'post'
+        path: 'auth/login'
+        cors: true
+        resultTtlInSeconds: 5
+
+logout:
+  handler: 'src/handlers/auth-handler.logout'
+  description: 'Authorizes User'
+  events:
+    - http:
+        method: 'get'
+        path: 'auth/logout'
+        cors: true
+        resultTtlInSeconds: 5
+
+updateEmail:
+  handler: 'src/handlers/auth-handler.updateEmail'
+  description: "Updates User's Email"
+  events:
+    - http:
+        method: 'put'
+        path: 'auth/updateEmail'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+changePassword:
+  handler: 'src/handlers/auth-handler.changePassword'
+  description: "Changes User's Password"
+  events:
+    - http:
+        method: 'put'
+        path: 'auth/changePassword'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+deleteUser:
+  handler: 'src/handlers/auth-handler.deleteUser'
+  description: "Deletes User"
+  events:
+    - http:
+        method: 'post'
+        path: 'auth/deleteUser'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+#User
+acceptedTermsAndConditions:
+  handler: 'src/handlers/user-handler.acceptedTermsAndConditions'
+  description: 'Accepts Terms And Conditions'
+  events:
+    - http:
+        method: 'post'
+        path: 'user/acceptedTermsAndConditions'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+getAccount:
+  handler: 'src/handlers/user-handler.getAccount'
+  description: "Gets User's Account"
+  events:
+    - http:
+        method: 'get'
+        path: 'user/account'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+getSettings:
+  handler: 'src/handlers/user-handler.getSettings'
+  description: "Gets User's Settings"
+  events:
+    - http:
+        method: 'get'
+        path: 'user/settings'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+getEtransferData:
+  handler: 'src/handlers/user-handler.getEtransferData'
+  description: "Gets User's e-transfer data"
+  events:
+    - http:
+        method: 'get'
+        path: 'user/etransfer'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+payBills:
+  handler: 'src/handlers/user-handler.payBill'
+  description: "Pay Bill"
+  events:
+    - http:
+        method: 'post'
+        path: 'user/account/payBill'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+sendEtransfer:
+  handler: 'src/handlers/user-handler.sendEtransfer'
+  description: "Sends e-Transfer"
+  events:
+    - http:
+        method: 'post'
+        path: 'user/etransfer/send'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+sendAdminTransaction:
+  handler: 'src/handlers/user-handler.sendAdminTransaction'
+  description: "Deposits/Withdraws money from User Account"
+  events:
+    - http:
+        method: 'post'
+        path: 'user/sendAdminTransaction'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+updatePayees:
+  handler: 'src/handlers/user-handler.updatePayees'
+  description: "Updates Payees"
+  events:
+    - http:
+        method: 'put'
+        path: 'user/account/updatePayees'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+updateContacts:
+  handler: 'src/handlers/user-handler.updateContacts'
+  description: "Updates Payees"
+  events:
+    - http:
+        method: 'put'
+        path: 'user/etransfer/updateContacts'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+updateSettings:
+  handler: 'src/handlers/user-handler.updateSettings'
+  description: "Updates User's Settings"
+  events:
+    - http:
+        method: 'put'
+        path: 'user/settings'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+updateCredentials:
+  handler: 'src/handlers/user-handler.getSettings'
+  description: "Updates User's Credentials"
+  events:
+    - http:
+        method: 'put'
+        path: 'user/credentials'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+updateTwoFactorAuthenticationSettings:
+  handler: 'src/handlers/auth-handler.getSettings'
+  description: "Updates User's Two Factor Authentication Settings"
+  events:
+    - http:
+        method: 'put'
+        path: 'auth/updateTFASettings'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+updateTwoFactorAuthenticationEnabled:
+  handler: 'src/handlers/auth-handler.updateTwoFactorAuthenticationEnabled'
+  description: "Updates User's Two Factor Authentication Enabled Settings"
+  events:
+    - http:
+        method: 'put'
+        path: 'auth/updateTFAState'
+        cors: true
+        authorizer:
+          name: verifyToken
+          type: request
+          resultTtlInSeconds: 5
+          indentitySource: method.request.header.Cookie
+
+#SQS
+updateTwoFactorAuthentication:
+  description: "Sets Two Factor Authentication for a User"
+  handler: 'src/handlers/user-handler.updateTwoFactorAuthentication'
+  timeout: 30
+  events:
+    - sqs:
+        arn: ${self:custom.variables.updateTwoFactorAuthenticationSQS.arn}
+        batchSize: 1
