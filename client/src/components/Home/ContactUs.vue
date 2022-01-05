@@ -14,7 +14,7 @@
           <i class="fas fa-phone"></i><span class="ml-3">(123) 456-7890</span>
         </p>
         <p class="py-4 is-italic is-size-5">
-          24/7 Support Ready to Assistance Anytime!
+          24/7 Support, Ready to Assist Anytime!
         </p>
       </div>
       <div class="column">
